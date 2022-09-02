@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "yt3MKYyDZLBKyl4xR3sjjK6DisxcVuTB05wCuKvJhPh1vMuZe5uS1hOAnAq3Q6Q4PUpgGkt2IWqHf0ar6PR42w==",
+  "success": true,
+  "projectFilePath": "E:\\_Projects\\Rawaa\\Mobile\\Rawaa\\Rawaa\\Rawaa\\Rawaa.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}
