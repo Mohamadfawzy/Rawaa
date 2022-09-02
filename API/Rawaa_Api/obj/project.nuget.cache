@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rTqAL7sGJoi7rW59OX5mbjgeOrBB2nssT9gMYYk2LK0Mu4Ikc57v5ywQEFi9aUvFpMy/z/mMqxI/KXT+NUaw4g==",
+  "dgSpecHash": "xxfLtMsYXR2huvvPxmRIacnd0S8AXDn8OpbQ8khlXMNQgsiYaMvv60loH/Fz+psjwgkZ6jjcGVGjP1Eq03WG2w==",
   "success": true,
-  "projectFilePath": "E:\\_Projects\\OurProject\\Back_End\\Rawaa_Api\\Rawaa_Api\\Rawaa_Api.csproj",
+  "projectFilePath": "E:\\_Projects\\Rawaa\\API\\Rawaa_Api\\Rawaa_Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

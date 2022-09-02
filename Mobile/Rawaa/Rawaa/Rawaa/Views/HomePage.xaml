@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             x:Class="Rawaa.Views.HomePage"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:converter="clr-namespace:Rawaa.Converters">
+
+    <ContentPage.BindingContext>
+        <vm:HomePageVM />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+           
+            <xct:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label Text="{x:Static lang:LanguageResources.first}" />
+            <Label Text="{x:Static icon:IconFont.Home}"
+                   FontFamily="IconFont"/>
+            <Label Text="محمد فوزي هلال"
+                   FontFamily="CairoBold" />
+            <Label Text="محمد فوزي هلال"
+                   FontFamily="CairoRequler"/>
+
+            <frame:PancakeView HeightRequest="100"
+                               BackgroundColor="Black"
+                               CornerRadius="5,40,10,20">
+                <Image Source="{Binding MyImage}"
+                       HeightRequest="50" />
+
+            </frame:PancakeView>
+
+            <!-- Ads -->
+            <StackLayout x:Name="MainSlideOfferStack">
+                <CarouselView x:Name="carouselOffers"
+                              Margin="10"
+                              PeekAreaInsets="0"
+                              IsBounceEnabled="True"
+                              IndicatorView="indicatorView"
+                              ItemsSource="{Binding Sliders }"
+                              CurrentItemChangedCommand="{Binding langCommand }"
+                              Position="{Binding SliderPosition }"
+                              HorizontalOptions="Start"
+                              VerticalOptions="Center"
+                              HeightRequest="170">
+                    <!--
+                    CurrentItemChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=CurrentItem}"
+                    -->
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
+                                           ItemSpacing="0"
+                                           SnapPointsAlignment="Start"
+                                           SnapPointsType="MandatorySingle" />
+                    </CarouselView.ItemsLayout>
+                    
+
+                    
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0"
+                                         Padding="0"
+                                         VerticalOptions="Center">
+                                <Frame Padding="0"
+                                       Margin="5,0,0,0"
+                                       HasShadow="True"
+                                       CornerRadius="15"
+                                       BorderColor="Gray"
+                                       VerticalOptions="Center">
+                                    <StackLayout Margin="0">
+                                        <!-- صورة الخلفية -->
+                                        <Image Source="{Binding Image, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                                               Aspect="AspectFill"
+                                               HeightRequest="170" />
+                                    </StackLayout>
+                                </Frame>
+                                
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+            </StackLayout>
+            <!--indicator View  -->
+            <Frame Grid.Row="0"
+                   IsVisible="true"
+                   BackgroundColor="#70FFFFFF"
+                   CornerRadius="20"
+                   Margin="0,0,0,15"
+                   Padding="0"
+                   HorizontalOptions="Center"
+                   VerticalOptions="End">
+                <IndicatorView x:Name="indicatorView"
+                               IndicatorColor="Red"
+                               Padding="20,5"
+                               IndicatorSize="7"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End"
+                               SelectedIndicatorColor="{StaticResource Accent}"></IndicatorView>
+            </Frame>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -80,15 +80,15 @@
 
     <TabBar>
         <Tab Title="Home" Icon="icon_about.png" >
-            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
         </Tab>
 
         <Tab Title="Acount" Icon="icon_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
         </Tab>
 
         <Tab Title="Favorite" Icon="icon_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
         </Tab>
 
         <Tab Title="Menu">
@@ -96,7 +96,7 @@
                 <FontImageSource Glyph="?" Size="Large" Color="Black"  />
             </Tab.Icon>
 
-            <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
         </Tab>
     </TabBar>
 

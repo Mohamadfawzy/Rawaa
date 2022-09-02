@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using Rawaa_Api.Helper;
+using Rawaa_Api.Models;
 using Rawaa_Api.Services;
 using System;
 using System.IO;
@@ -245,7 +246,22 @@ namespace ITICourse.Controllers
             binaryReader.Close();
             return fileContent;
         }
+        [HttpGet("bytImageAd")]
+        public Ad FileToByteArray2(string imageName)
+        {
+            string filePath = _webHostEnvironment.WebRootPath;
+            // string fullPath = AppDomain.CurrentDomain.BaseDirectory + filePath + "/" + imageName;
 
+            Ad fileContent = new Ad() ;
+            System.IO.FileStream fs = new System.IO.FileStream(filePath + "\\uploads\\" + imageName + ".jpg", System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            System.IO.BinaryReader binaryReader = new System.IO.BinaryReader(fs);
+            long byteLength = new System.IO.FileInfo(filePath + "\\uploads\\" + imageName + ".jpg").Length;
+            fileContent.Image = binaryReader.ReadBytes((Int32)byteLength);
+            fs.Close();
+            fs.Dispose();
+            binaryReader.Close();
+            return fileContent;
+        }
 
 
 
