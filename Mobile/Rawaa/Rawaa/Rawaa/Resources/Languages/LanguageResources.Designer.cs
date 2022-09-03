@@ -22,7 +22,7 @@ namespace Rawaa.Resources.Languages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class LanguageResources {
+    public class LanguageResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Rawaa.Resources.Languages {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rawaa.Resources.Languages.LanguageResources", typeof(LanguageResources).Assembly);
@@ -51,7 +51,7 @@ namespace Rawaa.Resources.Languages {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,56 @@ namespace Rawaa.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mohamed.
+        ///   Looks up a localized string similar to Mohamed fawzy.
         /// </summary>
-        internal static string first {
+        public static string first {
             get {
                 return ResourceManager.GetString("first", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string MainPage_SearchPlaceHolder {
+            get {
+                return ResourceManager.GetString("MainPage_SearchPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acount.
+        /// </summary>
+        public static string Shell_Title_Acount {
+            get {
+                return ResourceManager.GetString("Shell_Title_Acount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite.
+        /// </summary>
+        public static string Shell_Title_Favorite {
+            get {
+                return ResourceManager.GetString("Shell_Title_Favorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Shell_Title_Home {
+            get {
+                return ResourceManager.GetString("Shell_Title_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string Shell_Title_Menu {
+            get {
+                return ResourceManager.GetString("Shell_Title_Menu", resourceCulture);
             }
         }
     }

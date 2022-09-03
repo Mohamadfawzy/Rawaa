@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             x:Class="Rawaa.Views.SearchPage"
+             Shell.PresentationMode="ModalAnimated"
+             Shell.NavBarIsVisible="False"
+             FlowDirection="RightToLeft">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+            <!-- frame to circle touch 40*40 -->
+            <Style TargetType="Frame"
+                   x:Key="FrameCircleTouch">
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="CornerRadius"
+                        Value="20" />
+                <Setter Property="xct:TouchEffect.NativeAnimation"
+                        Value="True" />
+                <Setter Property="HasShadow"
+                        Value="False" />
+                <Setter Property="IsClippedToBounds"
+                        Value="True" />
+                <Setter Property="HorizontalOptions"
+                        Value="End" />
+                <Setter Property="HeightRequest"
+                        Value="40" />
+                <Setter Property="WidthRequest"
+                        Value="40" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <!-- Frame searchBar -Contain 2 elements -->
+            <frame:PancakeView CornerRadius="7"
+                               HorizontalOptions="FillAndExpand"
+                               BackgroundColor="White"
+                               Margin="8,2,8,8"
+                               Padding="0"
+                               Border="{frame:BorderMarkup Color=Gray, Thickness=1}">
+                <!-- Containar -have MagnifyIcon,SearchEntry,ClearIcon -->
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="Center"
+                             Orientation="Horizontal"
+                             Spacing="0">
+                    <!-- Magnify Icon-->
+                    <Label Text="{x:Static icon:IconFont.Magnify}"
+                           FontFamily="IconFont"
+                           Padding="10,0"
+                           FontSize="25"
+                           Margin="0,4,0,0"
+                           VerticalOptions="Center"
+                           TextColor="Red" />
+                    <!-- Entry for search -->
+                    <Entry Placeholder="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                           x:Name="entrySearch"
+                           FontFamily="CairoRequler"
+                           FontSize="14"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="FillAndExpand"
+                           Text="{Binding EntrySearch}"
+                           >
+                        <Entry.Effects>
+                            <xct:RemoveBorderEffect />
+                        </Entry.Effects>
+                    </Entry>
+                    <!-- Frame Clear icon -->
+                    <Frame Style="{StaticResource FrameCircleTouch}"
+                           xct:TouchEffect.Command="{Binding EraseEntrySearshCommand}">
+                        <Label Text="{x:Static icon:IconFont.Close}"
+                               IsVisible="true"
+                               FontFamily="IconFont"
+                               FontSize="20"
+                               Padding="10"
+                               VerticalOptions="Fill"
+                               HorizontalOptions="End"
+                               TextColor="Orange"
+                               BackgroundColor="Transparent">
+                        </Label>
+                        <!-- Trigger if  entrySearch not empty => IsVisible = false -->
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame"
+                                         Binding="{Binding Source={x:Reference entrySearch},Path=Text.Length}"
+                                         Value="0">
+                                <Setter Property="IsVisible"
+                                        Value="False" />
+                            </DataTrigger>
+                        </Frame.Triggers>
+                    </Frame>
+                </StackLayout>
+            </frame:PancakeView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -16,5 +16,15 @@ namespace Rawaa.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("SettingPage",false);
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("SearchPage",false);
+        }
     }
 }

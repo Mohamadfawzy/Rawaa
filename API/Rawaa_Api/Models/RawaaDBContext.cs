@@ -17,6 +17,7 @@ namespace Rawaa_Api.Models
 
         public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<ProductTitleTranslation> ProductTitleTranslations { get; set; } = null!;
+        public virtual DbSet<CategorieTitleTranslation> CategorieTitleTranslations { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<DeliveryAddress> DeliveryAddresses { get; set; } = null!;
@@ -37,7 +38,7 @@ namespace Rawaa_Api.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=LocalRwaaaDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Data Source=rawaaDB.mssql.somee.com;Initial Catalog=rawaaDB;user id=mfhelal12345_SQLLogin_1; pwd=jlgjukukt9");
             }
         }
 
@@ -81,14 +82,7 @@ namespace Rawaa_Api.Models
                     .IsUnicode(false)
                     .HasColumnName("image");
 
-                entity.Property(e => e.NameAr)
-                    .HasMaxLength(60)
-                    .HasColumnName("name_ar");
-
-                entity.Property(e => e.NameEn)
-                    .HasMaxLength(60)
-                    .IsUnicode(false)
-                    .HasColumnName("name_en");
+               
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -220,14 +214,6 @@ namespace Rawaa_Api.Models
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.NameAr)
-                    .HasMaxLength(60)
-                    .HasColumnName("name_ar");
-
-                entity.Property(e => e.NameEn)
-                    .HasMaxLength(60)
-                    .HasColumnName("name_en");
-
                 entity.Property(e => e.Price)
                     .HasColumnType("decimal(5, 2)")
                     .HasColumnName("price");
@@ -238,14 +224,6 @@ namespace Rawaa_Api.Models
             modelBuilder.Entity<MealExtra>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.NameAr)
-                    .HasMaxLength(60)
-                    .HasColumnName("name_ar");
-
-                entity.Property(e => e.NameEn)
-                    .HasMaxLength(60)
-                    .HasColumnName("name_en");
 
                 entity.Property(e => e.Price)
                     .HasColumnType("decimal(5, 2)")
@@ -445,6 +423,29 @@ namespace Rawaa_Api.Models
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Product_title_translation_product_id");
+            });
+
+            modelBuilder.Entity<CategorieTitleTranslation>(entity =>
+            {
+                entity.ToTable("Categorie_title_translation");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CategoryId).HasColumnName("categorie_id");
+
+                entity.Property(e => e.TitleAr)
+                    .HasMaxLength(150)
+                    .HasColumnName("title_ar");
+
+                entity.Property(e => e.TitleEn)
+                    .HasMaxLength(150)
+                    .HasColumnName("title_en");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.CategorieTitleTranslations)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Categorie_title_translation_categorie_id");
             });
 
             modelBuilder.Entity<Restaurant>(entity =>

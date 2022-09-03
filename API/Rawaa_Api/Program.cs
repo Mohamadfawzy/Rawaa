@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<RawaaDBContext>(options =>
     options.UseSqlServer(connectionString));
 
 
@@ -25,6 +25,7 @@ builder.Services.AddDirectoryBrowser();
 // Inject
 builder.Services.AddScoped<IProvider<Restaurant>, RestaurantData>();
 builder.Services.AddScoped<IProvider<Product>, ProductData>();
+builder.Services.AddScoped<IProvider<Category>, CategoryData>();
 
 
 var app = builder.Build();

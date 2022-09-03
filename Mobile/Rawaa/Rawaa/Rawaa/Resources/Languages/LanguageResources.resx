@@ -118,6 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="first" xml:space="preserve">
-    <value>Mohamed</value>
+    <value>Mohamed fawzy</value>
+  </data>
+  <data name="MainPage_SearchPlaceHolder" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Shell_Title_Acount" xml:space="preserve">
+    <value>Acount</value>
+  </data>
+  <data name="Shell_Title_Favorite" xml:space="preserve">
+    <value>Favorite</value>
+  </data>
+  <data name="Shell_Title_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Shell_Title_Menu" xml:space="preserve">
+    <value>Menu</value>
   </data>
 </root>

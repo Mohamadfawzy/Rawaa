@@ -70,3 +70,13 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\obj\iPhone\Debug\Rawaa.iOS.cspro
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\obj\iPhone\Debug\Rawaa.iOS.csproj.CopyComplete
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\obj\iPhone\Debug\Rawaa.iOS.exe
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\obj\iPhone\Debug\Rawaa.iOS.pdb
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\WebP.Touch.dll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\Xamarin.CommunityToolkit.Markup.dll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Platform.dll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Platform.pdb
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.dll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.pdb
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Forms.Platform.dll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Forms.Platform.pdb
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Forms.dll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Forms.pdb

@@ -1,10 +1,10 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Xamarin.Forms.Platform.Android;
+using Android.Views;
 
 namespace Rawaa.Droid
 {
@@ -17,9 +17,13 @@ namespace Rawaa.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             // addd this
+            Window.DecorView.LayoutDirection = LayoutDirection.Ltr;
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer:true);
             Window.SetNavigationBarColor(Xamarin.Forms.Color.FromHex("#cb1901").ToAndroid());
             this.SetStatusBarColor(Xamarin.Forms.Color.FromHex("#cb1901").ToAndroid());
+
             // end add
             LoadApplication(new App());
         }

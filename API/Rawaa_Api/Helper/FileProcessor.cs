@@ -11,7 +11,7 @@ namespace Rawaa_Api.Helper
             this.webHost = webHost;
         }
 
-        public  async Task<string> PostImage(ImageUplod fileUplod, int id)
+        public  async Task<string> PostImage(ImageUplod fileUplod, string guid)
         {
             try
             {
@@ -23,12 +23,12 @@ namespace Rawaa_Api.Helper
                         Directory.CreateDirectory(path);
                     }
                     FileInfo imageInfo = new FileInfo(fileUplod.Files.FileName);
-                    var newImageName = id + imageInfo.Extension;
+                    var newImageName =  guid + imageInfo.Extension;
                     using (FileStream fileStream = System.IO.File.Create(path + newImageName))
                     {
                         fileUplod.Files.CopyTo(fileStream);
                         fileStream.Flush();
-                        return $"image name: " + path + newImageName;
+                        return newImageName;
                     }
                 }
                 else

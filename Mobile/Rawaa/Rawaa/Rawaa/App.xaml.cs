@@ -1,6 +1,9 @@
-﻿using Rawaa.Services;
+﻿using Rawaa.Resources.Languages;
+using Rawaa.Services;
 using Rawaa.Views;
 using System;
+using System.Globalization;
+using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,11 +17,14 @@ namespace Rawaa
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            Rawaa.Helper.LocalizationResourceManager.SetLanguage(null,true);
             MainPage = new AppShell();
+            Rawaa.Helper.LocalizationResourceManager.checkDirectionWhenStart();
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
+            
         }
 
         protected override void OnSleep()

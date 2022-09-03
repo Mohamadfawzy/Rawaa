@@ -29,6 +29,7 @@ namespace Rawaa_Api.Services
         }
         public Product Add(Product entity)
         {
+            entity.Image = "P_"+Guid.NewGuid().ToString().Substring(0, 12); ;
             var result = context.Products.Add(entity);
             context.SaveChanges();
             var title = context.ProductTitleTranslations.Add(new ProductTitleTranslation { TitleAr = entity.Title, ProductId = entity.Id });
@@ -68,6 +69,32 @@ namespace Rawaa_Api.Services
 
         public IList<Product> List()
         {
+
+            var products = new List<Product>();
+            products = (from p in context.Products
+                       join translat in context.ProductTitleTranslations on p.Id equals translat.ProductId
+                       orderby translat.Id
+                       select new Product
+                       {
+                           Id = p.Id,
+                           Title = translat.TitleAr,
+                           Image = p.Image,
+                           SmallSizePrice = p.SmallSizePrice,
+                           MediumSizePrice = p.MediumSizePrice,
+                           BigSizePrice = p.BigSizePrice,
+                           DiscountValue = p.DiscountValue,
+                           Calories = p.Calories,
+                           HasTaste = p.HasTaste,
+                           CategoryId = p.CategoryId
+                       }).ToList();
+
+            if (products != null)
+            {
+                return products;
+            }
+            else return null;
+
+
             return context.Products.ToList<Product>();
 
         }

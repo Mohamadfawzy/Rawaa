@@ -10,10 +10,10 @@ using Xamarin.Forms;
 using System.IO;
 using Rawaa.Models;
 
-//[assembly: Dependency(typeof(RequestProvider))]
+
 namespace Rawaa.Services
 {
-    public class RequestProvider<T> //: IRequestProvider<TResult>
+    public class RequestProvider<T>
     {
 
         private const string BaseUrl = "https://192.168.1.101:7128";
@@ -21,12 +21,8 @@ namespace Rawaa.Services
         HttpClient client = new HttpClient
         {
             BaseAddress = new Uri(BaseUrl),
+            Timeout = TimeSpan.FromSeconds(20)
         };
-
-        public RequestProvider()
-        {
-            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        }
 
         public async Task<IEnumerable<T>> GetListAsync(string uri = "", string token = "")
         {
@@ -47,6 +43,23 @@ namespace Rawaa.Services
             return await Task.FromResult(new List<T>()); // await Task.FromResult(default(TResult));
         }
 
+        // Get by ID
+        public async Task<T> GetById(int id, string uri, string token = "")
+        {
+            try
+            {
+                client.DefaultRequestHeaders.Add("id", id.ToString());
+                var json = await client.GetStringAsync("Students");
+                T result = await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #region
         // get range
         public async Task<TResult> GetRangeAsync<TResult>(string uri, int skipe, int take, string token = "")
         {
@@ -141,9 +154,16 @@ namespace Rawaa.Services
             }
             return default(TResult);
         }
+        #endregion
 
-        // 
-
-
-    }
+    } // end class
 }
+
+
+
+
+/* Deleted
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+[assembly: Dependency(typeof(RequestProvider))]
+: IRequestProvider<TResult>
+*/

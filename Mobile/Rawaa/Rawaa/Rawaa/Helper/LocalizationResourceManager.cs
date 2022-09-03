@@ -11,22 +11,35 @@ namespace Rawaa.Helper
     {
         private static string languageCurrentDevice = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
-        public static string CurrentLanguage
+        public static string storedLanguageName
         {
-            get => Preferences.Get(nameof(CurrentLanguage), languageCurrentDevice);
-            set => Preferences.Set(nameof(CurrentLanguage), value);
+            get => Preferences.Get(nameof(storedLanguageName), languageCurrentDevice);
+            set => Preferences.Set(nameof(storedLanguageName), value);
         }
         public static string SetLanguage(string langName = null, bool isMainPage = false)
         {
             if (langName == null)
-                langName = CurrentLanguage;
+                langName = storedLanguageName;
             CultureInfo language = new CultureInfo(langName);
             Thread.CurrentThread.CurrentUICulture = language;
             LanguageResources.Culture = language;
-            CurrentLanguage = language.ToString();
-            //if(!isMainPage)
-            //    App.Current.MainPage = new MainPage();
-            return language.ToString();
+            storedLanguageName = language.ToString();
+            //if (isMainPage)
+            //{
+            //    var ds = DependencyService.Get<IMyEnvironment>();
+            //    if (storedLanguageName == "ar")
+            //    {
+            //        ds.FlowDirectionRTL();
+            //        App.Current.MainPage.FlowDirection = FlowDirection.RightToLeft;
+            //    }
+            //    else
+            //    {
+            //        ds.FlowDirectionLTR();
+            //        App.Current.MainPage.FlowDirection = FlowDirection.LeftToRight;
+            //    }
+            //}
+                
+            return storedLanguageName;
         }
         public static async Task<bool> SetLanguageAsync(string langName = null)
         {
@@ -34,29 +47,45 @@ namespace Rawaa.Helper
             var t1 = ChangeDirection(currentCulture);
             return await Task.FromResult(t1);
         }
-        public static bool ChangeDirection(string name)
+        public static bool ChangeDirection(string name, bool startApp = false)
         {
-           // var ds = DependencyService.Get<IMultipleDependencies>();
+            var ds = DependencyService.Get<IMyEnvironment>();
             if (name == "ar")
             {
-               // ds.FlowDirectionRTL();
-                //App.Current.MainPage = new MainPage();
+                ds.FlowDirectionRTL();
+                App.Current.MainPage = new AppShell();
                 App.Current.MainPage.FlowDirection = FlowDirection.RightToLeft;
             }
             else
             {
-               // ds.FlowDirectionLTR();
-                //App.Current.MainPage = new MainPage();
+                ds.FlowDirectionLTR();
+                App.Current.MainPage = new AppShell();
                 App.Current.MainPage.FlowDirection = FlowDirection.LeftToRight;
             }
             //CurrentLanguage = name;
             return true;
         }
 
+        public static void checkDirectionWhenStart()
+        {
+            var ds = DependencyService.Get<IMyEnvironment>();
+            if (storedLanguageName == "ar")
+            {
+                ds.FlowDirectionRTL();
+                App.Current.MainPage.FlowDirection = FlowDirection.RightToLeft;
+            }
+            else
+            {
+                ds.FlowDirectionLTR();
+                App.Current.MainPage.FlowDirection = FlowDirection.LeftToRight;
+            }
 
+        }
         static void old()
         {
-            
+
+
+
         }
     }
 }

@@ -3,13 +3,16 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Rawaa.Views"
        Title="Rawaa"
-       x:Class="Rawaa.AppShell">
+       x:Class="Rawaa.AppShell"
+       xmlns:icon="clr-namespace:Rawaa.Fonts"
+       xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+       >
 
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="Red" />
+                <Setter Property="Shell.ForegroundColor" Value="Blue" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
@@ -49,11 +52,11 @@
 
             <Style TargetType="TabBar">
                 <Setter Property="Shell.TabBarBackgroundColor"
-            Value="Red" />
+            Value="WhiteSmoke" />
                 <Setter Property="Shell.TabBarTitleColor"
-            Value="Green" />
+            Value="Blue" />
                 <Setter Property="Shell.TabBarUnselectedColor"
-            Value="Orange" />
+            Value="Gray" />
             </Style>
             <!--
             Custom Style you can apply to any Flyout Item
@@ -79,25 +82,38 @@
 
 
     <TabBar>
-        <Tab Title="Home" Icon="icon_about.png" >
-            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
-        </Tab>
-
-        <Tab Title="Acount" Icon="icon_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
-        </Tab>
-
-        <Tab Title="Favorite" Icon="icon_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
-        </Tab>
-
-        <Tab Title="Menu">
+        <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Home}">
             <Tab.Icon>
-                <FontImageSource Glyph="?" Size="Large" Color="Black"  />
+                <FontImageSource Glyph="{x:Static icon:IconFont.Home}"
+                                 FontFamily="IconFont" />
             </Tab.Icon>
-
-            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
         </Tab>
+
+        <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Acount}">
+            <Tab.Icon>
+                <FontImageSource Glyph="{x:Static icon:IconFont.AccountOutline}"
+                                 FontFamily="IconFont" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+        </Tab>
+
+        <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Favorite}">
+            <Tab.Icon>
+                <FontImageSource Glyph="{x:Static icon:IconFont.HeartOutline}"
+                                 FontFamily="IconFont" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+        </Tab>
+
+        <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Menu}">
+            <Tab.Icon>
+                <FontImageSource Glyph="{x:Static icon:IconFont.ViewGridOutline}"
+                                 FontFamily="IconFont" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+        </Tab>
+        
     </TabBar>
 
 </Shell>

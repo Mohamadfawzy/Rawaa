@@ -1,0 +1,107 @@
+﻿
+
+public async Task<byte[]> GetBytArryImageFromUri_1()
+        {
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            byte[] result;
+            try
+            {
+                var json = await client.GetAsync("https://192.168.1.101:7128/api/FileUploads/bytImage?imageName=1");
+                var content = await json.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<byte[]>(content);
+
+                var cl1 = new AdsM() { Image = result };
+                var cl2 = new AdsM() { Image = result };
+                Sliders = new List<AdsM>() { cl1, cl2 };
+                SetSliderPosition(2);
+                OnPropertyChanged("Sliders");
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            return null;// await Task.FromResult(default(TResult));
+        }
+================================================================================================================================================================================================================================================
+public async void GetBytArryImageFromUri_2()
+        {
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+
+            HttpClient myClint = new HttpClient(httpClientHandler)
+            {
+                BaseAddress = new Uri("https://192.168.1.101:7128"),
+                Timeout = new TimeSpan(0, 0, 10)
+            };
+
+            var json = await myClint.GetStringAsync("api/FileUploads/bytImage?imageName=1");
+            var result = JsonConvert.DeserializeObject<byte[]>(json);
+
+            var cl1 = new AdsM() { Image = result };
+            var cl2 = new AdsM() { Image = result };
+            Sliders = new List<AdsM>() { cl1, cl2 };
+            SetSliderPosition(2);
+            OnPropertyChanged("Sliders");
+
+        }
+
+================================================================================================================================================================================================================================================
+ public async Task<byte[]> GetBytArryImageFromUri_3()
+        {
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+
+            byte[] result;
+            try
+            {
+                using (var httpClient = new HttpClient(httpClientHandler))
+                {
+                    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://192.168.1.101:7128/api/FileUploads/bytImage?imageName=1"))
+                    {
+                        var response = await httpClient.SendAsync(request);
+                        var ima = await response.Content.ReadAsStringAsync();
+                        result = JsonConvert.DeserializeObject<byte[]>(ima) ;
+                    }
+                }
+                
+                var cl1 = new AdsM() {Image = result };
+                var cl2 = new AdsM() {Image = result };
+                Sliders = new List<AdsM>() { cl1, cl2 };
+                SetSliderPosition(2);
+                OnPropertyChanged("Sliders");
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            return null;// await Task.FromResult(default(TResult));
+        }
+
+================================================================================================================================================================================================================================================
+
+        public async void GetBytArryImageFromUri_4()
+        {
+            var result = aa22.GetListAsync().Result.ToList();
+
+            var cl1 = new AdsM() { Image = result.FirstOrDefault().Image };
+            var cl2 = new AdsM() { Image = result.FirstOrDefault().Image };
+            var cl3 = result.FirstOrDefault();
+            Sliders = new List<AdsM>() { cl1, cl2, cl3 };
+            SetSliderPosition(2);
+            OnPropertyChanged("Sliders");
+
+        }

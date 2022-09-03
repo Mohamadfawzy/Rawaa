@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Rawaa.Droid.Helper;
+using Rawaa.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(AdnroidSetting))]
 namespace Rawaa.Droid.Helper
 {
-    internal class AdnroidSetting
+    internal class AdnroidSetting : IMyEnvironment
     {
 
         Android.App.Activity activity = Platform.CurrentActivity;
@@ -23,6 +24,15 @@ namespace Rawaa.Droid.Helper
         public AdnroidSetting()
         {
             window = activity.Window;
+        }
+        public void FlowDirectionLTR()
+        {
+            activity.Window.DecorView.LayoutDirection = LayoutDirection.Ltr;
+        }
+
+        public void FlowDirectionRTL()
+        {
+            activity.Window.DecorView.LayoutDirection = LayoutDirection.Rtl;
         }
 
         public void SetStatusBarColor(System.Drawing.Color color, bool darkStatusBarTint)
@@ -54,5 +64,8 @@ namespace Rawaa.Droid.Helper
         {
             throw new NotImplementedException();
         }
-    }
+
+       
+
+    } // end
 }

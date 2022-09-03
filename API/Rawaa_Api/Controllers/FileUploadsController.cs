@@ -65,7 +65,7 @@ namespace ITICourse.Controllers
         }
 
 
-        [HttpGet("GetPysicalFile/{fileName}.jpg")]
+        [HttpGet("GetPysicalFile/{fileName}")]
         public async Task<IActionResult> GetPysicalFile([FromRoute] string fileName)
         {
             string path = _webHostEnvironment.WebRootPath + "\\Images\\";

@@ -7,7 +7,10 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:icon="clr-namespace:Rawaa.Fonts"
              xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:converter="clr-namespace:Rawaa.Converters">
+             xmlns:converter="clr-namespace:Rawaa.Converters"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Shell.NavBarIsVisible="False"
+             Shell.PresentationMode="NotAnimated">
 
     <ContentPage.BindingContext>
         <vm:HomePageVM />
@@ -15,32 +18,62 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-           
             <xct:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
-
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout Orientation="Horizontal" HeightRequest="50" Padding="10"
+                         BackgroundColor="WhiteSmoke"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center">
+                
+                <Image Source="LogoPNG"
+                       HeightRequest="30"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
 
-            <Label Text="{x:Static lang:LanguageResources.first}" />
-            <Label Text="{x:Static icon:IconFont.Home}"
-                   FontFamily="IconFont"/>
-            <Label Text="محمد فوزي هلال"
-                   FontFamily="CairoBold" />
-            <Label Text="محمد فوزي هلال"
-                   FontFamily="CairoRequler"/>
+                <!-- Frame searchBar -Contain 2 elements -->
+                <frame:PancakeView CornerRadius="7"
+                                   HorizontalOptions="FillAndExpand"
+                                   BackgroundColor="White"
+                                   Margin="8,3,8,8"
+                                   Padding="0"
+                                   Border="{frame:BorderMarkup Color=LightGray, Thickness=1}">
+                    <!-- Containar -have MagnifyIcon,SearchEntry,ClearIcon -->
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Center"
+                                 Orientation="Horizontal"
+                                 Spacing="0">
+                        <!-- Magnify Icon-->
+                        <Label Text="{x:Static icon:IconFont.Magnify}"
+                               FontFamily="IconFont"
+                               Padding="10,0"
+                               FontSize="25"
+                               Margin="0,4,0,0"
+                               VerticalOptions="Center"
+                               TextColor="Red" />
+                        <!-- Entry for search -->
+                        <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                               FontFamily="CairoRequler"
+                               FontSize="14"
+                               x:Name="entrySearch"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand">
+                        </Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </frame:PancakeView>
+                <Label Text="{Static icon:IconFont.Cart}"
+                       FontFamily="IconFont" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
 
-            <frame:PancakeView HeightRequest="100"
-                               BackgroundColor="Black"
-                               CornerRadius="5,40,10,20">
-                <Image Source="{Binding MyImage}"
-                       HeightRequest="50" />
-
-            </frame:PancakeView>
-
+            </StackLayout>
             <!-- Ads -->
             <StackLayout x:Name="MainSlideOfferStack">
                 <CarouselView x:Name="carouselOffers"
@@ -49,11 +82,11 @@
                               IsBounceEnabled="True"
                               IndicatorView="indicatorView"
                               ItemsSource="{Binding Sliders }"
-                              CurrentItemChangedCommand="{Binding langCommand }"
+                              CurrentItemChangedCommand="{Binding }"
                               Position="{Binding SliderPosition }"
                               HorizontalOptions="Start"
                               VerticalOptions="Center"
-                              HeightRequest="170">
+                              HeightRequest="300">
                     <!--
                     CurrentItemChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=CurrentItem}"
                     -->
@@ -63,9 +96,7 @@
                                            SnapPointsAlignment="Start"
                                            SnapPointsType="MandatorySingle" />
                     </CarouselView.ItemsLayout>
-                    
 
-                    
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Margin="0"
@@ -79,12 +110,13 @@
                                        VerticalOptions="Center">
                                     <StackLayout Margin="0">
                                         <!-- صورة الخلفية -->
-                                        <Image Source="{Binding Image, Converter={StaticResource ByteArrayToImageSourceConverter}}"
-                                               Aspect="AspectFill"
-                                               HeightRequest="170" />
+                                        <image:CachedImage Aspect="AspectFill"
+                                                           Source="{Binding Image, Converter={StaticResource ByteArrayToImageSourceConverter}}">
+                                        </image:CachedImage>
+
                                     </StackLayout>
                                 </Frame>
-                                
+
                             </StackLayout>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
@@ -107,6 +139,31 @@
                                VerticalOptions="End"
                                SelectedIndicatorColor="{StaticResource Accent}"></IndicatorView>
             </Frame>
+
+            <Button Text="lang"
+                    Command="{Binding langCommand}"
+                    CommandParameter="ar">
+
+            </Button>
+
+            <Button Text="go SettingPage"
+                    Clicked="Button_Clicked">
+
+            </Button>
+
+            <Label Text="{x:Static icon:IconFont.AccountOutline}"
+                   FontFamily="IconFont" />
+
+            <Label Text="{x:Static icon:IconFont.HeartOutline}"
+                   FontFamily="IconFont" />
+
+            <Label Text="{x:Static icon:IconFont.ViewGridOutline}"
+                   FontFamily="IconFont" />
+
+            <Label Text="محمد فوزي هلال"
+                   FontFamily="CairoBold" />
+            <Label Text="محمد فوزي هلال"
+                   FontFamily="CairoRequler" />
 
         </StackLayout>
     </ContentPage.Content>

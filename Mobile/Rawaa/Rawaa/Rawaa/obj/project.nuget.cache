@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ktfK9os4drYHrmk8ojoB9YK9AX8dJFAL2oaNPtcecfHWRa4hcSMgznjH1/gmfOGt6rN4kKRslB2hQutNoxF7MQ==",
+  "dgSpecHash": "/GAWpiGQp1Ewwe3/5/uT5i/GbPqeSC/aRePtv07DOA36uABB8zfITO+VWxnIoerzh3oNgEpB7yNdfco9uEY17Q==",
   "success": true,
   "projectFilePath": "E:\\_Projects\\Rawaa\\Mobile\\Rawaa\\Rawaa\\Rawaa\\Rawaa.csproj",
   "expectedPackageFiles": [
@@ -22,7 +22,10 @@
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.communitytoolkit\\2.0.4\\xamarin.communitytoolkit.2.0.4.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.communitytoolkit.markup\\2.0.4\\xamarin.communitytoolkit.markup.2.0.4.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.essentials\\1.7.3\\xamarin.essentials.1.7.3.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.ffimageloading\\2.4.11.982\\xamarin.ffimageloading.2.4.11.982.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.ffimageloading.forms\\2.4.11.982\\xamarin.ffimageloading.forms.2.4.11.982.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.forms\\5.0.0.2515\\xamarin.forms.5.0.0.2515.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\xamarin.forms.pancakeview\\2.3.0.759\\xamarin.forms.pancakeview.2.3.0.759.nupkg.sha512"
   ],

@@ -15,12 +15,15 @@ namespace Rawaa_Api.Controllers
         private readonly IProvider<Product> data;
         FileProcessor fileProcessor;
         IWebHostEnvironment webHost;
+
+        // Constructor ================================================================
         public ProductController(IProvider<Product> _data, IWebHostEnvironment webHost)
         {
             data = _data;
             this.webHost = webHost;
             this.fileProcessor = new FileProcessor(this.webHost);
         }
+
 
         [HttpPost("create")]
         public IActionResult PostProduct([FromForm] ImageUplod source, [FromForm] Product model)
@@ -29,7 +32,7 @@ namespace Rawaa_Api.Controllers
                 return BadRequest(new { StatusCode = 400, Message = $"The {nameof(model.Title)} field is required." });
 
             var result = data.Add(model);
-            fileProcessor.PostImage(source, result.Id);
+            fileProcessor.PostImage(source, result.Image);
             return CreatedAtAction(nameof(GetId), new { id = result.Id }, result); // id == param id in func GetIt
             //return Ok(result);
         }
