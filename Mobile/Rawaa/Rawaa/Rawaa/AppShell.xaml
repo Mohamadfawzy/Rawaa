@@ -95,7 +95,7 @@
                 <FontImageSource Glyph="{x:Static icon:IconFont.AccountOutline}"
                                  FontFamily="IconFont" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:SettingPage}" />
         </Tab>
 
         <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Favorite}">
@@ -103,7 +103,7 @@
                 <FontImageSource Glyph="{x:Static icon:IconFont.HeartOutline}"
                                  FontFamily="IconFont" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
         </Tab>
 
         <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Menu}">

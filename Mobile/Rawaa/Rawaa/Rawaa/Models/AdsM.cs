@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace Rawaa.Models
 {
@@ -8,8 +6,11 @@ namespace Rawaa.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public string ProductId { get; set; }
         public string CategoryId { get; set; }
+        
+        [JsonIgnore]
+        public string ImageUrl => AppSettings.ApiUrl + Image;
     }
 }

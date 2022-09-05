@@ -1,4 +1,5 @@
-﻿using Rawaa.Models;
+﻿using Rawaa.Helper;
+using Rawaa.Models;
 using Rawaa.Services;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,6 @@ namespace Rawaa.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-        
 
         bool isBusy = false;
         public bool IsBusy
@@ -26,6 +26,21 @@ namespace Rawaa.ViewModels
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+
+        FlowDirection currentFlowDirection = FlowDirection.RightToLeft;
+        public FlowDirection CurrentFlowDirection
+        {
+            get
+            {
+                if (LocalizationResourceManager.storedLanguageName == "ar")  
+                    return currentFlowDirection;
+                return FlowDirection.LeftToRight;
+                
+            }
+            set { SetProperty(ref currentFlowDirection, value); }
+        }
+
+
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",

@@ -12,33 +12,42 @@ using System.Text.Json.Serialization;
 using RestSharp;
 using Rawaa.Services;
 using Rawaa.Helper;
+using Rawaa_Api.Models;
 
 namespace Rawaa.ViewModels
 {
     public class HomePageVM : BaseViewModel
     {
-        public IDataStore<AdsM> requestProvider = new AdData();
-
-        public List<AdsM> Sliders { get; set; }
         public int SliderPosition { get; set; }
 
+
+        public IDataStore<AdsM> requestProvider = new AdData();
+        public List<AdsM> Sliders { get; set; }
+        public List<Category> FoodMenu { get; set; }
+        public List<Product> MostPopularMeals { get; set; }
+
+
+
         public ICommand langCommand => new Command<string>(changLang);
+        public ICommand CurrentItemChangedCommand => new Command<AdsM>(CurrentItemChangedExcute);
 
         public HomePageVM()
         {
-            ss2();
+            Task.Run(()=>FetchAds());
+            Task.Run(() => FetchCategory());
+            Task.Run(() => FetchMostPopularMeals());
+            Task.Run(() => FetchOffers());
         }
 
+        // excuted
+        void CurrentItemChangedExcute(AdsM item)
+        {
+            Console.WriteLine("====================="+ item.ImageUrl);
+        }
         async void changLang(string lng)
         {
             await LocalizationResourceManager.SetLanguageAsync(lng);
         }
-        HttpClient client = new HttpClient
-        {
-            //BaseAddress = new Uri(BaseUrl),
-            Timeout = new TimeSpan(0, 0, 10)
-        };
-
 
         // tip return task for exeptions
         private async Task ss2()
@@ -53,6 +62,55 @@ namespace Rawaa.ViewModels
         }
 
 
+
+        // fetch
+        private async Task FetchAds()
+        {
+            var lis = new List<AdsM>() { new AdsM { Image = "p3.jpg" }, new AdsM { Image = "m4.jpg" }, new AdsM { Image = "p2.jpg" } };
+            Sliders = lis;
+        }
+
+
+        private async Task FetchCategory()
+        {
+            var lis = new List<Category>() 
+            {
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+                new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
+
+            };
+            FoodMenu = lis;
+        }  
+        private async Task FetchMostPopularMeals()
+        {
+            var lis = new List<Product>()
+            {
+                new Product { Image = "m2.jpg", Calories= 1234, Title= "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا " , SmallSizePrice = 21.50 },
+                new Product { Image = "m1.jpg", Calories= 1234,Title= "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا " , SmallSizePrice = 21.99  },
+                new Product { Image = "p1.jpg", Calories= 1241,Title= "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا " , SmallSizePrice = 21.50  },
+                new Product { Image = "p2.jpg", Calories= 1341,Title= "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا " , SmallSizePrice = 21.99  },
+                new Product { Image = "p3.jpg", Calories= 1241,Title= "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا " , SmallSizePrice = 21.50  },
+
+            };
+            MostPopularMeals = lis;
+        } 
+
+        private async Task FetchOffers()
+        {
+
+        }
 
 
 

@@ -80,3 +80,4 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Forms.Platform.pdb
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Forms.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\FFImageLoading.Forms.pdb
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.iOS\bin\iPhone\Debug\ar\Rawaa.resources.dll

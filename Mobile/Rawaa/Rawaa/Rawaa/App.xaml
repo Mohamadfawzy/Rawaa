@@ -7,6 +7,42 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="blueDark">#122158</Color>
+            <Color x:Key="blueRegular">#2B388F</Color>
+            <Color x:Key="blueLight">#3C4C97</Color>
+            <Color x:Key="yellowDark">#F6B21B</Color>
+            <Color x:Key="yellowLight">#FFC237</Color>
+            <Color x:Key="whiteSmoke">WhiteSmoke</Color>
+            <Color x:Key="white">#FFFFFF</Color>
+            <Color x:Key="darkGray">#343a40</Color>
+            <Color x:Key="lightGray">LightGray</Color>
+            
+            <!--
+
+            <Color x:Key="primary">#007bff</Color>
+            <Color x:Key="indigo">#6610f2</Color>
+            <Color x:Key="blue">#007bff</Color>
+            <Color x:Key="purple">#6f42c1</Color>
+            <Color x:Key="success">#28a745</Color>
+            <Color x:Key="red">#dc3545</Color>
+            <Color x:Key="pink">#e83e8c</Color>
+            <Color x:Key="orange">#fd7e14</Color>
+            <Color x:Key="yellow">#ffc107</Color>
+            <Color x:Key="green">#28a745</Color>
+            <Color x:Key="teal">#20c997</Color>
+            <Color x:Key="cyan">#17a2b8</Color>
+            <Color x:Key="gray">#6c757d</Color>
+            <Color x:Key="grayDark">#343a40</Color>
+            <Color x:Key="secondary">#6c757d</Color>
+            <Color x:Key="info">#17a2b8</Color>
+            <Color x:Key="warning">#ffc107</Color>
+            <Color x:Key="danger">#dc3545</Color>
+            <Color x:Key="light">#f8f9fa</Color>
+            <Color x:Key="dark">#343a40</Color>
+
+            
+-->
+            
             <Color x:Key="Primary">#2196F3</Color>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>

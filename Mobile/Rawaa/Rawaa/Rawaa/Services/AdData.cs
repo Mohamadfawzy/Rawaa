@@ -24,22 +24,22 @@ namespace Rawaa.Services
 
             clint = new HttpClient(httpClientHandler)
             {
-                BaseAddress = new Uri("https://192.168.1.101:7128"),
+                BaseAddress = new Uri("http://www.rawaa.somee.com"),
                 Timeout = new TimeSpan(0, 0, 10)
             };
         }
         public async Task<AdsM> GetItemAsync(int id)
         {
             var json = await clint.GetStringAsync("api/FileUploads/bytImage?imageName=1");
-            var result = JsonConvert.DeserializeObject<byte[]>(json);
+            var result = JsonConvert.DeserializeObject<string>(json);
 
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<AdsM>> GetItemsAsync(bool forceRefresh = false)
         {
-            var json = await clint.GetStringAsync("api/FileUploads/bytImage?imageName=1");
-            var result = JsonConvert.DeserializeObject<byte[]>(json);
+            var json = await clint.GetStringAsync("api/FileUploads/GetPysicalFile/C_38571c11-49f");
+            var result = JsonConvert.DeserializeObject<string>(json);
 
             var ad = new List<AdsM>() { new AdsM() { Image = result } };
             return await Task.FromResult(ad);

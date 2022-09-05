@@ -4,14 +4,27 @@
              x:Class="Rawaa.Views.SettingPage"
              BackgroundColor="Orange"
              Shell.TabBarIsVisible="False"
-             Shell.PresentationMode="ModalAnimated">
+             >
     <ContentPage.Content>
-        <StackLayout BackgroundColor="Orange">
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button Text="bak"
-                    Clicked="Button_Clicked" />
+        <StackLayout BackgroundColor="DarkBlue">
+
+            <Button Text="عربي"
+                    x:Name="box_ar"
+                    Margin="15"
+                    CornerRadius="20"
+                    FontFamily="IconFont"
+                    Clicked="Button_Clicked_Arabic"/>
+            
+            <Button Text="English"
+                    x:Name="box_en"
+                    Margin="15"
+                    CornerRadius="20"
+                    Clicked="Button_Clicked_English" />
+
+            <Button Text="تمام ok"
+                    x:Name="bt_ok"
+                    Clicked="Button_Clicked_Ok" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

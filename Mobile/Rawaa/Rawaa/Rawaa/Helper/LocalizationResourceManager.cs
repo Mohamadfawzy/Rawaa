@@ -20,10 +20,13 @@ namespace Rawaa.Helper
         {
             if (langName == null)
                 langName = storedLanguageName;
+
             CultureInfo language = new CultureInfo(langName);
             Thread.CurrentThread.CurrentUICulture = language;
             LanguageResources.Culture = language;
+
             storedLanguageName = language.ToString();
+
             //if (isMainPage)
             //{
             //    var ds = DependencyService.Get<IMyEnvironment>();

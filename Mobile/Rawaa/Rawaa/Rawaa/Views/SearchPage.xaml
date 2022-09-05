@@ -5,10 +5,15 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
              xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
              x:Class="Rawaa.Views.SearchPage"
              Shell.PresentationMode="ModalAnimated"
              Shell.NavBarIsVisible="False"
-             FlowDirection="RightToLeft">
+             FlowDirection="{Binding  CurrentFlowDirection}">
+
+    <ContentPage.BindingContext>
+        <vm:SearchPageVM />
+    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
             
@@ -100,7 +105,71 @@
                         </Frame.Triggers>
                     </Frame>
                 </StackLayout>
+                
             </frame:PancakeView>
+
+            <!-- Collection of MostPopularMeals -->
+            <CollectionView ItemsSource="{Binding ListOfProducts}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="0" />
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid VerticalOptions="Fill"
+                              RowSpacing="1">
+                            <frame:PancakeView Margin="8,5"
+                                               CornerRadius="10"
+                                               WidthRequest="200"
+                                               Padding="0"
+                                               Shadow="{frame:ShadowMarkup BlurRadius=3}"
+                                               VerticalOptions="FillAndExpand"
+                                               BackgroundColor="WhiteSmoke">
+                                <StackLayout HorizontalOptions="FillAndExpand"
+                                             Spacing="5"
+                                             Orientation="Horizontal"
+                                             BackgroundColor="MintCream">
+                                    <Image Source="{Binding ImageUrl}"
+                                           Aspect="AspectFill"
+                                           WidthRequest="120"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Start" />
+                                    <StackLayout>
+                                        <!-- Title -->
+                                        <Label Text="{Binding Title}"
+                                               FontSize="18"
+                                               TextColor="{StaticResource blueRegular}"
+                                               LineBreakMode="TailTruncation"
+                                               Margin="0" />
+
+                                        <!-- price -->
+                                        <StackLayout Orientation="Horizontal"
+                                                     VerticalOptions="Center"
+                                                     Spacing="0">
+                                            <Label Text="{Binding SmallSizePrice}"
+                                                   FontSize="20"
+                                                   TextColor="{StaticResource blueDark}"
+                                                   VerticalOptions="Center"
+                                                   FontFamily="CairoBold" />
+                                            <Label Text="ج.م"
+                                                   FontSize="16"
+                                                   Margin="10,0"
+                                                   TextColor="{StaticResource blueDark}"
+                                                   VerticalOptions="Center"
+                                                   FontFamily="CairoBold" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                            </frame:PancakeView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
