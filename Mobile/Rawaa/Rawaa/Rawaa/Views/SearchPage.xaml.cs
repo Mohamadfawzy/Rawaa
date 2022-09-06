@@ -24,7 +24,12 @@ namespace Rawaa.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await Task.Delay(50);
+            Task.Run(() => SetFocus());
+        }
+
+        async Task SetFocus()
+        {
+            await Task.Delay(2070);
             entrySearch.Focus();
         }
     }

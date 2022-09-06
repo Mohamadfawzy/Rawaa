@@ -1,8 +1,6 @@
-﻿using Rawaa;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace Rawaa_Api.Models
+namespace Rawaa.Models
 {
     public class Product
     {

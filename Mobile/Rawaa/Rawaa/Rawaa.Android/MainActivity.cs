@@ -21,8 +21,8 @@ namespace Rawaa.Droid
             // addd this
             Window.DecorView.LayoutDirection = LayoutDirection.Ltr;
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer:true);
-            Window.SetNavigationBarColor(Xamarin.Forms.Color.FromHex("#cb1901").ToAndroid());
-            this.SetStatusBarColor(Xamarin.Forms.Color.FromHex("#cb1901").ToAndroid());
+            Window.SetNavigationBarColor(Xamarin.Forms.Color.FromHex("#2B388F").ToAndroid());//2B388F
+            this.SetStatusBarColor(Xamarin.Forms.Color.FromHex("#2B388F").ToAndroid()); // red cb1901
 
             // end add
             LoadApplication(new App());

@@ -1,7 +1,7 @@
 ﻿using Rawaa;
 using System.Text.Json.Serialization;
 
-namespace Rawaa_Api.Models
+namespace Rawaa.Models
 {
     public partial class Category
     {

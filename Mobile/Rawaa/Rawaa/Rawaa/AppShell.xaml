@@ -95,7 +95,7 @@
                 <FontImageSource Glyph="{x:Static icon:IconFont.AccountOutline}"
                                  FontFamily="IconFont" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate local:SettingPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
         </Tab>
 
         <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Favorite}">
@@ -111,7 +111,7 @@
                 <FontImageSource Glyph="{x:Static icon:IconFont.ViewGridOutline}"
                                  FontFamily="IconFont" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:CategoryPage}" />
         </Tab>
         
     </TabBar>

@@ -1,9 +1,10 @@
-﻿using Rawaa_Api.Models;
+﻿using Rawaa.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Rawaa.ViewModels
 {
@@ -40,19 +41,23 @@ namespace Rawaa.ViewModels
         public SearchPageVM()
         {
             ListOfProducts = new ObservableCollection<Product>();
+            Task.Run(()=> AddResultsInTheRecentSearchList(StoredList));
         }
         public ObservableCollection<Product> ListOfProducts { get; set; }
         private void getReseltFromSearch(string search)
         {
-            var ListOfResult = StoredList.Where(s => s.Title.ToLower().Contains(search.ToLower())).OrderBy((x) => x);
+            if (string.IsNullOrEmpty(search))
+                return;
+            var ListOfResult = StoredList.Where(s => s.Title.ToLower().Contains(search.ToLower())).OrderBy((x) => x.Title).ToList();
             
             AddResultsInTheRecentSearchList(ListOfResult);
         }
 
-        private void AddResultsInTheRecentSearchList(IEnumerable<Product> list)
+        private async void AddResultsInTheRecentSearchList(List<Product> list)
         {
             try
             {
+                await Task.Delay(3000);
                 ListOfProducts.Clear();
 
                 foreach (var item in list)

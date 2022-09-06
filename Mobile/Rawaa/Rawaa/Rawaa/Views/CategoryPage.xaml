@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.CategoryPage"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <vm:CategoryPageVM />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+
+            <!-- header-->
+            <StackLayout Orientation="Horizontal"
+                         HeightRequest="50"
+                         Padding="10"
+                         BackgroundColor="{StaticResource blueRegular}"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center">
+                <!-- logo -->
+                <Image Source="LogoPNG"
+                       HeightRequest="30"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       xct:IconTintColorEffect.TintColor="{StaticResource white}">
+                </Image>
+
+                <!-- Frame searchBar -Contain 2 elements -->
+                <frame:PancakeView CornerRadius="7"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="Center"
+                                   BackgroundColor="White"
+                                   Margin="8,3,8,8"
+                                   Padding="0"
+                                   Border="{frame:BorderMarkup Color=LightGray, Thickness=1}">
+
+                    <!-- Containar -have MagnifyIcon -->
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Center"
+                                 Orientation="Horizontal"
+                                 Spacing="0">
+
+                        <!-- Magnify Icon-->
+                        <Label Text="{x:Static icon:IconFont.Magnify}"
+                               FontFamily="IconFont"
+                               Padding="10,0"
+                               FontSize="25"
+                               Margin="0,4,0,0"
+                               VerticalOptions="Center"
+                               TextColor="Red" />
+
+                        <!--  Whate you want? -->
+                        <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                               FontFamily="CairoRequler"
+                               FontSize="14"
+                               x:Name="entrySearch"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand">
+                        </Label>
+
+                        <!-- click -->
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding  GoToSearchPageCommand}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </frame:PancakeView>
+
+                <!-- Cart Icon -->
+                <AbsoluteLayout HeightRequest="36"
+                                WidthRequest="36"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FlowDirection="LeftToRight">
+                    <Label x:Name="cartIcon"
+                           Text="{x:Static icon:IconFont.CartOutline}"
+                           TextColor="{StaticResource white}"
+                           FontFamily="IconFont"
+                           FontSize="30"
+                           Padding="0"
+                           Margin="0"
+                           HeightRequest="30"
+                           RotationY="0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           AbsoluteLayout.LayoutBounds="0,1"
+                           AbsoluteLayout.LayoutFlags="PositionProportional" />
+                    <frame:PancakeView IsVisible="{Binding CountBasketVisible}"
+                                       CornerRadius="15"
+                                       HeightRequest="20"
+                                       WidthRequest="20"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Start"
+                                       BackgroundColor="{StaticResource yellowDark}"
+                                       Padding="0"
+                                       Margin="0"
+                                       AbsoluteLayout.LayoutBounds="1,0"
+                                       AbsoluteLayout.LayoutFlags="PositionProportional">
+                        <Label Text="{Binding CountBasket}"
+                               FontSize="10"
+                               Padding="0"
+                               Margin="0"
+                               TextColor="{StaticResource white}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </frame:PancakeView>
+                    <AbsoluteLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToBasketPageCommand}" />
+                    </AbsoluteLayout.GestureRecognizers>
+                </AbsoluteLayout>
+            </StackLayout>
+
+            <!-- data-->
+            <StackLayout Margin="10,0"
+                         VerticalOptions="Start"
+                         BackgroundColor="{StaticResource white}"
+                         Spacing="0">
+                <CollectionView x:Name="CVMenus"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="Center"
+                                SelectionMode="None"
+                                Margin="0,10,0,0"
+                                ItemsSource="{Binding Categories}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout  Orientation="Vertical"
+                                          Span="3" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="7,10"
+                                         VerticalOptions="CenterAndExpand">
+                                <frame:PancakeView CornerRadius="10"
+                                                   Padding="0"
+                                                   HeightRequest="170"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   IsClippedToBounds="True"
+                                                   BackgroundColor="WhiteSmoke"
+                                                   Border="{frame:BorderMarkup Color=NavajoWhite, Thickness=2}">
+                                    <StackLayout Padding="10">
+                                        <image:CachedImage Source="{Binding ImageUrl}"
+                                                           Aspect="AspectFill" 
+                                                           VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="{Binding Title}"
+                                               FontSize="13"
+                                               TextColor="Black"
+                                               FontFamily="CairoBold"
+                                               HorizontalOptions="Center" />
+                                    </StackLayout>
+                                </frame:PancakeView>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

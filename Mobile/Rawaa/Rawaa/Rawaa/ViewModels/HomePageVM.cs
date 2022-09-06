@@ -12,7 +12,6 @@ using System.Text.Json.Serialization;
 using RestSharp;
 using Rawaa.Services;
 using Rawaa.Helper;
-using Rawaa_Api.Models;
 
 namespace Rawaa.ViewModels
 {
@@ -33,6 +32,7 @@ namespace Rawaa.ViewModels
 
         public HomePageVM()
         {
+            RefreshCountBasket();
             Task.Run(()=>FetchAds());
             Task.Run(() => FetchCategory());
             Task.Run(() => FetchMostPopularMeals());
@@ -57,7 +57,7 @@ namespace Rawaa.ViewModels
             var cl2 = new AdsM() { Image = result.FirstOrDefault().Image };
             var cl3 = result.FirstOrDefault();
             Sliders = new List<AdsM>() { cl1, cl2, cl3 };
-            //SetSliderPosition(2);
+            SetSliderPosition(3);
             OnPropertyChanged("Sliders");
         }
 
@@ -68,6 +68,8 @@ namespace Rawaa.ViewModels
         {
             var lis = new List<AdsM>() { new AdsM { Image = "p3.jpg" }, new AdsM { Image = "m4.jpg" }, new AdsM { Image = "p2.jpg" } };
             Sliders = lis;
+            SetSliderPosition(3);
+            OnPropertyChanged("Sliders");
         }
 
 

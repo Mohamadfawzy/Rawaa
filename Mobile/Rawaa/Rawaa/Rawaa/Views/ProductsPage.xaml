@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.ProductsPage"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="False">
+    
+    <ContentPage.BindingContext>
+        <vm:ProductsPageVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+
+            <!-- header-->
+            <StackLayout Orientation="Horizontal"
+                         HeightRequest="50"
+                         Padding="10"
+                         BackgroundColor="{StaticResource blueRegular}"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center">
+                <!-- logo -->
+                <Image Source="LogoPNG"
+                       HeightRequest="30"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       xct:IconTintColorEffect.TintColor="{StaticResource white}">
+                </Image>
+
+                <!-- Frame searchBar -Contain 2 elements -->
+                <frame:PancakeView CornerRadius="7"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="Center"
+                                   BackgroundColor="White"
+                                   Margin="8,3,8,8"
+                                   Padding="0"
+                                   Border="{frame:BorderMarkup Color=LightGray, Thickness=1}">
+
+                    <!-- Containar -have MagnifyIcon -->
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Center"
+                                 Orientation="Horizontal"
+                                 Spacing="0">
+
+                        <!-- Magnify Icon-->
+                        <Label Text="{x:Static icon:IconFont.Magnify}"
+                               FontFamily="IconFont"
+                               Padding="10,0"
+                               FontSize="25"
+                               Margin="0,4,0,0"
+                               VerticalOptions="Center"
+                               TextColor="Red" />
+
+                        <!--  Whate you want? -->
+                        <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                               FontFamily="CairoRequler"
+                               FontSize="14"
+                               x:Name="entrySearch"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand">
+                        </Label>
+
+                        <!-- click -->
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding  GoToSearchPageCommand}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </frame:PancakeView>
+
+                <!-- Cart Icon -->
+                <AbsoluteLayout HeightRequest="36"
+                                WidthRequest="36"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FlowDirection="LeftToRight">
+                    <Label x:Name="cartIcon"
+                           Text="{x:Static icon:IconFont.CartOutline}"
+                           TextColor="{StaticResource white}"
+                           FontFamily="IconFont"
+                           FontSize="30"
+                           Padding="0"
+                           Margin="0"
+                           HeightRequest="30"
+                           RotationY="0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           AbsoluteLayout.LayoutBounds="0,1"
+                           AbsoluteLayout.LayoutFlags="PositionProportional" />
+                    <frame:PancakeView IsVisible="{Binding CountBasketVisible}"
+                                       CornerRadius="15"
+                                       HeightRequest="20"
+                                       WidthRequest="20"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Start"
+                                       BackgroundColor="{StaticResource yellowDark}"
+                                       Padding="0"
+                                       Margin="0"
+                                       AbsoluteLayout.LayoutBounds="1,0"
+                                       AbsoluteLayout.LayoutFlags="PositionProportional">
+                        <Label Text="{Binding CountBasket}"
+                               FontSize="10"
+                               Padding="0"
+                               Margin="0"
+                               TextColor="{StaticResource white}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </frame:PancakeView>
+                    <AbsoluteLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToBasketPageCommand}" />
+                    </AbsoluteLayout.GestureRecognizers>
+                </AbsoluteLayout>
+            </StackLayout>
+            
+            <!-- MostPopularMeals -->
+            <StackLayout Margin="0,0,0,0"
+                         VerticalOptions="Start"
+                         IsClippedToBounds="True">
+                <!-- Title -->
+                <Label Text="الأطعمة الأكثر طلبا"
+                       FontFamily="CairoBold"
+                       Margin="8,0" />
+
+                <!-- Collection of MostPopularMeals -->
+                <CollectionView HeightRequest="307"
+                                ItemsSource="{Binding  Produts}"
+                                Margin="0,0"
+                                BackgroundColor="Transparent">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
+                                           ItemSpacing="0"
+                                           SnapPointsAlignment="Center" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid VerticalOptions="Fill"
+                                  RowSpacing="1"
+                                  BackgroundColor="Transparent">
+                                <frame:PancakeView Margin="8,5"
+                                                   CornerRadius="10"
+                                                   WidthRequest="200"
+                                                   Padding="0"
+                                                   BackgroundColor="Transparent"
+                                                   Shadow="{frame:ShadowMarkup BlurRadius=3}"
+                                                   VerticalOptions="FillAndExpand">
+                                    <StackLayout HorizontalOptions="FillAndExpand"
+                                                 Spacing="5"
+                                                 BackgroundColor="MintCream">
+                                        <image:CachedImage Source="{Binding ImageUrl}"
+                                                           Aspect="AspectFill"
+                                                           HeightRequest="120"
+                                                           WidthRequest="220"
+                                                           HorizontalOptions="Start"
+                                                           VerticalOptions="Start" />
+                                        <StackLayout Padding="10,0"
+                                                     Spacing="4">
+
+                                            <!-- Title -->
+                                            <Label Text="{Binding Title}"
+                                                   FontSize="18"
+                                                   TextColor="{StaticResource blueRegular}"
+                                                   LineBreakMode="TailTruncation"
+                                                   Margin="0" />
+
+                                            <!-- price -->
+                                            <StackLayout Orientation="Horizontal"
+                                                         VerticalOptions="Center"
+                                                         Spacing="0">
+                                                <Label Text="{Binding SmallSizePrice}"
+                                                       FontSize="20"
+                                                       TextColor="{StaticResource blueDark}"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoBold" />
+                                                <Label Text="ج.م"
+                                                       FontSize="16"
+                                                       Margin="10,0"
+                                                       TextColor="{StaticResource blueDark}"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoBold" />
+                                            </StackLayout>
+                                            <!-- price pefore descount -->
+                                            <StackLayout Orientation="Horizontal"
+                                                         VerticalOptions="Center"
+                                                         Spacing="-10">
+                                                <Label Text="{Binding SmallSizePrice}"
+                                                       FontSize="16"
+                                                       TextDecorations="Strikethrough"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoRegular">
+                                                </Label>
+                                                <Label Text="   ج.م"
+                                                       FontSize="16"
+                                                       TextDecorations="Strikethrough"
+                                                       Margin="10,0"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoRegular" />
+                                            </StackLayout>
+
+                                            <!-- Calories -->
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding Calories}"
+                                                       FontSize="16"
+                                                       LineBreakMode="TailTruncation"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoRegular" />
+                                                <Label Text="سعر حراري"
+                                                       FontSize="11"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoRegular" />
+                                            </StackLayout>
+
+                                            <!-- button add to cart -->
+                                            <Button Text="اضافة للسلة"
+                                                    Margin="5,0,5,7"
+                                                    CornerRadius="30"
+                                                    HeightRequest="45"
+                                                    VerticalOptions="Center"
+                                                    BackgroundColor="{StaticResource yellowDark}"
+                                                    TextColor="{StaticResource blueDark}"
+                                                    FontFamily="CairoBold"
+                                                    HorizontalOptions="FillAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </frame:PancakeView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
