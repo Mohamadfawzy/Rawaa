@@ -123,11 +123,14 @@
                          BackgroundColor="{StaticResource white}"
                          Spacing="0">
                 <CollectionView x:Name="CVMenus"
+                                ItemsSource="{Binding Categories}"
                                 HorizontalOptions="CenterAndExpand"
                                 VerticalOptions="Center"
-                                SelectionMode="None"
+                                SelectionMode="Single"
                                 Margin="0,10,0,0"
-                                ItemsSource="{Binding Categories}">
+                                SelectedItem="{Binding SelectedCategory,Mode=TwoWay }"
+                                SelectionChangedCommand="{Binding SelectedCategoryCommand}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CVMenus}}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout  Orientation="Vertical"
                                           Span="3" />

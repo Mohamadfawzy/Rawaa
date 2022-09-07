@@ -36,7 +36,7 @@ namespace Rawaa.ViewModels
             set { SetProperty(ref cartIcon, value); }
         }
 
-        
+
         // Cart visible
         public bool countBasketVisible = false;
         public bool CountBasketVisible
@@ -79,6 +79,7 @@ namespace Rawaa.ViewModels
         // Command --------------------------------------------
         public ICommand GoToBasketPageCommand => new Command(GoToBasketPage);
         public ICommand GoToSearchPageCommand => new Command(GoToSearchtPage);
+        public ICommand AddProductToBasket => new Command<Product>(ExceuteAddProductToBasket);
 
         // Execute Methodes -----------------------------------
         protected void GoToBasketPage()
@@ -87,7 +88,18 @@ namespace Rawaa.ViewModels
         }
         protected void GoToSearchtPage()
         {
-            Shell.Current.GoToAsync("SearchPage",false);
+            Shell.Current.GoToAsync("SearchPage", false);
+        }
+        int add = 0;
+        protected void ExceuteAddProductToBasket(Product product)
+        {
+            //if (product != null)
+            //{
+            //    int.TryParse(CountBasket, out int result);
+            //    CountBasket = result++.ToString();
+            //}
+            AppSettings.countOfCart++;
+            RefreshCountBasket();
         }
         protected void RefreshCountBasket()
         {
@@ -99,7 +111,7 @@ namespace Rawaa.ViewModels
                 {
                     if (item > 0)
                     {
-                        CountBasket = item.ToString();
+                        CountBasket = AppSettings.countOfCart.ToString();
                         CountBasketVisible = true;
                     }
                     else

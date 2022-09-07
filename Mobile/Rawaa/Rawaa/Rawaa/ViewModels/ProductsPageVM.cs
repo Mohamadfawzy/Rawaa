@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rawaa.ViewModels
 {
-    public class ProductsPageVM
+    public class ProductsPageVM : BaseViewModel
     {
         List<Product> produts = new List<Product>()
         {
@@ -22,6 +22,7 @@ namespace Rawaa.ViewModels
         public List<Product> Produts { get; set; } = new List<Product>();
         public ProductsPageVM()
         {
+            RefreshCountBasket();
             Produts = produts;
         }
     }

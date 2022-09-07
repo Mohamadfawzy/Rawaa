@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rawaa.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,18 @@ namespace Rawaa.Views
         //    Shell.Current.GoToAsync("SettingPage",false);
         //}
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Carousel.TranslationY = 0;
+            Carousel.Opacity = 1;
+            (BindingContext as HomePageVM).SliderIsLoop = true;
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            (BindingContext as HomePageVM).SliderIsLoop = false ;
+        }
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("SearchPage", false);

@@ -17,14 +17,14 @@ namespace Rawaa
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            Rawaa.Helper.LocalizationResourceManager.SetLanguage(null,true);
+            Rawaa.Helper.LocalizationResourceManager.SetLanguage(null, true);
             MainPage = new AppShell();
             Rawaa.Helper.LocalizationResourceManager.checkDirectionWhenStart();
         }
 
         protected async override void OnStart()
         {
-            
+
         }
 
         protected override void OnSleep()

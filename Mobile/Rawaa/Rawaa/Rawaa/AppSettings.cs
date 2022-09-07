@@ -8,5 +8,6 @@ namespace Rawaa
     {
         //http://www.rawaa.somee.com/
         public const string ApiUrl = "";
+        public static int countOfCart = 0;
     }
 }

@@ -6,6 +6,7 @@
        x:Class="Rawaa.AppShell"
        xmlns:icon="clr-namespace:Rawaa.Fonts"
        xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+       FlowDirection="RightToLeft"
        >
 
     <Shell.Resources>

@@ -1,4 +1,5 @@
 ﻿
+SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CVMenus}}"
 
 public async Task<byte[]> GetBytArryImageFromUri_1()
         {

@@ -25,10 +25,16 @@ namespace Rawaa.ViewModels
         public List<Category> FoodMenu { get; set; }
         public List<Product> MostPopularMeals { get; set; }
 
-
+        Product selectedProduct;
+        public Product SelectedProduct
+        {
+            get { return selectedProduct; }
+            set { SetProperty(ref selectedProduct, value); }
+        }
 
         public ICommand langCommand => new Command<string>(changLang);
         public ICommand CurrentItemChangedCommand => new Command<AdsM>(CurrentItemChangedExcute);
+        public ICommand SelectedProductCommand => new Command<Product>(SelectedProductExecute);
 
         public HomePageVM()
         {
@@ -40,6 +46,12 @@ namespace Rawaa.ViewModels
         }
 
         // excuted
+        private async void SelectedProductExecute(Product item)
+        {
+            if (SelectedProduct == null) return;
+            await Shell.Current.GoToAsync($"ProductDetailsPage?product={item}");
+            SelectedProduct = null;
+        }
         void CurrentItemChangedExcute(AdsM item)
         {
             Console.WriteLine("====================="+ item.ImageUrl);
@@ -115,7 +127,7 @@ namespace Rawaa.ViewModels
         }
 
 
-
+        public bool SliderIsLoop = true;
         private void SetSliderPosition(int count)
         {
             try
@@ -126,7 +138,7 @@ namespace Rawaa.ViewModels
                     {
                         SliderPosition = (SliderPosition + 1) % count;
                         OnPropertyChanged(nameof(SliderPosition));
-                        return true;
+                        return SliderIsLoop;
                     });
                 }
             }

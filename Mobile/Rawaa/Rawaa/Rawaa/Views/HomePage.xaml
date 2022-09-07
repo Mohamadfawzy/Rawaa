@@ -10,6 +10,7 @@
              xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{StaticResource white}"
              Shell.NavBarIsVisible="False"
+             x:Name="page"
              xmlns:converter="clr-namespace:Rawaa.Converters"
              Shell.PresentationMode="NotAnimated">
 
@@ -71,6 +72,7 @@
 
                         <!--  Whate you want? -->
                         <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                               TextColor="{StaticResource lightGray}"
                                FontFamily="CairoRequler"
                                FontSize="14"
                                x:Name="entrySearch"
@@ -151,7 +153,7 @@
                                           Position="{Binding SliderPosition, Mode=TwoWay}"
                                           HorizontalOptions="Start"
                                           VerticalOptions="Center"
-                                          HeightRequest="200">
+                                          HeightRequest="170">
                                 <CarouselView.ItemsLayout>
                                     <LinearItemsLayout Orientation="Horizontal"
                                                        ItemSpacing="0"
@@ -219,7 +221,10 @@
                                         SelectionMode="None"
                                         HeightRequest="200"
                                         Margin="0,20,0,0"
-                                        ItemsSource="{Binding FoodMenu}">
+                                        ItemsSource="{Binding FoodMenu}"
+                                        SelectedItem="{Binding SelectedCategory,Mode=TwoWay }"
+                                        SelectionChangedCommand="{Binding SelectedCategoryCommand}"
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CVMenus}}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout  Orientation="Horizontal"
                                                   Span="2" />
@@ -270,6 +275,7 @@
                                 <DataTemplate>
                                     <Grid VerticalOptions="Fill"
                                           RowSpacing="1"
+                                          x:Name="MealsCV"
                                           BackgroundColor="Transparent">
                                         <frame:PancakeView Margin="8,5"
                                                            CornerRadius="10"
@@ -353,7 +359,9 @@
                                                             BackgroundColor="{StaticResource yellowDark}"
                                                             TextColor="{StaticResource blueDark}"
                                                             FontFamily="CairoBold"
-                                                            HorizontalOptions="FillAndExpand" />
+                                                            HorizontalOptions="FillAndExpand"
+                                                            Command="{Binding BindingContext.AddProductToBasket, Source={x:Reference Name=page}}"
+                                                            CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
                                                 </StackLayout>
                                             </StackLayout>
                                         </frame:PancakeView>
@@ -374,7 +382,8 @@
 
                         <!-- Collection of MostPopularMeals -->
                         <CollectionView HeightRequest="307"
-                                        ItemsSource="{Binding MostPopularMeals}">
+                                        ItemsSource="{Binding MostPopularMeals}"
+                                        >
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
                                                    ItemSpacing="0" />
@@ -466,7 +475,9 @@
                                                             BackgroundColor="{StaticResource yellowDark}"
                                                             TextColor="{StaticResource blueDark}"
                                                             FontFamily="CairoBold"
-                                                            HorizontalOptions="FillAndExpand" />
+                                                            HorizontalOptions="FillAndExpand"
+                                                            Command="{Binding BindingContext.AddProductToBasket, Source={x:Reference Name=page}}"
+                                                            CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
                                                 </StackLayout>
                                             </StackLayout>
                                         </frame:PancakeView>

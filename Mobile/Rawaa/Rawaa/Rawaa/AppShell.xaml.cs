@@ -14,6 +14,9 @@ namespace Rawaa
             InitializeComponent();
             Routing.RegisterRoute(nameof(SettingPage), typeof(SettingPage));
             Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
+            Routing.RegisterRoute(nameof(CategoryPage), typeof(CategoryPage));
+            Routing.RegisterRoute(nameof(ProductsPage), typeof(ProductsPage));
+            Routing.RegisterRoute(nameof(ProductDetailsPage), typeof(ProductDetailsPage));
             //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
         
