@@ -20,7 +20,7 @@ namespace Rawaa_Api.Services
             return entity;
         }
 
-        public void Delete(int id)
+        public Restaurant Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -31,7 +31,7 @@ namespace Rawaa_Api.Services
             return result;
         }
 
-        public IList<Restaurant> List()
+        public IList<Restaurant> List(string lang)
         {
             return context.Restaurants.ToList<Restaurant>();
         }
@@ -47,7 +47,7 @@ namespace Rawaa_Api.Services
             return restaurants;
         }
 
-        public void Update(int id, Restaurant entity)
+        public Restaurant Update(int id, Restaurant entity, string lang, bool udateImage)
         {
             throw new NotImplementedException();
         }

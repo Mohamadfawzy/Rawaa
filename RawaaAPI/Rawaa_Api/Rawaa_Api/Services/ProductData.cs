@@ -32,7 +32,7 @@ namespace Rawaa_Api.Services
             entity.Image = "P_"+Guid.NewGuid().ToString().Substring(0, 12); ;
             var result = context.Products.Add(entity);
             context.SaveChanges();
-            var title = context.ProductTitleTranslations.Add(new ProductTitleTranslation { TitleAr = entity.Title, ProductId = entity.Id });
+            var title = context.ProductTitleTranslations.Add(new ProductTitleTranslation { Title = entity.Title, ProductId = entity.Id });
             context.SaveChanges();
             return entity;
         }
@@ -44,12 +44,12 @@ namespace Rawaa_Api.Services
             {
                 product = (from p in context.Products
                            join translat in context.ProductTitleTranslations on p.Id equals translat.ProductId
-                           orderby translat.Id
+                           //orderby translat.Id
                            where p.Id == id
                            select new Product
                            {
                                Id = p.Id,
-                               Title = translat.TitleAr,
+                               Title = translat.Title,
                                Image = p.Image,
                                SmallSizePrice = p.SmallSizePrice,
                                MediumSizePrice = p.MediumSizePrice,
@@ -67,17 +67,17 @@ namespace Rawaa_Api.Services
             else return null;
         }
 
-        public IList<Product> List()
+        public IList<Product> List(string lang)
         {
 
             var products = new List<Product>();
             products = (from p in context.Products
                        join translat in context.ProductTitleTranslations on p.Id equals translat.ProductId
-                       orderby translat.Id
+                       //orderby translat.Id
                        select new Product
                        {
                            Id = p.Id,
-                           Title = translat.TitleAr,
+                           Title = translat.Title,
                            Image = p.Image,
                            SmallSizePrice = p.SmallSizePrice,
                            MediumSizePrice = p.MediumSizePrice,
@@ -104,11 +104,11 @@ namespace Rawaa_Api.Services
             throw new NotImplementedException();
         }
 
-        public void Update(int id, Product entity)
+        public Product Update(int id, Product entity, string lang, bool udateImage)
         {
             throw new NotImplementedException();
         }
-        public void Delete(int id)
+        public Product Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -120,11 +120,11 @@ namespace Rawaa_Api.Services
             {
                 Directory.CreateDirectory(path);
             }
-            FileInfo imageInfo = new FileInfo(source.Files.FileName);
+            FileInfo imageInfo = new FileInfo(source.Images.FileName);
             var newImageName = "name1" + imageInfo.Extension;
             using (FileStream fileStream = System.IO.File.Create(path + newImageName))
             {
-                source.Files.CopyTo(fileStream);
+                source.Images.CopyTo(fileStream);
                 fileStream.Flush();
                 return $"image name: " + path + newImageName;
             }

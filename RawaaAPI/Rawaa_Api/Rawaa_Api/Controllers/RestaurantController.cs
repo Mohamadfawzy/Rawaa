@@ -27,9 +27,9 @@ namespace Rawaa_Api.Controllers
         }
 
         [HttpGet("show_all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string lang)
         {
-            return Ok(data.List());
+            return Ok(data.List(lang));
         }
 
         [HttpGet("show/{id=1}")]

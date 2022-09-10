@@ -5,6 +5,6 @@ namespace Rawaa_Api.Helper
     [NotMapped]
     public class ImageUplod
     {
-        public IFormFile? Files { get; set; } 
+        public IFormFile? Images { get; set; } 
     }
 }

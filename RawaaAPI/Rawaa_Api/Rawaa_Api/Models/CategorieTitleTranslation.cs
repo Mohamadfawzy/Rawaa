@@ -1,15 +1,15 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Rawaa_Api.Models
 {
-    public class CategorieTitleTranslation
+    public partial class CategorieTitleTranslation
     {
-        public int Id { get; set; }
-        public string? TitleAr { get; set; }
-        public string? TitleEn { get; set; }
-        public int? CategoryId { get; set; }
+        public string? Title { get; set; }
+        public int CategorieId { get; set; }
+        public int LanguageId { get; set; }
 
-        [JsonIgnore]
-        public virtual Category Category { get; set; } = null!;
+        public virtual Category Categorie { get; set; } = null!;
+        public virtual LanguageName Language { get; set; } = null!;
     }
 }

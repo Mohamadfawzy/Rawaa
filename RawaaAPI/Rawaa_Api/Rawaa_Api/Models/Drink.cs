@@ -7,15 +7,15 @@ namespace Rawaa_Api.Models
     {
         public Drink()
         {
+            DrinksTitleTranslations = new HashSet<DrinksTitleTranslation>();
             OrderDetails = new HashSet<OrderDetail>();
         }
 
         public int Id { get; set; }
-        public string? NameAr { get; set; }
-        public string? NameEn { get; set; }
         public string? Image { get; set; }
         public decimal? Price { get; set; }
 
+        public virtual ICollection<DrinksTitleTranslation> DrinksTitleTranslations { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

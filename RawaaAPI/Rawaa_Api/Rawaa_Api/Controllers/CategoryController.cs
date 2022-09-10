@@ -4,10 +4,12 @@ using Rawaa_Api.Helper;
 using Rawaa_Api.Models;
 using Rawaa_Api.Services.Interfaces;
 using System;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Rawaa_Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("{lang}/api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -24,28 +26,51 @@ namespace Rawaa_Api.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult PostSingle([FromForm] ImageUplod source, [FromForm] Category model)
+        public IActionResult PostSingle([FromForm] ImageUplod Files, [FromForm] Category model, string lang)
         {
             if (String.IsNullOrEmpty(model.Title))
                 return BadRequest(new { StatusCode = 400, Message = $"The {nameof(model.Title)} field is required." });
 
-            var result = data.Add(model);
-            var imageName = fileProcessor.PostImage(source, result.Image);
-            //result.Image = imageName.Result;
+            if (Files.Images == null)
+                return BadRequest(new ErrorClass("400", $"The {nameof(Files.Images)} field is required"));
+
+            var entity = data.Add(model);
+            var imageName = fileProcessor.SaveImage(Files, entity.Image);
+
             //CreatedAtAction(nameof(GetId), new { id = result.Id }, result); // id == param id in func GetIt
-            return Ok( result);
-            //return Ok(result);
+            return Created("", new { Id = entity.Id, Image = entity.Image, Title = entity.Title, TitleEn = entity.TitleEn });
         }
 
+        // PUT api/<AdController>/5
+        [HttpPut("Update/{id}")]
+        public IActionResult Put(int id, [FromForm] ImageUplod? image, [FromForm] Category model, string lang)
+        {
+            var thereImage = image.Images != null ? true : false;
+            var entity = data.Update(id, model, lang, thereImage);
 
+
+            if (!string.IsNullOrEmpty(entity.Image) && thereImage)
+            {
+                // add new image
+                var imageName = fileProcessor.UpdateImage(image, entity.Image);
+            }
+            return Ok(entity);
+        }
 
         [HttpGet("show_all")]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string lang)
         {
-            return Ok(data.List());
+            return Ok(data.List(lang));
         }
 
-
+        // DELETE api/<AdController>/5
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id,string lang)
+        {
+            var result = data.Delete(id);
+            _= fileProcessor.RemoveImage(result.Image);
+            return Ok(result);
+        }
 
     }
 }

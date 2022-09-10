@@ -34,18 +34,18 @@ namespace ITICourse.Controllers
         {
             try
             {
-                if (fileUplod.Files.Length > 0)
+                if (fileUplod.Images.Length > 0)
                 {
                     string path = _webHostEnvironment.WebRootPath + "\\" + "Images"+ "\\";
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
                     }
-                    FileInfo imageInfo = new FileInfo(fileUplod.Files.FileName);
+                    FileInfo imageInfo = new FileInfo(fileUplod.Images.FileName);
                     var newImageName = id + imageInfo.Extension;
                     using (FileStream fileStream = System.IO.File.Create(path + newImageName))
                     {
-                        fileUplod.Files.CopyTo(fileStream);
+                        fileUplod.Images.CopyTo(fileStream);
                         fileStream.Flush();
                         return $"image name: "+ path +  newImageName;
                     }
@@ -246,7 +246,7 @@ namespace ITICourse.Controllers
         [HttpGet("bytImageAd")]
         public IActionResult FileToByteArray2(string imageName)
         {
-            Ad fileContent = new Ad();
+            OldAd fileContent = new OldAd();
             try
             {
                 string filePath = _webHostEnvironment.WebRootPath;

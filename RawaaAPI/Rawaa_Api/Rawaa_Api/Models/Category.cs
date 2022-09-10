@@ -9,8 +9,9 @@ namespace Rawaa_Api.Models
     {
         public Category()
         {
-            Products = new HashSet<Product>();
+            Ads = new HashSet<Ad>();
             CategorieTitleTranslations = new HashSet<CategorieTitleTranslation>();
+            Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
@@ -18,11 +19,15 @@ namespace Rawaa_Api.Models
 
         [NotMapped]
         public string? Title { get; set; }
-
-        
+        [NotMapped]
         [JsonIgnore]
-        public virtual ICollection<Product> Products { get; set; }
+        public string? TitleEn { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Ad> Ads { get; set; }
         [JsonIgnore]
         public virtual ICollection<CategorieTitleTranslation> CategorieTitleTranslations { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

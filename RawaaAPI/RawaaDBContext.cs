@@ -11,70 +11,46 @@ namespace Rawaa_Api.Models
         {
         }
 
-        public RawaaDBContext(DbContextOptions<RawaaDBContext> options)
-            : base(options)
+        public RawaaDBContext(DbContextOptions<RawaaDBContext> options) : base(options)
         {
         }
 
-        public virtual DbSet<Ad> Ads { get; set; } = null!;
         public virtual DbSet<Cart> Carts { get; set; } = null!;
+        public virtual DbSet<ProductTitleTranslation> ProductTitleTranslations { get; set; } = null!;
         public virtual DbSet<CategorieTitleTranslation> CategorieTitleTranslations { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<DeliveryAddress> DeliveryAddresses { get; set; } = null!;
         public virtual DbSet<Drink> Drinks { get; set; } = null!;
-        public virtual DbSet<DrinksTitleTranslation> DrinksTitleTranslations { get; set; } = null!;
         public virtual DbSet<Favorite> Favorites { get; set; } = null!;
         public virtual DbSet<Ingredient> Ingredients { get; set; } = null!;
-        public virtual DbSet<IngredientsTitleTranslation> IngredientsTitleTranslations { get; set; } = null!;
-        public virtual DbSet<LanguageName> LanguageNames { get; set; } = null!;
         public virtual DbSet<MealExtra> MealExtras { get; set; } = null!;
-        public virtual DbSet<MealExtrasTitleTranslation> MealExtrasTitleTranslations { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
-        public virtual DbSet<ProductTitleTranslation> ProductTitleTranslations { get; set; } = null!;
         public virtual DbSet<Restaurant> Restaurants { get; set; } = null!;
         public virtual DbSet<Staff> Staffs { get; set; } = null!;
 
+        //#warning To protect
+        // Scaffold-DbContext "Server=.\SQLExpress;Database=LocalRwaaaDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir NewModels --force
+        // Scaffold-DbContext "Server=.\SQLExpress;Database=LocalRwaaaDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --force
+        // Data Source=rawaaDB.mssql.somee.com;Initial Catalog=rawaaDB;user id=mfhelal12345_SQLLogin_1; pwd=jlgjukukt9;
+        // Data Source=thamer\\SQLEXPRESS;Initial Catalog=test; Integrated Security=True
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=RwaaaDB;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer("Data Source=rawaaDB.mssql.somee.com;Initial Catalog=rawaaDB;user id=mfhelal12345_SQLLogin_1; pwd=jlgjukukt9");
+                optionsBuilder.UseSqlServer("Data Source=thamer\\SQLEXPRESS;Initial Catalog=LocalRwaaaDB; Integrated Security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Ad>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.CategorieId).HasColumnName("categorie_id");
-
-                entity.Property(e => e.Image)
-                    .HasMaxLength(250)
-                    .HasColumnName("image");
-
-                entity.Property(e => e.ProductId).HasColumnName("product_id");
-
-                entity.HasOne(d => d.Categorie)
-                    .WithMany(p => p.Ads)
-                    .HasForeignKey(d => d.CategorieId)
-                    .HasConstraintName("FK_Ads_categorie_id");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Ads)
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK_Ads_product_id");
-            });
-
             modelBuilder.Entity<Cart>(entity =>
             {
                 entity.HasKey(e => new { e.CustomerId, e.ProductId })
-                    .HasName("PK__cart__8915EC5AEFA8F3F4");
+                    .HasName("PK__cart__8915EC5ADECE6012");
 
                 entity.ToTable("cart");
 
@@ -100,40 +76,16 @@ namespace Rawaa_Api.Models
                     .HasConstraintName("FK_cart_product_id");
             });
 
-            modelBuilder.Entity<CategorieTitleTranslation>(entity =>
-            {
-                entity.HasKey(e => new { e.CategorieId, e.LanguageId })
-                    .HasName("PK__Categori__7DE1DE54A5B954D8");
-
-                entity.ToTable("Categorie_title_translation");
-
-                entity.Property(e => e.CategorieId).HasColumnName("categorie_id");
-
-                entity.Property(e => e.LanguageId).HasColumnName("language_id");
-
-                entity.Property(e => e.Title)
-                    .HasMaxLength(250)
-                    .HasColumnName("title");
-
-                entity.HasOne(d => d.Categorie)
-                    .WithMany(p => p.CategorieTitleTranslations)
-                    .HasForeignKey(d => d.CategorieId)
-                    .HasConstraintName("FK_Categorie_title_translation_categorie_id");
-
-                entity.HasOne(d => d.Language)
-                    .WithMany(p => p.CategorieTitleTranslations)
-                    .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_Categorie_title_translation_language_id");
-            });
-
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Image)
-                    .HasMaxLength(150)
+                    .HasMaxLength(14)
                     .IsUnicode(false)
                     .HasColumnName("image");
+
+               
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -215,45 +167,28 @@ namespace Rawaa_Api.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Image)
-                    .HasMaxLength(150)
+                    .HasMaxLength(14)
                     .IsUnicode(false)
                     .HasColumnName("image");
+
+                entity.Property(e => e.NameAr)
+                    .HasMaxLength(60)
+                    .HasColumnName("name_ar");
+
+                entity.Property(e => e.NameEn)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("name_en");
 
                 entity.Property(e => e.Price)
                     .HasColumnType("decimal(5, 2)")
                     .HasColumnName("price");
             });
 
-            modelBuilder.Entity<DrinksTitleTranslation>(entity =>
-            {
-                entity.HasKey(e => new { e.DrinksId, e.LanguageId })
-                    .HasName("PK__Drinks_t__A5110794AE7758DB");
-
-                entity.ToTable("Drinks_title_translation");
-
-                entity.Property(e => e.DrinksId).HasColumnName("drinks_id");
-
-                entity.Property(e => e.LanguageId).HasColumnName("language_id");
-
-                entity.Property(e => e.Title)
-                    .HasMaxLength(150)
-                    .HasColumnName("title");
-
-                entity.HasOne(d => d.Drinks)
-                    .WithMany(p => p.DrinksTitleTranslations)
-                    .HasForeignKey(d => d.DrinksId)
-                    .HasConstraintName("FK_Drinks_title_translation_drinks_id");
-
-                entity.HasOne(d => d.Language)
-                    .WithMany(p => p.DrinksTitleTranslations)
-                    .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_Drinks_title_translation_language_id");
-            });
-
             modelBuilder.Entity<Favorite>(entity =>
             {
                 entity.HasKey(e => new { e.CustomerId, e.ProductId })
-                    .HasName("PK__Favorite__8915EC5A8FC532E1");
+                    .HasName("PK__Favorite__8915EC5A1C313124");
 
                 entity.Property(e => e.CustomerId)
                     .ValueGeneratedOnAdd()
@@ -289,43 +224,6 @@ namespace Rawaa_Api.Models
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
             });
 
-            modelBuilder.Entity<IngredientsTitleTranslation>(entity =>
-            {
-                entity.HasKey(e => new { e.IngredientsId, e.LanguageId })
-                    .HasName("PK__Ingredie__4106C5241FE9D014");
-
-                entity.ToTable("Ingredients_title_translation");
-
-                entity.Property(e => e.IngredientsId).HasColumnName("ingredients_id");
-
-                entity.Property(e => e.LanguageId).HasColumnName("language_id");
-
-                entity.Property(e => e.Title)
-                    .HasMaxLength(150)
-                    .HasColumnName("title");
-
-                entity.HasOne(d => d.Ingredients)
-                    .WithMany(p => p.IngredientsTitleTranslations)
-                    .HasForeignKey(d => d.IngredientsId)
-                    .HasConstraintName("FK_Ingredients_title_translation_ingredients_id");
-
-                entity.HasOne(d => d.Language)
-                    .WithMany(p => p.IngredientsTitleTranslations)
-                    .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_Ingredients_title_translation_language_id");
-            });
-
-            modelBuilder.Entity<LanguageName>(entity =>
-            {
-                entity.ToTable("Language_name");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(70)
-                    .HasColumnName("name");
-            });
-
             modelBuilder.Entity<MealExtra>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -335,35 +233,9 @@ namespace Rawaa_Api.Models
                     .HasColumnName("price");
             });
 
-            modelBuilder.Entity<MealExtrasTitleTranslation>(entity =>
-            {
-                entity.HasKey(e => new { e.MealExtrasId, e.LanguageId })
-                    .HasName("PK__MealExtr__B5FBE33E4BDB8649");
-
-                entity.ToTable("MealExtras_title_translation");
-
-                entity.Property(e => e.MealExtrasId).HasColumnName("mealExtras_id");
-
-                entity.Property(e => e.LanguageId).HasColumnName("language_id");
-
-                entity.Property(e => e.Title)
-                    .HasMaxLength(150)
-                    .HasColumnName("title");
-
-                entity.HasOne(d => d.Language)
-                    .WithMany(p => p.MealExtrasTitleTranslations)
-                    .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_MealExtras_title_translation_language_id");
-
-                entity.HasOne(d => d.MealExtras)
-                    .WithMany(p => p.MealExtrasTitleTranslations)
-                    .HasForeignKey(d => d.MealExtrasId)
-                    .HasConstraintName("FK_MealExtras_title_translation_mealExtras_id");
-            });
-
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.HasIndex(e => e.OrderNumber, "UQ__Orders__CAC5E74330E9DB6B")
+                entity.HasIndex(e => e.OrderNumber, "UQ__Orders__CAC5E743C1FE64FE")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -417,7 +289,7 @@ namespace Rawaa_Api.Models
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.HasKey(e => new { e.ProductId, e.OrderId })
-                    .HasName("PK__Order_De__C367EBD7F1AD2462");
+                    .HasName("PK__Order_De__C367EBD7B037152B");
 
                 entity.ToTable("Order_Details");
 
@@ -466,7 +338,7 @@ namespace Rawaa_Api.Models
                         r => r.HasOne<OrderDetail>().WithMany().HasForeignKey("ProductId", "OrderId").HasConstraintName("FK_orderItems_mealExtras_product_id_order_id"),
                         j =>
                         {
-                            j.HasKey("ProductId", "OrderId", "MealExtraId").HasName("PK__OrderIte__814E11760EB6F35C");
+                            j.HasKey("ProductId", "OrderId", "MealExtraId").HasName("PK__OrderIte__814E11762AE2124F");
 
                             j.ToTable("OrderItems_MealExtras");
 
@@ -497,7 +369,7 @@ namespace Rawaa_Api.Models
                 entity.Property(e => e.HasTaste).HasColumnName("has_taste");
 
                 entity.Property(e => e.Image)
-                    .HasMaxLength(150)
+                    .HasMaxLength(14)
                     .IsUnicode(false)
                     .HasColumnName("image");
 
@@ -523,7 +395,7 @@ namespace Rawaa_Api.Models
                         r => r.HasOne<Product>().WithMany().HasForeignKey("ProductId").HasConstraintName("FK_products_ingredients_product_id"),
                         j =>
                         {
-                            j.HasKey("ProductId", "IngredientId").HasName("PK__products__AC0C38C9DACD286F");
+                            j.HasKey("ProductId", "IngredientId").HasName("PK__products__AC0C38C90F7AE54A");
 
                             j.ToTable("products_ingredients");
 
@@ -535,28 +407,48 @@ namespace Rawaa_Api.Models
 
             modelBuilder.Entity<ProductTitleTranslation>(entity =>
             {
-                entity.HasKey(e => new { e.ProductId, e.LanguageId })
-                    .HasName("PK__Product___6F06B29E6AA21871");
-
                 entity.ToTable("Product_title_translation");
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
 
-                entity.Property(e => e.LanguageId).HasColumnName("language_id");
-
-                entity.Property(e => e.Title)
+                entity.Property(e => e.TitleAr)
                     .HasMaxLength(150)
-                    .HasColumnName("title");
+                    .HasColumnName("title_ar");
 
-                entity.HasOne(d => d.Language)
-                    .WithMany(p => p.ProductTitleTranslations)
-                    .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_Product_title_translation_language_id");
+                entity.Property(e => e.TitleEn)
+                    .HasMaxLength(150)
+                    .HasColumnName("title_en");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.ProductTitleTranslations)
                     .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Product_title_translation_product_id");
+            });
+
+            modelBuilder.Entity<CategorieTitleTranslation>(entity =>
+            {
+                entity.ToTable("Categorie_title_translation");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CategoryId).HasColumnName("categorie_id");
+
+                entity.Property(e => e.TitleAr)
+                    .HasMaxLength(150)
+                    .HasColumnName("title_ar");
+
+                entity.Property(e => e.TitleEn)
+                    .HasMaxLength(150)
+                    .HasColumnName("title_en");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.CategorieTitleTranslations)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Categorie_title_translation_categorie_id");
             });
 
             modelBuilder.Entity<Restaurant>(entity =>
@@ -567,10 +459,12 @@ namespace Rawaa_Api.Models
 
                 entity.Property(e => e.City)
                     .HasMaxLength(50)
+                    .IsUnicode(false)
                     .HasColumnName("city");
 
                 entity.Property(e => e.Governorate)
                     .HasMaxLength(50)
+                    .IsUnicode(false)
                     .HasColumnName("governorate");
 
                 entity.Property(e => e.NameAr)
@@ -591,6 +485,7 @@ namespace Rawaa_Api.Models
 
                 entity.Property(e => e.Street)
                     .HasMaxLength(60)
+                    .IsUnicode(false)
                     .HasColumnName("street");
             });
 

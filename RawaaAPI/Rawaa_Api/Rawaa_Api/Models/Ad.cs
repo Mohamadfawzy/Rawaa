@@ -1,18 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Rawaa_Api.Models
 {
-    public class Ad
+    public partial class Ad
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? ImageUrl { get; set; }
+        public string? Image { get; set; }
+        public int? CategorieId { get; set; }
+        public int? ProductId { get; set; }
 
-        [NotMapped]
-        [JsonIgnore]
-        public byte[]? Image { get; set; }
-        public string? ProductId { get; set; }
-        public string? CategoryId { get; set; }
+        public virtual Category? Categorie { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }
