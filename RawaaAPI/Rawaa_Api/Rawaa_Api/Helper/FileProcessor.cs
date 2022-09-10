@@ -11,7 +11,11 @@ namespace Rawaa_Api.Helper
         {
             this.webHost = webHost;
         }
-
+        public string ImageExtension(string file)
+        {
+            FileInfo imageInfo = new FileInfo(file);
+            return imageInfo.Extension;
+        }
         public async Task<string> SaveImage(ImageUplod? fileUplod, string ImageName)
         {
             try

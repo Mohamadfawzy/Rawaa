@@ -29,7 +29,7 @@ namespace Rawaa_Api.Services
 
             var category = new Category
             {
-                Image = "C_" + Guid.NewGuid().ToString(),
+                Image = "C_" + Guid.NewGuid().ToString()+entity.Image,
                 CategorieTitleTranslations = listOfTitle
             };
 
