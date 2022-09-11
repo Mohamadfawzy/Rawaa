@@ -1,26 +1,26 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace Rawaa_Api.Helper
+﻿namespace Rawaa_Api.Helper
 {
     public class FileProcessor
     {
         private readonly IWebHostEnvironment webHost;
+        
+        // ctor
         public FileProcessor(IWebHostEnvironment webHost)
         {
             this.webHost = webHost;
         }
+
         public string ImageExtension(string file)
         {
             FileInfo imageInfo = new FileInfo(file);
             return imageInfo.Extension;
         }
-        public async Task<string> SaveImage(ImageUplod? fileUplod, string ImageName)
+
+        public async Task<string> SaveImage(IFormFile? fileUplod, string ImageName)
         {
             try
             {
-                if (fileUplod.Images.Length > 0)
+                if (fileUplod.Length > 0)
                 {
                     string path = webHost.WebRootPath + "\\" + "Images" + "\\";
                     if (!Directory.Exists(path))
@@ -28,12 +28,11 @@ namespace Rawaa_Api.Helper
                         Directory.CreateDirectory(path);
                     }
 
-                    FileInfo imageInfo = new FileInfo(fileUplod.Images.FileName);
-                    var fullImageName = ImageName + imageInfo.Extension;
-
-                    using (FileStream fileStream = System.IO.File.Create(path + fullImageName))
+                    FileInfo imageInfo = new FileInfo(fileUplod.FileName);
+                    var fullImageName = path + ImageName;
+                    using (FileStream fileStream = System.IO.File.Create(fullImageName))
                     {
-                        await fileUplod.Images.CopyToAsync(fileStream);
+                        await fileUplod.CopyToAsync(fileStream);
                         fileStream.Flush();
                         return fullImageName;
                     }
@@ -48,11 +47,12 @@ namespace Rawaa_Api.Helper
                 return ex.Message;
             }
         }
-        public async Task<string> UpdateImage(ImageUplod? image, string ImageName)
+
+        public async Task<string> UpdateImage(IFormFile? image, string ImageName)
         {
             try
             {
-                if (image.Images.Length > 0)
+                if (image.Length > 0)
                 {
                     string path = webHost.WebRootPath + "\\" + "Images" + "\\";
                     if (!Directory.Exists(path))
@@ -60,13 +60,25 @@ namespace Rawaa_Api.Helper
                         Directory.CreateDirectory(path);
                     }
 
-                    FileInfo imageInfo = new FileInfo(image.Images.FileName);
-                    var fullImageName = ImageName + imageInfo.Extension;
+                    FileInfo imageInfo = new FileInfo(image.FileName);
+                    var fullImageName = path + ImageName;
 
-
-                    using (FileStream fileStream = System.IO.File.Create(path + fullImageName))
+                    // 
+                    var nameWithoutExtention = Path.ChangeExtension(ImageName,"");
+                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                    var s = directoryInfo.GetFiles().Where(f=>f.Name.Contains(nameWithoutExtention)).FirstOrDefault();
+                    
+                    if (s!= null)
                     {
-                        await image.Images.CopyToAsync(fileStream);
+                        //File.Delete(fullImageName);
+                        s.Delete();
+                    }
+
+                    //var fullPath = Path.ChangeExtension(fullImageName,imageInfo.Extension);
+
+                    using (FileStream fileStream = System.IO.File.Create(fullImageName))
+                    {
+                        await image.CopyToAsync(fileStream);
                         fileStream.Flush();
                         return fullImageName;
                     }
@@ -81,11 +93,12 @@ namespace Rawaa_Api.Helper
                 return ex.Message;
             }
         }
+
         public async Task<string> RemoveImage(string ImageName)
         {
             try
             {
-                string fullPath = webHost.WebRootPath + "\\" + "Images" + "\\" + ImageName + ".jpg" ;
+                string fullPath = webHost.WebRootPath + "\\" + "Images" + "\\" + ImageName;
 
                 FileInfo imageInfo = new FileInfo(fullPath);
 
@@ -103,35 +116,6 @@ namespace Rawaa_Api.Helper
             }
         }
 
-        public async Task<string> PostImage(ImageUplod fileUplod, string guid)
-        {
-            try
-            {
-                if (fileUplod.Images.Length > 0)
-                {
-                    string path = webHost.WebRootPath + "\\" + "Images" + "\\";
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-                    FileInfo imageInfo = new FileInfo(fileUplod.Images.FileName);
-                    var newImageName = guid + imageInfo.Extension;
-                    using (FileStream fileStream = System.IO.File.Create(path + newImageName))
-                    {
-                        fileUplod.Images.CopyTo(fileStream);
-                        fileStream.Flush();
-                        return newImageName;
-                    }
-                }
-                else
-                {
-                    return "Failed";
-                }
-            }
-            catch (System.Exception ex)
-            {
-                return ex.Message;
-            }
-        }
+       
     }
 }

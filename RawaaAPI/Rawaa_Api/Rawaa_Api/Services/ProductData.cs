@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Rawaa_Api.Helper;
 using Rawaa_Api.Models;
+using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Services.Interfaces;
 
 namespace Rawaa_Api.Services
@@ -113,21 +114,5 @@ namespace Rawaa_Api.Services
             throw new NotImplementedException();
         }
 
-        public string UploudImage(ImageUplod source)
-        {
-            string path = _webHostEnvironment.WebRootPath + "\\" + "Images" + "\\";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            FileInfo imageInfo = new FileInfo(source.Images.FileName);
-            var newImageName = "name1" + imageInfo.Extension;
-            using (FileStream fileStream = System.IO.File.Create(path + newImageName))
-            {
-                source.Images.CopyTo(fileStream);
-                fileStream.Flush();
-                return $"image name: " + path + newImageName;
-            }
-        }
     }
 }

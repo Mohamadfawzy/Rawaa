@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Rawaa_Api.Models;
+using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Services;
 using Rawaa_Api.Services.Interfaces;
 

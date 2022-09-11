@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Rawaa_Api.Models.Entities;
 
 namespace Rawaa_Api.Models
 {

@@ -1,5 +1,7 @@
-using Rawaa_Api.Models;
+using Rawaa_Api.Models.ControlPanel;
+using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Services;
+using Rawaa_Api.Services.ControlPanel;
 using Rawaa_Api.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +17,8 @@ builder.Services.AddSwaggerGen();
 
 // Inject
 builder.Services.AddScoped<IProvider<Restaurant>, RestaurantData>();
-builder.Services.AddScoped<IProvider<Product>, ProductData>();
-builder.Services.AddScoped<IProvider<Category>, CategoryData>();
+builder.Services.AddScoped<IProvider<Product>, Rawaa_Api.Services.ProductData>();
+builder.Services.AddScoped<IProvider<CategoryRq>, CategoryData>();
 
 
 

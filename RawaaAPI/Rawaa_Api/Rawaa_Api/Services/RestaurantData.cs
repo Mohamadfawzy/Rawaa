@@ -1,4 +1,5 @@
 ﻿using Rawaa_Api.Models;
+using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Services.Interfaces;
 using System.Linq;
 namespace Rawaa_Api.Services

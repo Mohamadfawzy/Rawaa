@@ -2,11 +2,13 @@
 {
     public class ErrorClass
     {
-        public ErrorClass(string StatusCode, string Message)
+        public ErrorClass(string statusCode="000", string message = "There error")
         {
-            this.Message = Message;
-            this.StatusCode  = StatusCode;
+            this.Message = message;
+            this.StatusCode  = statusCode;
+            this.IsError = false;
         }
+        public bool IsError { get; set; }
         public string StatusCode { get; set; }
         public string Message { get; set; }
     }
