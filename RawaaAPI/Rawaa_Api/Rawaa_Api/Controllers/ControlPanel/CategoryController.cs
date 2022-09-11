@@ -70,16 +70,16 @@ namespace Rawaa_Api.Controllers.ControlPanel
             if (result == null)
                 return NotFound(new ErrorClass("404", "There are no categories to display"));
 
-            var list = new List<CategorySearch>();
-            foreach (var item in result)
-            {
-                CategorySearch categorySearch = new CategorySearch();
-                categorySearch.Id = item.Id;
-                categorySearch.Title = item.TitleAr;
-                categorySearch.Image = item.Image;
-                list.Add(categorySearch);
-            }
-            return Ok(list);
+            //var list = new List<CategorySearch>();
+            //foreach (var item in result)
+            //{
+            //    CategorySearch categorySearch = new CategorySearch();
+            //    categorySearch.Id = item.Id;
+            //    categorySearch.Title = item.TitleAr;
+            //    categorySearch.Image = item.Image;
+            //    list.Add(categorySearch);
+            //}
+            return Ok(result);
         }
 
         [HttpPut("{id}")]

@@ -6,8 +6,13 @@ namespace Rawaa_Api.Models.ControlPanel
     {
         public int Id { get; set; }
         public string? Image { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? TitleAr { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? TitleEn { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Title { get; set; }
+        
     }
 
     public class CategorySearch

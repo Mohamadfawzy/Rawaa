@@ -57,31 +57,13 @@ namespace Rawaa_Api.Services.ControlPanel
             // enityh is null
             if (string.IsNullOrEmpty(entity.Image) && thereImage)
                 model.Image = "C_" + Guid.NewGuid().ToString() + model.Image;
-            else
+            else if (!string.IsNullOrEmpty(entity.Image) && thereImage)
             {
-                //model.Image = entity.Image;
                 var newNameImage = Path.ChangeExtension(entity.Image, model.Image);
                 model.Image = newNameImage;
-
-
             }
 
 
-            if (!thereImage)
-            {
-                context.Entry(entity).Property(p => p.Image).IsModified = false;
-            }
-
-            // Add title based on language
-            //if (lang == "ar" && !string.IsNullOrEmpty(model.TitleAr))
-            //{
-            //    listOfTitle.Add(new CategorieTitleTranslation { Title = model.TitleAr, CategorieId = id, LanguageId = 1 });
-            //}
-            //// add en title
-            //else if (lang == "en" && !string.IsNullOrEmpty(model.TitleEn))
-            //{
-            //    listOfTitle.Add(new CategorieTitleTranslation { Title = model.TitleEn, CategorieId = id, LanguageId = 2 });
-            //}
 
             listOfTitle.Add(new CategorieTitleTranslation { Title = model.TitleAr, CategorieId = id, LanguageId = 1 });
             listOfTitle.Add(new CategorieTitleTranslation { Title = model.TitleEn, CategorieId = id, LanguageId = 2 });
@@ -91,7 +73,7 @@ namespace Rawaa_Api.Services.ControlPanel
 
             context.CategorieTitleTranslations.AsNoTracking().Where(t => t.CategorieId == id).ToList();
             context.UpdateRange(listOfTitle);
-            context.Update(entity); //Entry(entity).CurrentValues.SetValues(category);
+            context.Update(entity).Property(p => p.Image).IsModified = thereImage; //Entry(entity).CurrentValues.SetValues(category);
             context.SaveChanges();
 
 
@@ -164,7 +146,6 @@ namespace Rawaa_Api.Services.ControlPanel
 
         public List<CategoryRq> Search(string searchString)
         {
-
             var category = (from t in context.CategorieTitleTranslations
                             where t.Title.Contains(searchString)
                             select t
@@ -174,13 +155,11 @@ namespace Rawaa_Api.Services.ControlPanel
                             join c in context.Categories on title.CategorieId equals c.Id
                             select new CategoryRq
                             {
-                                TitleAr = title.Title,
+                                Title = title.Title,
                                 Image = c.Image,
                                 Id = c.Id
                             }).ToList();
-
             return category;
-
         }
 
 
