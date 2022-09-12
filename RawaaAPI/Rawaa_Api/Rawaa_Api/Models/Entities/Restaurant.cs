@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Rawaa_Api.Models.Entities
 {
@@ -12,6 +14,7 @@ namespace Rawaa_Api.Models.Entities
         }
 
         public int Id { get; set; }
+        [Required(ErrorMessage ="this NameAr is required to create restarrant")]
         public string NameAr { get; set; } = null!;
         public string? NameEn { get; set; }
         public string? Phone { get; set; }
@@ -20,7 +23,9 @@ namespace Rawaa_Api.Models.Entities
         public string? City { get; set; }
         public string? Street { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Staff> staff { get; set; }
     }
 }

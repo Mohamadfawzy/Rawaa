@@ -5,9 +5,9 @@ namespace Rawaa_Api.Services.Interfaces
     {
         IList<T> List(string lang);
         T Find(int? id);
-        T Add(T entity);
+        T Add(T model);
         List<T> Search(string searchString);
-        T Update(int id, T entity, string lang, bool udateImage = false);
+        T Update(int id, T model, string lang, bool udateImage = false);
         T Delete(int id);
     }
 }

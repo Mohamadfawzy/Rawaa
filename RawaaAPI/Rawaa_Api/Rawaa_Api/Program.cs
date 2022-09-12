@@ -1,6 +1,5 @@
 using Rawaa_Api.Models.ControlPanel;
 using Rawaa_Api.Models.Entities;
-using Rawaa_Api.Services;
 using Rawaa_Api.Services.ControlPanel;
 using Rawaa_Api.Services.Interfaces;
 
@@ -25,7 +24,7 @@ builder.Services.AddScoped<IProvider<CategoryRq>, CategoryData>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
