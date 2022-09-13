@@ -32,6 +32,7 @@ namespace Rawaa_Api.Controllers.ControlPanel
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<StaffController>/5

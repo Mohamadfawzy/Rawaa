@@ -173,36 +173,7 @@ namespace Rawaa_Api.Services.ControlPanel
 
 
         // ------------------------
-        public IList<CategoryRq> oldList(string lang)
-        {
-            var products = new List<Category>();
-            products = (from c in context.Categories
-                        join t in context.CategorieTitleTranslations on c.Id equals t.CategorieId
-                        join l in context.LanguageNames on t.LanguageId equals l.Id
-                        where l.Name == lang
-                        //orderby translat.Id
-                        select new Category
-                        {
-                            Id = c.Id,
-                            Title = t.Title,
-                            Image = c.Image,
-                        }).ToList();
-
-            var cat = new List<CategoryRq>();
-
-            foreach (var p in products)
-            {
-                cat.Add(new CategoryRq() { Id = p.Id, Image = p.Image, TitleAr = p.Title, TitleEn = p.TitleEn });
-            }
-
-            if (products != null)
-            {
-                return cat;
-            }
-            else return null;
-
-            return cat;
-        }
+       
 
 
 

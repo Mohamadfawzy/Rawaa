@@ -9,19 +9,7 @@ namespace Rawaa_Api.Services
     public class ProductData : IProvider<Product>
     {
         RawaaDBContext context;
-        Product defaultModel = new Product()
-        {
-            Id = 1,
-            Title = "",
-            Image = "",
-            SmallSizePrice = 1,
-            MediumSizePrice = 1,
-            BigSizePrice = 1,
-            DiscountValue = 1,
-            Calories = 11,
-            HasTaste = 1,
-            CategoryId = 1
-        };
+        
         public static IWebHostEnvironment _webHostEnvironment;
         public ProductData(IWebHostEnvironment web)
         {
@@ -33,7 +21,7 @@ namespace Rawaa_Api.Services
             entity.Image = "P_"+Guid.NewGuid().ToString().Substring(0, 12); ;
             var result = context.Products.Add(entity);
             context.SaveChanges();
-            var title = context.ProductTitleTranslations.Add(new ProductTitleTranslation { Title = entity.Title, ProductId = entity.Id });
+            var title = context.ProductTitleTranslations.Add(new ProductTitleTranslation { ProductId = entity.Id });
             context.SaveChanges();
             return entity;
         }
@@ -50,7 +38,6 @@ namespace Rawaa_Api.Services
                            select new Product
                            {
                                Id = p.Id,
-                               Title = translat.Title,
                                Image = p.Image,
                                SmallSizePrice = p.SmallSizePrice,
                                MediumSizePrice = p.MediumSizePrice,
@@ -78,7 +65,6 @@ namespace Rawaa_Api.Services
                        select new Product
                        {
                            Id = p.Id,
-                           Title = translat.Title,
                            Image = p.Image,
                            SmallSizePrice = p.SmallSizePrice,
                            MediumSizePrice = p.MediumSizePrice,
