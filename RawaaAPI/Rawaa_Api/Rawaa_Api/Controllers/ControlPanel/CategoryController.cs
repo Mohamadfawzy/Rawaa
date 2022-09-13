@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Rawaa_Api.Helper;
 using Rawaa_Api.Models;
 using Rawaa_Api.Models.ControlPanel;
+using Rawaa_Api.Models.Entities;
+using Rawaa_Api.Services.ControlPanel;
 using Rawaa_Api.Services.Interfaces;
 using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -20,8 +22,8 @@ namespace Rawaa_Api.Controllers.ControlPanel
 
         public CategoryController(IProvider<CategoryRq> _data, IWebHostEnvironment webHost)
         {
-            data = _data;
             this.webHost = webHost;
+            data = _data;
             fileProcessor = new FileProcessor(this.webHost);
         }
 
@@ -105,7 +107,11 @@ namespace Rawaa_Api.Controllers.ControlPanel
             var result = data.Delete(id);
             if (result == null)
                 return NotFound(new ErrorClass("404","the category your wannt delate not found"));
+            
             _ = fileProcessor.RemoveImage(result.Image);
+            _ = fileProcessor.RemoveImages(result.ProductsImages);
+
+
             return Ok(result);
         }
 

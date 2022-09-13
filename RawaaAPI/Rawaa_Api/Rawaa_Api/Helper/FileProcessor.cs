@@ -116,6 +116,26 @@
             }
         }
 
-       
+        public async Task<string> RemoveImages(List<string> imags)
+        {
+            try
+            {
+                string path = webHost.WebRootPath + "\\" + "Images" + "\\";
+
+                foreach (var image in imags)
+                {
+                    System.IO.File.Delete(path + image);
+                }
+
+                return "is deleated ok";
+
+            }
+            catch (System.Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
     }
 }

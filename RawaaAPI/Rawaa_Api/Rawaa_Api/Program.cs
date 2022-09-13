@@ -1,8 +1,12 @@
+// Data Source=rawaaDB.mssql.somee.com;Initial Catalog=rawaaDB;user id=mfhelal12345_SQLLogin_1; pwd=jlgjukukt9;
+//Server=.\\SQLExpress;Database=RwaaaDB;Trusted_Connection=True;
+//Scaffold - DbContext "Server=.\SQLExpress;Database=LocalRwaaaDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer - OutputDir NewModels--force
+
+using Microsoft.EntityFrameworkCore;
 using Rawaa_Api.Models.ControlPanel;
 using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Services.ControlPanel;
 using Rawaa_Api.Services.Interfaces;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

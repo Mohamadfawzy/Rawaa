@@ -29,7 +29,7 @@ namespace Rawaa.Views
 
         async Task SetFocus()
         {
-            await Task.Delay(2070);
+            await Task.Delay(50);
             entrySearch.Focus();
         }
     }

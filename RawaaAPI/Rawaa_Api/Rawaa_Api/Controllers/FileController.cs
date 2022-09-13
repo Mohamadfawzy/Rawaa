@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,7 +25,7 @@ namespace Rawaa_Api.Controllers
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             var s = directoryInfo.GetFiles();
             var list = new List<string>();
-            foreach(var f in s)
+            foreach (var f in s)
             {
                 list.Add(f.Name);
             }
@@ -43,9 +45,25 @@ namespace Rawaa_Api.Controllers
                 //byte[] b = System.IO.File.ReadAllBytes(filePath);
                 //return File(b, "image/jpg");
                 //return PhysicalFile(newImageName,"image/jpg");
-                return PhysicalFile(newImageName,"image/"+ imageInfo.Extension);
+                return PhysicalFile(newImageName, "image/" + imageInfo.Extension);
             }
             return null;
+        }
+
+        [HttpDelete]
+        public IActionResult delete(string imageName)
+        {
+            var imags = new List<string>()
+            {
+                "p1.jpg",
+                "p2.jpg",
+                "p3.jpg",
+            };
+            string path = web.WebRootPath + "\\" + "Images" + "\\" + imageName;
+
+            System.IO.File.Delete(path);
+
+            return Ok(imags);
         }
     }
 }

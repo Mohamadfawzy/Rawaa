@@ -11,14 +11,10 @@ namespace Rawaa_Api.Services.ControlPanel
     public class CategoryData : IProvider<CategoryRq>
     {
         RawaaDBContext context;
-        public static IWebHostEnvironment _webHostEnvironment;
-        FileProcessor fileProcessor;
 
-        public CategoryData(IWebHostEnvironment web)
+        public CategoryData()
         {
             context = new RawaaDBContext();
-            _webHostEnvironment = web;
-            fileProcessor = new FileProcessor(_webHostEnvironment);
         }
 
         public CategoryRq Add(CategoryRq model)
@@ -87,10 +83,20 @@ namespace Rawaa_Api.Services.ControlPanel
             var entity = context.Categories.Find(id);
             if (entity == null)
                 return null;
+            
+            List<string> productsImages = (from p in context.Products
+                              where p.CategoryId == id
+                              select p.Image).ToList();
+
             var result = context.Remove(entity);
+            var category = new CategoryRq();
+            category.Id = id;
+            category.Image = entity.Image;
+            category.ProductsImages = productsImages;
+            category.ProductsCount = productsImages.Count;
             context.SaveChanges();
 
-            return new CategoryRq() { Id = result.Entity.Id, Image = entity.Image };
+            return category;//new CategoryRq() { Id = result.Entity.Id, Image = entity.Image };
         }
 
         public CategoryRq Find(int? id)

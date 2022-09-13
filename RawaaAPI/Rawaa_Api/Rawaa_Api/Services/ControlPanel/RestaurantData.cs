@@ -20,12 +20,10 @@ namespace Rawaa_Api.Services.ControlPanel
 
         public Restaurant Add(Restaurant entity)
         {
-            return context.Restaurants.Add(entity).Entity;
-        }
+            var result = context.Restaurants.Add(entity).Entity;
+            context.SaveChanges();
+            return result;
 
-        public Restaurant Find(int? id)
-        {
-            throw new NotImplementedException();
         }
 
         public IList<Restaurant> List(string lang)
@@ -33,25 +31,31 @@ namespace Rawaa_Api.Services.ControlPanel
             return context.Restaurants.ToList();
         }
 
-        public List<Restaurant> Search(string searchString)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public Restaurant Update(int id, Restaurant model, string lang, bool udateImage = false)
         {
             var entity = context.Restaurants.AsNoTracking().SingleOrDefault(b => b.Id == id);
-            var result = context.Update(entity).Entity;
+            model.Id = id;
+            var result = context.Update(model).Entity;
+            context.SaveChanges();
             return result;
+        }
+
+        public Restaurant Find(int? id)
+        {
+            return null;
         }
 
         public Restaurant Delete(int id)
         {
-            throw new NotImplementedException();
+            return null;
         }
-
-        // data
-
+       
+        public List<Restaurant> Search(string searchString)
+        {
+            return null;
+        }
 
 
     }

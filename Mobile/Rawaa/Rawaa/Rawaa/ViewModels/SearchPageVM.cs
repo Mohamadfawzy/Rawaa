@@ -57,7 +57,7 @@ namespace Rawaa.ViewModels
         {
             try
             {
-                await Task.Delay(3000);
+                //await Task.Delay(3000);
                 ListOfProducts.Clear();
 
                 foreach (var item in list)
