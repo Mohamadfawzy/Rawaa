@@ -28,6 +28,7 @@ namespace Rawaa_Api.Services.ControlPanel
 
         public IList<Restaurant> List(string lang)
         {
+
             return context.Restaurants.ToList();
         }
 

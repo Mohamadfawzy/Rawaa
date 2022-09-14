@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rawaa_Api.NewModels;
 
 namespace Rawaa_Api.Models.Entities
 {

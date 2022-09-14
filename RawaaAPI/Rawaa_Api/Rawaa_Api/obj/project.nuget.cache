@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "byIF08UR3pKU3efTeLY/TnP0Ni9h75xUdrGW8d3kI3X2TE8U+r21OJtnq75QGHPMXk0AsO8LjWL9NEaSinhH7g==",
+  "dgSpecHash": "AlvpCWGWfStAnil1ZMaR2ZuHgqh94kEXwUreSEn/0a99u/jtaZq8jyOaMxlVGhZM2HynS76B6DHevaE4GPJl3w==",
   "success": true,
   "projectFilePath": "E:\\_Projects\\Rawaa\\RawaaAPI\\Rawaa_Api\\Rawaa_Api\\Rawaa_Api.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,7 @@
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\Mohamed Fawzy\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

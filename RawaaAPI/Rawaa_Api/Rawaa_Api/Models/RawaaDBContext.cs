@@ -149,6 +149,15 @@ namespace Rawaa_Api.Models
                     .HasColumnType("datetime")
                     .HasColumnName("create_on")
                     .HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.UpdateOn)
+                   .HasColumnType("datetime")
+                   .HasColumnName("update_on")
+                   .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EmailVerification)
+                   .HasColumnType("bit")
+                   .HasColumnName("email_verification")
+                   .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(100)
@@ -175,27 +184,17 @@ namespace Rawaa_Api.Models
 
                 entity.Property(e => e.BuildingNumber).HasColumnName("building_number");
 
-                entity.Property(e => e.CityAr)
+                entity.Property(e => e.City)
                     .HasMaxLength(100)
-                    .HasColumnName("city_ar");
-
-                entity.Property(e => e.CityEn)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("city_en");
+                    .HasColumnName("city");
 
                 entity.Property(e => e.CustomerId).HasColumnName("customer_id");
 
                 entity.Property(e => e.FloorrUmber).HasColumnName("floorr_umber");
 
-                entity.Property(e => e.GovernorateAr)
+                entity.Property(e => e.Governorate)
                     .HasMaxLength(100)
-                    .HasColumnName("governorate_ar");
-
-                entity.Property(e => e.GovernorateEn)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("governorate_en");
+                    .HasColumnName("governorate");
 
                 entity.Property(e => e.Notes)
                     .HasMaxLength(300)
@@ -205,14 +204,9 @@ namespace Rawaa_Api.Models
                     .HasMaxLength(100)
                     .HasColumnName("short_name");
 
-                entity.Property(e => e.StreetAr)
+                entity.Property(e => e.Street)
                     .HasMaxLength(100)
-                    .HasColumnName("street_ar");
-
-                entity.Property(e => e.StreetEn)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("street_en");
+                    .HasColumnName("street");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.DeliveryAddresses)
@@ -632,6 +626,10 @@ namespace Rawaa_Api.Models
                 entity.Property(e => e.CreateOn)
                     .HasColumnType("datetime")
                     .HasColumnName("create_on")
+                    .HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.UpdateOn)
+                    .HasColumnType("datetime")
+                    .HasColumnName("update_on")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.FullName)

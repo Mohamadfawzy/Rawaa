@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Rawaa_Api.Models.Entities
 {
@@ -20,7 +21,9 @@ namespace Rawaa_Api.Models.Entities
         public string? City { get; set; }
         public string? Street { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Staff> staff { get; set; }
     }
 }
