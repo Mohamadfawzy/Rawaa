@@ -1,43 +1,74 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Rawaa_Api.Helper;
 using Rawaa_Api.Models.ControlPanel;
 using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Models;
-using Rawaa_Api.Helper;
 
-namespace Rawaa_Api.Services
+namespace Rawaa_Api.Services.Client
 {
-    public class UserData
+    public class OrderData
     {
         RawaaDBContext context;
-        public UserData()
+        public OrderData()
         {
             context = new RawaaDBContext();
         }
         // client
-        public bool checkEmail(string email)
+        public Order Add(Order model)
         {
-            return context.Customers.Where(un => un.Email == email).Any();
-        }
-        public bool EmailValidity(string email,int id)
-        {
-            //var res = context.Customers.Where(un => un.Email == email && un.Id != id).Any();
-            var res = context.Customers.Any(un => un.Email == email && un.Id != id);
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var orderDetails = new OrderDetail();
+            decimal price = 0.0M;
+            foreach (var item in model.OrderDetails)
+            {
+                var product = context.Products.Find(item.ProductId);
+                var priceQuantity = 0.0M;
+                switch (item.Size)
+                {
+                    case 1:
+                        priceQuantity += (decimal)product.SmallSizePrice * (decimal)item.Quantity ;
+                        break;
+                    case 2:
+                        priceQuantity += (decimal)product.MediumSizePrice * (decimal)item.Quantity;
+                        break;
+                    case 3:
+                        priceQuantity += (decimal)product.BigSizePrice * (decimal)item.Quantity;
+                        break;
+                }
 
-            return res;
-        }
+                price += priceQuantity;
+            }
+            var deliveryFee = 10.0;
+            price += (decimal)deliveryFee;
+            
+            model.Total = (decimal)price;
+            model.OrderNumber = "00000000000005";
 
-        public Customer Add(Customer model)
-        {
-            var res = context.Customers.Add(model).Entity;
+            var res = context.Orders.Add(model).Entity;
             context.SaveChanges();
             return res;
+
+
+            //var order = new Order();
+            //order.OrderStatus = 1;
+            //order.CustomerId = model.CustomerId;
+            //order.DeliveryAddressId = model.DeliveryAddressId;
+            //order.PymentMethod = model.PymentMethod;
+
+            //var orderDetails = new OrderDetail();
+            //orderDetails.ProductId = model.ProductId;
+            //orderDetails.Taste = model.Taste;
+            //orderDetails.Size = model.Size;
+            //orderDetails.Quantity = model.Quantity;
+
+            //order.OrderDetails = orderDetails;
         }
 
         public UserRequest Login(UserRequest user)
         {
             var res = context.Customers.Where(e => e.Email == user.Email && e.Password == user.Password).FirstOrDefault();
-            var result = CastClass.Deserialize(res,user);
+            var result = CastClass.Deserialize(res, user);
             return result;
         }
         public UserRequest? Update(int id, Customer model)
@@ -57,7 +88,7 @@ namespace Rawaa_Api.Services
             context.Entry(model).Property(p => p.CreateOn).IsModified = false;
             context.SaveChanges();
             var userInfo = new UserRequest();
-            var result = CastClass.Deserialize( model,userInfo);
+            var result = CastClass.Deserialize(model, userInfo);
             return result;
 
         }
@@ -121,9 +152,8 @@ namespace Rawaa_Api.Services
                           }).ToList();
             return staffs;
         }
-       
 
-       
+
 
 
     }

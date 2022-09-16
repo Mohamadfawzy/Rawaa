@@ -166,7 +166,11 @@ namespace Rawaa_Api.Models
 
                 entity.Property(e => e.FullName)
                     .HasMaxLength(70)
-                    .HasColumnName("full_name");
+                    .HasColumnName("full_name"); 
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(14)
+                    .HasColumnName("phone");
 
                 entity.Property(e => e.Password)
                     .HasMaxLength(100)

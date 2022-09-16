@@ -100,6 +100,8 @@ namespace Rawaa_Api.Services.ControlPanel
             var entity = context.Staffs.Find(id);
             if (entity == null)
                 return null;
+            if (entity.UserName == "admin")
+                return null;
             var result = context.Remove(entity);
             context.SaveChanges();
 

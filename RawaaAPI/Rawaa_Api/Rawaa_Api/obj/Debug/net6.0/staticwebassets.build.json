@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3ZXw3jSCb05v0E2lbqXWj8hPvmwjRD1m3n67u9iw138=",
+  "Hash": "225gV2WD0oBgyuFUhJzIxzbd8xA7MSurR1pDfuTQsSA=",
   "Source": "Rawaa_Api",
   "BasePath": "_content/Rawaa_Api",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\C_4553cb4a-4a4e-4758-894d-75b71ce2ff09.jpg"
+    },
+    {
+      "Identity": "E:\\_Projects\\Rawaa\\RawaaAPI\\Rawaa_Api\\Rawaa_Api\\wwwroot\\Images\\P_127759a0-0d71-413a-817b-abdc9ccfc3da.jpg",
+      "SourceId": "Rawaa_Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\_Projects\\Rawaa\\RawaaAPI\\Rawaa_Api\\Rawaa_Api\\wwwroot\\",
+      "BasePath": "_content/Rawaa_Api",
+      "RelativePath": "Images/P_127759a0-0d71-413a-817b-abdc9ccfc3da.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\P_127759a0-0d71-413a-817b-abdc9ccfc3da.jpg"
     },
     {
       "Identity": "E:\\_Projects\\Rawaa\\RawaaAPI\\Rawaa_Api\\Rawaa_Api\\wwwroot\\Images\\P_e6664ac4-5847-45b0-8942-4eff0704f747.jpg",

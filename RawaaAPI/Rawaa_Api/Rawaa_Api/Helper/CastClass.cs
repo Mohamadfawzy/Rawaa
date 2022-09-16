@@ -8,5 +8,14 @@ namespace Rawaa_Api.Helper
         {
             return JsonConvert.DeserializeObject<To>(JsonConvert.SerializeObject(from));
         }
+        public static bool IsNullOrEmpty(string[] fields)
+        {
+            foreach(var field in fields)
+            {
+                if(string.IsNullOrEmpty(field))
+                    return true;
+            }
+            return false;
+        }
     }
 }

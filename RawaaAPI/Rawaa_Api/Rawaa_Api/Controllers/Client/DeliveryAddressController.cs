@@ -21,6 +21,11 @@ namespace Rawaa_Api.Controllers.Client
         [HttpPost]
         public IActionResult PostSingle([FromBody] DeliveryAddress model)
         {
+            var res = CastClass.IsNullOrEmpty(new string[] { model.City, model.Governorate, model.ShortName, model.CustomerId.ToString() });
+            if (res)
+            {
+                return BadRequest(new ErrorClass("400", "fields required"));
+            }
             var result = data.Add(model);
             return Created("", result);
         }
@@ -29,16 +34,21 @@ namespace Rawaa_Api.Controllers.Client
         public IActionResult Delete(int id)
         {
             var result = data.Delete(id);
-            if (result != null)
-                return Ok(result);
-            return BadRequest(new ErrorClass("400", "check your password or user not found"));
+            if (result == null)
+                return BadRequest(new ErrorClass("400", "user or address not found"));
+
+            if(result == true)
+            {
+                return BadRequest(new ErrorClass("400", "user or address not found"));
+            }
+            return Ok(new {isDelete = true});
         }
 
-        [HttpGet("all")]
-        public IActionResult GetAll()
+        [HttpGet("all/user/{id}")]
+        public IActionResult GetAll(int id)
         {
-            var result = data.List();
-            if (result == null)
+            var result = data.List(id);
+            if (result.Count<1)
             {
                 return NoContent();
             }

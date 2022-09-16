@@ -24,20 +24,20 @@ namespace Rawaa_Api.Services
             return res;
         }
 
-        public Customer? Delete(int id)
+        public bool? Delete(int id)
         {
-            var entity = context.Customers.Find(id);
+            var entity = context.DeliveryAddresses.Find(id);
             if (entity == null)
                 return null;
-
+            context.Remove(entity);
             context.SaveChanges();
-
-            return entity;
+            var res =context.DeliveryAddresses.Where(e => e.Id == id).Any();
+            return res;
         }
 
-        public List<Staff> List()
+        public List<DeliveryAddress> List(int userId)
         {
-            var entity = context.Staffs.ToList();
+            var entity = context.DeliveryAddresses.Where(e => e.CustomerId == userId).ToList();
 
             return entity;
         }

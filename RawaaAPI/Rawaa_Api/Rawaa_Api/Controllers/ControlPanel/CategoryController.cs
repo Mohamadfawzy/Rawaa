@@ -88,7 +88,8 @@ namespace Rawaa_Api.Controllers.ControlPanel
         public IActionResult Put(int id, [FromForm] IFormFile? image, [FromForm] CategoryRq model, string lang)
         {
             var thereImage = image != null ? true : false;
-            model.Image = fileProcessor.ImageExtension(image.FileName);
+            if (image != null)
+                model.Image = fileProcessor.ImageExtension(image.FileName);
             var entity = data.Update(id, model, lang, thereImage);
             if (entity == null)
                 return NotFound(new ErrorClass("404", "the category your wannt Update not found"));

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Rawaa_Api.Models.Entities
 {
@@ -18,10 +19,13 @@ namespace Rawaa_Api.Models.Entities
         public DateTime? CreateOn { get; set; }
         public int? DrinkId { get; set; }
 
+        [JsonIgnore]
         public virtual Drink? Drink { get; set; }
-        public virtual Order Order { get; set; } = null!;
-        public virtual Product Product { get; set; } = null!;
-
-        public virtual ICollection<MealExtra> MealExtras { get; set; }
+        [JsonIgnore]
+        public virtual Order? Order { get; set; } = null!;
+        [JsonIgnore]
+        public virtual Product? Product { get; set; } = null!;
+        [JsonIgnore]
+        public virtual ICollection<MealExtra>? MealExtras { get; set; }
     }
 }
