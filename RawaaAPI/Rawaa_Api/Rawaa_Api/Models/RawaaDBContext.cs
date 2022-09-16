@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Rawaa_Api.Models.Entities;
 // Data Source=rawaaDB.mssql.somee.com;Initial Catalog=rawaaDB;user id=mfhelal12345_SQLLogin_1; pwd=jlgjukukt9;
 //Data Source=DESKTOP-UND6KAU\\SQLEXPRESS;Initial Catalog=test; Integrated Security=True
+//Server =.\\SQLExpress; Database = RwaaaDB; Trusted_Connection = True;
+
 namespace Rawaa_Api.Models
 {
     public partial class RawaaDBContext : DbContext
@@ -44,7 +47,6 @@ namespace Rawaa_Api.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=RwaaaDB;Trusted_Connection=True;");
             }
         }

@@ -86,6 +86,33 @@ namespace Rawaa_Api.Controllers.ControlPanel
             return Ok(entity);
         }
 
+
+        // put image in product
+        [HttpPut("image/{id}")]
+        public IActionResult PutImage(int id, [FromForm] IFormFile? image)
+        {
+            var thereImage = image != null ? true : false;
+            var extension = "";
+            if (image != null)
+                extension = fileProcessor.ImageExtension(image.FileName);
+            
+            if (image == null)
+                return NotFound(new ErrorClass("404", "Please insert image"));
+
+            var entity = data.UpdateImage(id, extension);
+
+            if (entity == null)
+                return NotFound(new ErrorClass("404", "the Product your want Update not found"));
+
+            if (!string.IsNullOrEmpty(entity.Image) && thereImage)
+            {
+                // add new image
+                _= fileProcessor.UpdateImage(image, entity.Image);
+            }
+            return Ok(entity);
+        }
+
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, string lang)
         {

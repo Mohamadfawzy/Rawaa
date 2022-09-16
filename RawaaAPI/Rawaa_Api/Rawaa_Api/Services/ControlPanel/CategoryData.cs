@@ -41,6 +41,7 @@ namespace Rawaa_Api.Services.ControlPanel
             return model;
         }
 
+        // updata all
         public CategoryRq Update(int id, CategoryRq model, string lang, bool thereImage)
         {
             var listOfTitle = new List<CategorieTitleTranslation>();
@@ -59,8 +60,7 @@ namespace Rawaa_Api.Services.ControlPanel
                 model.Image = newNameImage;
             }
 
-
-
+            
             listOfTitle.Add(new CategorieTitleTranslation { Title = model.TitleAr, CategorieId = id, LanguageId = 1 });
             listOfTitle.Add(new CategorieTitleTranslation { Title = model.TitleEn, CategorieId = id, LanguageId = 2 });
 
@@ -69,7 +69,9 @@ namespace Rawaa_Api.Services.ControlPanel
 
             context.CategorieTitleTranslations.AsNoTracking().Where(t => t.CategorieId == id).ToList();
             context.UpdateRange(listOfTitle);
-            context.Update(entity).Property(p => p.Image).IsModified = thereImage; //Entry(entity).CurrentValues.SetValues(category);
+            context.Update(entity);
+            context.Entry(entity).Property(p => p.Image).IsModified = thereImage;
+
             context.SaveChanges();
 
 
@@ -78,15 +80,39 @@ namespace Rawaa_Api.Services.ControlPanel
 
         }
 
+        // update image 
+        public CategoryRq? UpdateImage(int id, string extension)
+        {
+            var entity = context.Categories.AsNoTracking().SingleOrDefault(p => p.Id == id);
+            var newNameImage = "";
+
+            if (entity == null)
+                return null;
+
+            if (string.IsNullOrEmpty(entity.Image))
+                newNameImage = "C_" + Guid.NewGuid().ToString() + extension;
+            else if (!string.IsNullOrEmpty(entity.Image))
+            {
+                newNameImage = Path.ChangeExtension(entity.Image, extension);
+            }
+            entity.Image = newNameImage;
+            context.Update(entity);
+            context.SaveChanges();
+            var rs = Find(id);
+            return rs;
+
+        }
+
+
         public CategoryRq Delete(int id)
         {
             var entity = context.Categories.Find(id);
             if (entity == null)
                 return null;
-            
+
             List<string> productsImages = (from p in context.Products
-                              where p.CategoryId == id
-                              select p.Image).ToList();
+                                           where p.CategoryId == id
+                                           select p.Image).ToList();
 
             var result = context.Remove(entity);
             var category = new CategoryRq();
@@ -173,7 +199,7 @@ namespace Rawaa_Api.Services.ControlPanel
 
 
         // ------------------------
-       
+
 
 
 

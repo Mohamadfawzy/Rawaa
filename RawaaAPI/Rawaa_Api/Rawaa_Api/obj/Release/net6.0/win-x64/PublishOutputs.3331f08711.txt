@@ -18,6 +18,7 @@ E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTm
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.OpenApi.dll
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTmp\Out\Newtonsoft.Json.dll
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\win-x64\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

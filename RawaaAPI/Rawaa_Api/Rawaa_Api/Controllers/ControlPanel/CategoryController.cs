@@ -16,14 +16,14 @@ namespace Rawaa_Api.Controllers.ControlPanel
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly IProvider<CategoryRq> data;
+        private readonly CategoryData data;
         FileProcessor fileProcessor;
         IWebHostEnvironment webHost;
 
         public CategoryController(IProvider<CategoryRq> _data, IWebHostEnvironment webHost)
         {
             this.webHost = webHost;
-            data = _data;
+            data = new CategoryData();
             fileProcessor = new FileProcessor(this.webHost);
         }
 
@@ -62,31 +62,25 @@ namespace Rawaa_Api.Controllers.ControlPanel
             if (result == null)
                 return NotFound(new ErrorClass("404", "There are no categories to display"));
 
-            return Ok(data.List(lang));
+            return Ok(result);
         }
 
         [HttpGet("Search/{text}")]
         public IActionResult GetAllSearch(string text)
         {
-            var result =  data.Search(text);
+            var result = data.Search(text);
             if (result == null)
                 return NotFound(new ErrorClass("404", "There are no categories to display"));
-
-            //var list = new List<CategorySearch>();
-            //foreach (var item in result)
-            //{
-            //    CategorySearch categorySearch = new CategorySearch();
-            //    categorySearch.Id = item.Id;
-            //    categorySearch.Title = item.TitleAr;
-            //    categorySearch.Image = item.Image;
-            //    list.Add(categorySearch);
-            //}
             return Ok(result);
         }
+
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromForm] IFormFile? image, [FromForm] CategoryRq model, string lang)
         {
+            if (string.IsNullOrEmpty(model.TitleAr) && string.IsNullOrEmpty(model.TitleEn))
+                return BadRequest(new ErrorClass("404", "please check input"));
+
             var thereImage = image != null ? true : false;
             if (image != null)
                 model.Image = fileProcessor.ImageExtension(image.FileName);
@@ -102,13 +96,39 @@ namespace Rawaa_Api.Controllers.ControlPanel
             return Ok(entity);
         }
 
+        // put image
+        [HttpPut("image/{id}")]
+        public IActionResult PutImage(int id, [FromForm] IFormFile? image)
+        {
+            var thereImage = image != null ? true : false;
+            var extension = "";
+            if (image != null)
+                extension = fileProcessor.ImageExtension(image.FileName);
+
+            if (image == null)
+                return NotFound(new ErrorClass("404", "Please insert image"));
+
+            var entity = data.UpdateImage(id, extension);
+
+            if (entity == null)
+                return NotFound(new ErrorClass("404", "the Category your want Update not found"));
+
+            if (!string.IsNullOrEmpty(entity.Image) && thereImage)
+            {
+                // add new image
+                _ = fileProcessor.UpdateImage(image, entity.Image);
+            }
+            return Ok(entity);
+        }
+
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, string lang)
         {
             var result = data.Delete(id);
             if (result == null)
-                return NotFound(new ErrorClass("404","the category your wannt delate not found"));
-            
+                return NotFound(new ErrorClass("404", "the category your wannt delate not found"));
+
             _ = fileProcessor.RemoveImage(result.Image);
             _ = fileProcessor.RemoveImages(result.ProductsImages);
 

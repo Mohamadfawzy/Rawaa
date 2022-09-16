@@ -60,3 +60,4 @@ E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\refint\Rawaa_
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\Rawaa_Api.pdb
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\Rawaa_Api.genruntimeconfig.cache
 E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\obj\Release\net6.0\ref\Rawaa_Api.dll
+E:\_Projects\Rawaa\RawaaAPI\Rawaa_Api\Rawaa_Api\bin\Release\net6.0\Newtonsoft.Json.dll

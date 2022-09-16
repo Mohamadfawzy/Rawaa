@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Rawaa_Api.Helper;
+using Rawaa_Api.Models.ControlPanel;
+using Rawaa_Api.Services.Client;
+using Rawaa_Api.Services.Interfaces;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// this Controller for client
 
 namespace Rawaa_Api.Controllers.Client
 {
@@ -8,36 +12,27 @@ namespace Rawaa_Api.Controllers.Client
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        // GET: api/<CategoryController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly CategoryClientData data;
+        
+        // ctor client
+        public CategoryController()
         {
-            return new string[] { "value1", "value2" };
+            data = new CategoryClientData();
         }
 
-        // GET api/<CategoryController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("all")]
+        public IActionResult GetAll(string lang)
         {
-            return "value";
+            var result = data.List(lang);
+            if (result == null)
+                return NotFound(new ErrorClass("404", "There are no categories to display"));
+
+            return Ok(result);
         }
 
-        // POST api/<CategoryController>
-        [HttpPost("create")]
-        public void Post([FromBody] string value)
-        {
-        }
 
-        // PUT api/<CategoryController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
+
+
 }

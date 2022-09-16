@@ -11,7 +11,7 @@ namespace Rawaa_Api.Services.ControlPanel
         RawaaDBContext context;
         public static IWebHostEnvironment _webHostEnvironment;
         FileProcessor fileProcessor;
-        
+
         // ctor
         public ProductData(IWebHostEnvironment web)
         {
@@ -28,11 +28,11 @@ namespace Rawaa_Api.Services.ControlPanel
             {
                 Image = "P_" + Guid.NewGuid().ToString() + model.Image,
                 SmallSizePrice = model.SmallSizePrice,
-                MediumSizePrice =model.MediumSizePrice,
-                BigSizePrice=model.BigSizePrice,
-                DiscountValue=model.DiscountValue,
-                Calories=model.Calories,
-                HasTaste=model.HasTaste,
+                MediumSizePrice = model.MediumSizePrice,
+                BigSizePrice = model.BigSizePrice,
+                DiscountValue = model.DiscountValue,
+                Calories = model.Calories,
+                HasTaste = model.HasTaste,
                 CategoryId = model.CategoryId,
                 ProductTitleTranslations = listOfTitle
             };
@@ -61,8 +61,8 @@ namespace Rawaa_Api.Services.ControlPanel
                 return null;
 
             if (string.IsNullOrEmpty(entity.Image) && isThereImage)
-                model.Image = "C_" + Guid.NewGuid().ToString() + model.Image;
-            else if(!string.IsNullOrEmpty(entity.Image) && isThereImage)
+                model.Image = "P_" + Guid.NewGuid().ToString() + model.Image;
+            else if (!string.IsNullOrEmpty(entity.Image) && isThereImage)
             {
                 var newNameImage = Path.ChangeExtension(entity.Image, model.Image);
                 model.Image = newNameImage;
@@ -85,12 +85,43 @@ namespace Rawaa_Api.Services.ControlPanel
             context.CategorieTitleTranslations.AsNoTracking().Where(t => t.CategorieId == id).ToList();
             context.UpdateRange(listOfTitle);
 
-            context.Update(entity).Property(p=>p.Image).IsModified = isThereImage; //Entry(entity).CurrentValues.SetValues(category);
+            context.Update(entity).Property(p => p.Image).IsModified = isThereImage; //Entry(entity).CurrentValues.SetValues(category);
             context.SaveChanges();
 
 
             model = Find(id);
             return model;
+
+        }
+
+        public ProductRequest? UpdateImage(int id, string extension)
+        {
+            var entity = context.Products.AsNoTracking().SingleOrDefault(p => p.Id == id);
+            var newNameImage = "";
+
+            if (entity == null)
+                return null;
+
+            if (string.IsNullOrEmpty(entity.Image))
+                newNameImage = "P_" + Guid.NewGuid().ToString() + extension;
+            else if (!string.IsNullOrEmpty(entity.Image))
+            {
+                newNameImage = Path.ChangeExtension(entity.Image, extension);
+            }
+            entity.Image = newNameImage;
+            context.Update(entity);
+            context.Entry(entity).Property(p => p.SmallSizePrice).IsModified = false;
+            context.Entry(entity).Property(p => p.MediumSizePrice).IsModified = false;
+            context.Entry(entity).Property(p => p.BigSizePrice).IsModified = false;
+            context.Entry(entity).Property(p => p.DiscountValue).IsModified = false;
+            context.Entry(entity).Property(p => p.Calories).IsModified = false;
+            context.Entry(entity).Property(p => p.HasTaste).IsModified = false;
+            context.Entry(entity).Property(p => p.CategoryId).IsModified = false;
+            context.Entry(entity).Property(p => p.CreateOn).IsModified = false;
+            context.Entry(entity).Property(p => p.DiscountExpiryDate).IsModified = false;
+            context.SaveChanges();
+            var rs = Find(id);
+            return rs;
 
         }
 
@@ -112,7 +143,7 @@ namespace Rawaa_Api.Services.ControlPanel
                         join t in context.ProductTitleTranslations on p.Id equals t.ProductId
                         join l in context.LanguageNames on t.LanguageId equals l.Id
                         where t.ProductId == id && t.LanguageId == 1
-                        select new ProductRequest 
+                        select new ProductRequest
                         {
                             Id = p.Id,
                             Image = p.Image,
