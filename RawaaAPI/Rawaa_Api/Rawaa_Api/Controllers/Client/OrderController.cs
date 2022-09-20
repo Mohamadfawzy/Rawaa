@@ -60,8 +60,7 @@ namespace Rawaa_Api.Controllers.Client
             return Ok(result);
         }
 
-       
-
+        // get order details with address
         [HttpGet("{id}")]
         public IActionResult GetOrderDetail(int id,string lang)
         {
@@ -75,6 +74,7 @@ namespace Rawaa_Api.Controllers.Client
             return Ok(res);
         }
 
+        // get all products in the order by order id
         [HttpGet("list-products/order/{id}")]
         public IActionResult GetProductsInOrder(int id, string lang)
         {

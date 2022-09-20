@@ -94,14 +94,20 @@ namespace Rawaa_Api.Models
                     .HasColumnName("create_on")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Quantity).HasColumnName("quantity");
+                entity.Property(e => e.Quantity)
+                    .HasColumnName("quantity")
+                    .HasDefaultValueSql("((1))");
 
 
                 entity.Property(e => e.DrinkId).HasColumnName("drink_id");
 
-                entity.Property(e => e.Size).HasColumnName("size");
+                entity.Property(e => e.Size)
+                .HasColumnName("size")
+                .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Taste).HasColumnName("taste");
+                entity.Property(e => e.Taste)
+                .HasColumnName("taste")
+                .HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.Drink)
                     .WithMany(p => p.Carts)
