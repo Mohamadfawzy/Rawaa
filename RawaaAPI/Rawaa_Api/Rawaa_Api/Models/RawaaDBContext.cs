@@ -96,6 +96,18 @@ namespace Rawaa_Api.Models
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
 
+
+                entity.Property(e => e.DrinkId).HasColumnName("drink_id");
+
+                entity.Property(e => e.Size).HasColumnName("size");
+
+                entity.Property(e => e.Taste).HasColumnName("taste");
+
+                entity.HasOne(d => d.Drink)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.DrinkId)
+                    .HasConstraintName("FK_cart_drink_id");
+
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.CustomerId)
@@ -168,7 +180,7 @@ namespace Rawaa_Api.Models
 
                 entity.Property(e => e.FullName)
                     .HasMaxLength(70)
-                    .HasColumnName("full_name"); 
+                    .HasColumnName("full_name");
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(14)
@@ -213,6 +225,9 @@ namespace Rawaa_Api.Models
                 entity.Property(e => e.Street)
                     .HasMaxLength(100)
                     .HasColumnName("street");
+                entity.Property(e => e.IsDeleted)
+                    .HasColumnType("bit")
+                    .HasColumnName("is_deleted");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.DeliveryAddresses)
@@ -453,9 +468,13 @@ namespace Rawaa_Api.Models
                     .HasColumnName("create_on")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.DrinkId).HasColumnName("drink_id");
+                entity.Property(e => e.ProductPrice)
+                    .HasColumnType("decimal(5, 2)")
+                    .HasColumnName("product_price");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.DrinkId).HasColumnName("drink_id");
 
                 entity.Property(e => e.Size).HasColumnName("size");
 

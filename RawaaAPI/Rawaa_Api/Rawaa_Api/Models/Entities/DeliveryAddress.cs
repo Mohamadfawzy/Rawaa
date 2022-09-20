@@ -20,6 +20,7 @@ namespace Rawaa_Api.Models.Entities
         public byte? ApartmentNumber { get; set; }
         public string? Notes { get; set; }
         public string? ShortName { get; set; } = null!;
+        public bool IsDeleted { get; set; }
         public int CustomerId { get; set; }
 
         [JsonIgnore]

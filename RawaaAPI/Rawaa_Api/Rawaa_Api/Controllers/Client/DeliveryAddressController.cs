@@ -55,6 +55,23 @@ namespace Rawaa_Api.Controllers.Client
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetSingle(int id)
+        {
+            if (id < 1)
+                return BadRequest(new ErrorClass("400", "id is invalid"));
+            var res = data.Find(id);
+            if (res == null)
+            {
+                return NoContent();
+            }
+            return Ok(res);
+        }
+
+
+
+
+        // not handel
 
         [HttpGet("Search/{text}")]
         public IActionResult GetAllSearch(string text)

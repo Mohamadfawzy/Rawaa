@@ -17,6 +17,8 @@ namespace Rawaa_Api.Controllers.Client
         {
             data = new OrderData();
         }
+
+        // create order by user
         [HttpPost]
         public IActionResult PostSingle([FromBody] Order model)
         {
@@ -32,46 +34,40 @@ namespace Rawaa_Api.Controllers.Client
             return Created("", result);
         }
 
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] UserRequest user)
+        // cancel order by user
+        [HttpPut("OrderStatus")]
+        public IActionResult PutCancelOrder([FromBody] OrderStatusRequest state)
         {
-            
-           return BadRequest(new ErrorClass("400", "email is not exist"));
-           
-            // add
-            var result = data.Login(user);
-            if (result == null)
+            if(state.OrderStatus == 0 || state.OrderStatus >5)
             {
-                return BadRequest(new ErrorClass("400", "Password or email is invalid"));
+                return BadRequest(new ErrorClass("400", "you must insert order status and between 1-5 "));
             }
-            return Created("", result);
-        }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Customer user)
-        {
-            return BadRequest(new ErrorClass("400", "can not use this email"));
-            
-            var result = data.Update(id, user);
-            return Ok(result);
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete([FromBody] UserRequest user, int id)
-        {
-            var result = data.Delete(id, user.Password);
+            var result = data.CancelOrder(state);
             if (result != null)
                 return Ok(result);
             return BadRequest(new ErrorClass("400", "check your password or user not found"));
         }
 
-        // end clint
+        // get all order of user
+        [HttpGet("all/{userId}")]
+        public IActionResult GetAll(int userId)
+        {
+            var result = data.List(userId);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+
+       
 
         [HttpGet("{id}")]
-        public IActionResult GetSingle(int id)
+        public IActionResult GetOrderDetail(int id,string lang)
         {
             if (id < 1)
                 return BadRequest(new ErrorClass("400", "id is invalid"));
-            var res = data.Find(id);
+            var res = data.OrderDetails(id,lang);
             if (res == null)
             {
                 return NoContent();
@@ -79,27 +75,17 @@ namespace Rawaa_Api.Controllers.Client
             return Ok(res);
         }
 
-        [HttpGet("all")]
-        public IActionResult GetAll()
+        [HttpGet("list-products/order/{id}")]
+        public IActionResult GetProductsInOrder(int id, string lang)
         {
-            var result = data.List();
-            if (result == null)
+            if (id < 1)
+                return BadRequest(new ErrorClass("400", "id is invalid"));
+            var res = data.ProductsInOrder(id, lang);
+            if (res == null)
             {
                 return NoContent();
             }
-            return Ok(result);
-        }
-
-
-        [HttpGet("Search/{text}")]
-        public IActionResult GetAllSearch(string text)
-        {
-            var result = data.Search(text);
-            if (result == null)
-            {
-                return NoContent();
-            }
-            return Ok(result);
+            return Ok(res);
         }
 
 

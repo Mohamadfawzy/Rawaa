@@ -29,5 +29,12 @@ namespace Rawaa_Api.Controllers
             })
             .ToArray();
         }
+        [HttpGet("time")]
+        public IActionResult TestDateTime()
+        {
+            var t = DateTime.Now.ToString("yyMMddHHmmssff");
+            //var ft = t.Year.ToString() + t.Month + t.Day + t.Hour + t.Second + t.Millisecond;
+            return Ok(t);
+        }
     }
 }

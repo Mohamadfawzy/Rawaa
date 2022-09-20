@@ -45,7 +45,8 @@ namespace Rawaa_Api.Controllers
                 //byte[] b = System.IO.File.ReadAllBytes(filePath);
                 //return File(b, "image/jpg");
                 //return PhysicalFile(newImageName,"image/jpg");
-                return PhysicalFile(newImageName, "image/" + imageInfo.Extension);
+                var ext = imageInfo.Extension.Substring(1);
+                return PhysicalFile(newImageName, "image/" + ext);
             }
             return null;
         }
@@ -53,17 +54,19 @@ namespace Rawaa_Api.Controllers
         [HttpDelete]
         public IActionResult delete(string imageName)
         {
-            var imags = new List<string>()
+            try
             {
-                "p1.jpg",
-                "p2.jpg",
-                "p3.jpg",
-            };
-            string path = web.WebRootPath + "\\" + "Images" + "\\" + imageName;
+                string path = web.WebRootPath + "\\" + "Images" + "\\" + imageName;
+                System.IO.File.Delete(path);
 
-            System.IO.File.Delete(path);
+            }
+            catch (Exception ex)
+            {
 
-            return Ok(imags);
+                return NotFound(ex);
+            }
+
+            return Ok("is deleted");
         }
     }
 }

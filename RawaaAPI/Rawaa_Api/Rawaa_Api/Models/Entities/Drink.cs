@@ -18,5 +18,6 @@ namespace Rawaa_Api.Models.Entities
 
         public virtual ICollection<DrinksTitleTranslation> DrinksTitleTranslations { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
     }
 }

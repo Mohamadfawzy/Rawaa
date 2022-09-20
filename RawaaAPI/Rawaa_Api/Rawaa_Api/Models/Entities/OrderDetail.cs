@@ -16,6 +16,7 @@ namespace Rawaa_Api.Models.Entities
         public byte? Taste { get; set; }
         public byte? Size { get; set; }
         public byte? Quantity { get; set; }
+        public decimal? ProductPrice { get; set; }
         public DateTime? CreateOn { get; set; }
         public int? DrinkId { get; set; }
 

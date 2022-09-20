@@ -27,19 +27,31 @@ namespace Rawaa_Api.Services
         public bool? Delete(int id)
         {
             var entity = context.DeliveryAddresses.Find(id);
-            if (entity == null)
+            if (entity == null || entity.IsDeleted == true)
                 return null;
-            context.Remove(entity);
+
+            entity.IsDeleted = true;
+            context.Update(entity);
             context.SaveChanges();
-            var res =context.DeliveryAddresses.Where(e => e.Id == id).Any();
-            return res;
+            //var res =context.DeliveryAddresses.Where(e => e.Id == id).Any();
+            return false;
         }
 
         public List<DeliveryAddress> List(int userId)
         {
-            var entity = context.DeliveryAddresses.Where(e => e.CustomerId == userId).ToList();
+            var entity = context.DeliveryAddresses.Where(e => e.CustomerId == userId && e.IsDeleted != true).ToList();
 
             return entity;
+        }
+
+        public DeliveryAddress Find(int id)
+        {
+            var entity = context.DeliveryAddresses.Find(id);
+            if (entity == null)
+                return null;
+
+            return entity;
+
         }
 
         public List<StaffRequest> Search(string searchString)

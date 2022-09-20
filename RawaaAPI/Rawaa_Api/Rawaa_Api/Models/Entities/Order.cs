@@ -25,12 +25,14 @@ namespace Rawaa_Api.Models.Entities
         public int? StaffId { get; set; }
         [JsonIgnore]
         public virtual Customer? Customer { get; set; }
-        [JsonIgnore]
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public virtual DeliveryAddress? DeliveryAddress { get; set; }
         [JsonIgnore]
         public virtual Restaurant? Restaurant { get; set; }
         [JsonIgnore]
         public virtual Staff? Staff { get; set; }
+        [JsonIgnore(Condition =JsonIgnoreCondition.WhenWritingNull)]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
