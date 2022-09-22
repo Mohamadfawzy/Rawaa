@@ -120,6 +120,33 @@
   <data name="first" xml:space="preserve">
     <value>محمد فوزي</value>
   </data>
+  <data name="LanguagePage_Ok" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+  <data name="LanguagePage_TheSameLange" xml:space="preserve">
+    <value>لغة الحالية هي العربية</value>
+  </data>
+  <data name="loginPage_BtnLongin" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="loginPage_doNothave_acount" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
+  <data name="loginPage_email" xml:space="preserve">
+    <value>الإيميل</value>
+  </data>
+  <data name="loginPage_forgetPass" xml:space="preserve">
+    <value>هل نسيت كلمة السر؟</value>
+  </data>
+  <data name="loginPage_password" xml:space="preserve">
+    <value>كلمة السر</value>
+  </data>
+  <data name="loginPage_regesterNow" xml:space="preserve">
+    <value>اشتراك</value>
+  </data>
+  <data name="loginPage_title" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
   <data name="MainPage_SearchPlaceHolder" xml:space="preserve">
     <value>عن ماذا تبحث؟</value>
   </data>

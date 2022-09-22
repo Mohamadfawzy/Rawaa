@@ -120,6 +120,33 @@
   <data name="first" xml:space="preserve">
     <value>Mohamed fawzy</value>
   </data>
+  <data name="LanguagePage_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="LanguagePage_TheSameLange" xml:space="preserve">
+    <value>The current language is English</value>
+  </data>
+  <data name="loginPage_BtnLongin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="loginPage_doNothave_acount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+  <data name="loginPage_email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="loginPage_forgetPass" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="loginPage_password" xml:space="preserve">
+    <value>Passeord</value>
+  </data>
+  <data name="loginPage_regesterNow" xml:space="preserve">
+    <value>register</value>
+  </data>
+  <data name="loginPage_title" xml:space="preserve">
+    <value>longin</value>
+  </data>
   <data name="MainPage_SearchPlaceHolder" xml:space="preserve">
     <value />
   </data>

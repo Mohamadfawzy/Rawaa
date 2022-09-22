@@ -70,6 +70,87 @@ namespace Rawaa.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string LanguagePage_Ok {
+            get {
+                return ResourceManager.GetString("LanguagePage_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current language is English.
+        /// </summary>
+        public static string LanguagePage_TheSameLange {
+            get {
+                return ResourceManager.GetString("LanguagePage_TheSameLange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string loginPage_BtnLongin {
+            get {
+                return ResourceManager.GetString("loginPage_BtnLongin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t have an account?.
+        /// </summary>
+        public static string loginPage_doNothave_acount {
+            get {
+                return ResourceManager.GetString("loginPage_doNothave_acount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string loginPage_email {
+            get {
+                return ResourceManager.GetString("loginPage_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot your password?.
+        /// </summary>
+        public static string loginPage_forgetPass {
+            get {
+                return ResourceManager.GetString("loginPage_forgetPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passeord.
+        /// </summary>
+        public static string loginPage_password {
+            get {
+                return ResourceManager.GetString("loginPage_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to register.
+        /// </summary>
+        public static string loginPage_regesterNow {
+            get {
+                return ResourceManager.GetString("loginPage_regesterNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to longin.
+        /// </summary>
+        public static string loginPage_title {
+            get {
+                return ResourceManager.GetString("loginPage_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string MainPage_SearchPlaceHolder {

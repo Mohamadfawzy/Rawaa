@@ -2,29 +2,86 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Rawaa.Views.SettingPage"
-             BackgroundColor="Orange"
-             Shell.TabBarIsVisible="False"
-             >
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             
+             x:Name="page"
+             Shell.TabBarIsVisible="False">
+    <Shell.TitleView>
+       
+        <StackLayout BackgroundColor="Green"
+                     VerticalOptions="CenterAndExpand">
+            <!-- -->
+            <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                   FontFamily="CairoRequler"
+                   HorizontalOptions="Start"
+                   VerticalOptions="CenterAndExpand"
+                   FontSize="Large"
+                   TextColor="{StaticResource blueDark}" />
+        </StackLayout>
+    </Shell.TitleView>
     <ContentPage.Content>
-        <StackLayout BackgroundColor="DarkBlue">
+        <StackLayout Margin="25,0"
+                     Spacing="20">
+            <!-- -->
+            <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                   FontFamily="CairoRequler"
+                   HorizontalOptions="Start"
+                   FontSize="Large"
+                   TextColor="{StaticResource blueDark}"
+                   VerticalOptions="Center" />
+            <frame:PancakeView x:Name="frameAr"
+                               Shadow="{frame:ShadowMarkup BlurRadius=1 , Color=Red}"
+                               CornerRadius="10"
+                               Padding="0"
+                               BackgroundColor="White"
+                               Border="{frame:BorderMarkup Thickness=1 ,Color=Gray}"
+                               HeightRequest="50">
+                <StackLayout VerticalOptions="Center">
+                    <!-- -->
+                    <Label Text="عربي"
+                           FontFamily="CairoRequler"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </StackLayout>
+                <frame:PancakeView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Button_Clicked_Arabic" />
+                </frame:PancakeView.GestureRecognizers>
+            </frame:PancakeView>
 
-            <Button Text="عربي"
-                    x:Name="box_ar"
-                    Margin="15"
-                    CornerRadius="20"
-                    FontFamily="IconFont"
-                    Clicked="Button_Clicked_Arabic"/>
-            
-            <Button Text="English"
-                    x:Name="box_en"
-                    Margin="15"
-                    CornerRadius="20"
-                    Clicked="Button_Clicked_English" />
+            <frame:PancakeView x:Name="frameEn"
+                               Shadow="{frame:ShadowMarkup BlurRadius=1 , Color=Red}"
+                               CornerRadius="10"
+                               Padding="0"
+                               BackgroundColor="White"
+                               Border="{frame:BorderMarkup Thickness=1 ,Color=Gray}"
+                               HeightRequest="50">
+                <StackLayout VerticalOptions="Center">
+                    <!-- -->
+                    <Label Text="English"
+                           FontFamily="CairoRequler"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </StackLayout>
+                <frame:PancakeView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Button_Clicked_English" />
+                </frame:PancakeView.GestureRecognizers>
+            </frame:PancakeView>
 
-            <Button Text="تمام ok"
-                    x:Name="bt_ok"
-                    Clicked="Button_Clicked_Ok" />
-            
+            <!-- -->
+            <Button Text="{x:Static lang:LanguageResources.LanguagePage_Ok}"
+                    FontFamily="CairoRequler"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    CornerRadius="10"
+                    
+                    Clicked="Button_Clicked_Ok"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

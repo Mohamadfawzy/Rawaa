@@ -21,6 +21,7 @@ namespace Rawaa.ViewModels
 
 
         public IDataStore<AdsM> requestProvider = new AdData();
+        public RequestProvider<Category> requestProviderr = new RequestProvider<Category>();
         public List<AdsM> Sliders { get; set; }
         public List<Category> FoodMenu { get; set; }
         public List<Product> MostPopularMeals { get; set; }
@@ -75,7 +76,9 @@ namespace Rawaa.ViewModels
 
 
 
-        // fetch
+        // fetch data ----------------------
+
+        // Adds
         private async Task FetchAds()
         {
             var lis = new List<AdsM>() { new AdsM { Image = "p3.jpg" }, new AdsM { Image = "m4.jpg" }, new AdsM { Image = "p2.jpg" } };
@@ -84,7 +87,7 @@ namespace Rawaa.ViewModels
             OnPropertyChanged("Sliders");
         }
 
-
+        // Categoreis
         private async Task FetchCategory()
         {
             var lis = new List<Category>() 
@@ -105,8 +108,12 @@ namespace Rawaa.ViewModels
                 new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
 
             };
-            FoodMenu = lis;
+            var list = requestProviderr.GetListAsync("ar/api/client/Category/all");
+            FoodMenu = list.Result.ToList();
+            OnPropertyChanged("FoodMenu");
         }  
+
+        // most meals 
         private async Task FetchMostPopularMeals()
         {
             var lis = new List<Product>()
@@ -126,8 +133,10 @@ namespace Rawaa.ViewModels
 
         }
 
-
-        public bool SliderIsLoop = true;
+        
+        
+        // prossece ---------------------------------
+        public bool SliderIsLoop = false;
         private void SetSliderPosition(int count)
         {
             try

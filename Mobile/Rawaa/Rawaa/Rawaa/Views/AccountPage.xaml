@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.AccountPage"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="False"
+             x:Name="page">
+    <ContentPage.Content>
+        <StackLayout Margin="10,0">
+            <Label Text="Welcome to Xamarin.Forms!" />
+            <Button Clicked="Button_Clicked"
+                    Text="longin" />
+            <!-- lang-->
+            <frame:PancakeView>
+                <StackLayout>
+                    <!-- -->
+                    <Label Text="{x:Static lang:LanguageResources.loginPage_title}"
+                           FontFamily="CairoRequler"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </StackLayout>
+                <frame:PancakeView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Language_Tapped" />
+                </frame:PancakeView.GestureRecognizers>
+            </frame:PancakeView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

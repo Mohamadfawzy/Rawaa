@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.LoginPage"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="False"
+             x:Name="page">
+    <ContentPage.Content>
+        <StackLayout Spacing="30"
+                     Margin="20,0">
+            <!-- x -->
+            <Label Text="{x:Static icon:IconFont.Close}"
+                   FontFamily="IconFont"
+                   HorizontalOptions="End"
+                   FontSize="Large"
+                   Margin="10,15,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Close_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+            <!-- logo image -->
+            <Image Source="LogoPNG"
+                   x:Name="logo"
+                   Margin="0,30,0,0"
+                   HeightRequest="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   xct:IconTintColorEffect.TintColor="{StaticResource blueDark}">
+            </Image>
+            
+            <!-- login -->
+            <Label Text="{x:Static lang:LanguageResources.loginPage_title}"
+                   FontFamily="CairoBold"
+                   FontSize="Large"
+                   TextColor="{StaticResource blueDark}"/>
+            
+            <!-- email-->
+            <StackLayout  Spacing="0"
+                          >
+                <Label Text="{x:Static lang:LanguageResources.loginPage_email}"
+                       FontFamily="CairoRequler"
+                       TextColor="{StaticResource blueDark}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       />
+                <frame:PancakeView Padding="0"
+                                   Margin="0,-7,0,0">
+                    <StackLayout Spacing="0">
+                        <Entry x:Name="email"
+                               Margin="0,0,0,-7">
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                        <BoxView Color="{StaticResource lightGray}"
+                                 HeightRequest="1"/>
+                    </StackLayout>
+                </frame:PancakeView>
+            </StackLayout>
+
+            <!-- password -->
+            <StackLayout Spacing="0">
+                <Label Text="{x:Static lang:LanguageResources.loginPage_password}"
+                       FontFamily="CairoRequler"
+                       TextColor="{StaticResource blueDark}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"/>
+                <frame:PancakeView Padding="0"
+                                   Margin="0,-7,0,0">
+                    <StackLayout Spacing="0">
+                        <Entry x:Name="password"
+                               Margin="0,0,0,-7"
+                               IsPassword="True">
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                        <BoxView Color="{StaticResource lightGray}"
+                                 HeightRequest="1" />
+                    </StackLayout>
+                </frame:PancakeView>
+            </StackLayout>
+            
+            <!-- forget password -->
+            <Label Text="{x:Static lang:LanguageResources.loginPage_forgetPass}"
+                   FontFamily="CairoRequler"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center" />
+
+            <Button Text="{x:Static lang:LanguageResources.loginPage_BtnLongin}"
+                    CornerRadius="20"
+                    BackgroundColor="{StaticResource blueRegular}"
+                    TextColor="{StaticResource white}" 
+                    Clicked="Button_Clicked"/>
+            <StackLayout Orientation="Horizontal">
+                <!-- -->
+                <Label Text="{x:Static lang:LanguageResources.loginPage_doNothave_acount}"
+                       FontFamily="CairoRequler"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+                <!-- -->
+                <Label Text="{x:Static lang:LanguageResources.loginPage_regesterNow}"
+                       FontFamily="CairoBold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

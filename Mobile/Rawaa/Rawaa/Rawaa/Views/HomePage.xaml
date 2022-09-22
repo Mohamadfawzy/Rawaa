@@ -13,7 +13,14 @@
              x:Name="page"
              xmlns:converter="clr-namespace:Rawaa.Converters"
              Shell.PresentationMode="NotAnimated">
-
+<!--
+Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+FontFamily="CairoRequler"
+    
+Text="{x:Static icon:IconFont.Magnify}"
+FontFamily="IconFont"
+    
+-->
     <ContentPage.BindingContext>
         <vm:HomePageVM />
     </ContentPage.BindingContext>
@@ -72,8 +79,8 @@
 
                         <!--  Whate you want? -->
                         <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
-                               TextColor="{StaticResource lightGray}"
                                FontFamily="CairoRequler"
+                               TextColor="{StaticResource lightGray}"
                                FontSize="14"
                                x:Name="entrySearch"
                                VerticalOptions="CenterAndExpand"
@@ -382,8 +389,7 @@
 
                         <!-- Collection of MostPopularMeals -->
                         <CollectionView HeightRequest="307"
-                                        ItemsSource="{Binding MostPopularMeals}"
-                                        >
+                                        ItemsSource="{Binding MostPopularMeals}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal"
                                                    ItemSpacing="0" />

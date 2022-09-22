@@ -10,6 +10,6 @@ namespace Rawaa.Models
         public string Title { get; set; }
 
         [JsonIgnore]
-        public string ImageUrl => AppSettings.ApiUrl + Image;
+        public string ImageUrl => AppSettings.ImageUrl + Image;
     }
 }

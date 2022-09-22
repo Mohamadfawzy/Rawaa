@@ -16,34 +16,64 @@ namespace Rawaa.Services
     public class RequestProvider<T>
     {
 
-        private const string BaseUrl = "https://192.168.1.101:7128";
-
-        HttpClient client = new HttpClient
+        private const string BaseUrl = "http://192.168.1.101:5117";
+        HttpClientHandler httpClientHandler = new HttpClientHandler();
+        HttpClient client;
+        public RequestProvider()
         {
-            BaseAddress = new Uri(BaseUrl),
-            Timeout = TimeSpan.FromSeconds(20)
-        };
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
 
-        public async Task<IEnumerable<T>> GetListAsync(string uri = "", string token = "")
+            client = new HttpClient(httpClientHandler)
+            {
+                BaseAddress = new Uri(BaseUrl),
+                Timeout = new TimeSpan(0, 0, 20)
+            };
+        }
+
+        // post single 
+        public async Task<T> PostOneAsync<Take>(Take item, string uri, string token = "")
         {
-            //T result;
+            var valueReturned = default(T);// as ResponseResult<TResult>;
+
+            var json = JsonConvert.SerializeObject(item);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(uri, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                //valueReturned.Status = true;
+                var resJson = response.Content.ReadAsStringAsync().Result;
+                valueReturned = await Task.Run(() => JsonConvert.DeserializeObject<T>(resJson));
+
+                return valueReturned; // default(TResult);
+            }
+
+
+            return default(T);
+        }
+
+
+        // get list
+        public async Task<List<T>> GetListAsync(string uri = "", string token = "null")
+        {
             try
             {
-                var responseMessage = await client.GetAsync("api/FileUploads/bytImage?imageName=1");
+                var responseMessage = await client.GetAsync(uri);
                 if (responseMessage == null)
                     return null;
+
                 var content = await responseMessage.Content.ReadAsStringAsync();
-                var listFromT = JsonConvert.DeserializeObject<IEnumerable<T>>(content);
+                var listFromT = JsonConvert.DeserializeObject<List<T>>(content);
                 return await Task.FromResult(listFromT);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-            return await Task.FromResult(new List<T>()); // await Task.FromResult(default(TResult));
+            return await Task.FromResult(new List<T>());
         }
 
-        // Get by ID
+        // Get single  by ID
         public async Task<T> GetById(int id, string uri, string token = "")
         {
             try
@@ -58,6 +88,7 @@ namespace Rawaa.Services
                 throw;
             }
         }
+
 
         #region
         // get range

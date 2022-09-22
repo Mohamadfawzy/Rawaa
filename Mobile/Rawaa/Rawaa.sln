@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawaa.Android", "Rawaa\Rawa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawaa.iOS", "Rawaa\Rawaa.iOS\Rawaa.iOS.csproj", "{14CA6EA1-A13E-4B79-A783-30BE69A19A2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rawaa", "Rawaa\Rawaa\Rawaa.csproj", "{2DC99837-D0E2-451F-BACA-B1FED2920805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rawaa", "Rawaa\Rawaa\Rawaa.csproj", "{2DC99837-D0E2-451F-BACA-B1FED2920805}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

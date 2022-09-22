@@ -7,6 +7,7 @@
        xmlns:icon="clr-namespace:Rawaa.Fonts"
        xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
        FlowDirection="RightToLeft"
+       BackgroundColor="#2B388F"
        >
 
     <Shell.Resources>
@@ -96,7 +97,7 @@
                 <FontImageSource Glyph="{x:Static icon:IconFont.AccountOutline}"
                                  FontFamily="IconFont" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:AccountPage}" />
         </Tab>
 
         <Tab Title="{x:Static lang:LanguageResources.Shell_Title_Favorite}">

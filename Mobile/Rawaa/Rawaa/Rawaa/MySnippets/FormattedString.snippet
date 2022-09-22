@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Formatted String</Title>
+            <Author>Andreas Nesheim</Author>
+            <Description>Snippet for a FormattedString Label</Description>
+            <Shortcut>lablet</Shortcut>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal Editable="true">
+                    <ID>String1</ID>
+                    <ToolTip>Text for the first span</ToolTip>
+                    <Default>Red bold, </Default>
+                    <Function>
+                    </Function>
+                </Literal>
+                <Literal Editable="true">
+                    <ID>String2</ID>
+                    <ToolTip>Text for the second span</ToolTip>
+                    <Default>italic small.</Default>
+                    <Function>
+                    </Function>
+                </Literal>
+            </Declarations>
+            <Code Language="XAML">
+                <![CDATA[            <!-- -->
+            <Label Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                   FontFamily="CairoRequler" 
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
