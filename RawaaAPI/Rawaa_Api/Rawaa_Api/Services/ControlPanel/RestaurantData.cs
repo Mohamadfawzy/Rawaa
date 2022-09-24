@@ -48,9 +48,12 @@ namespace Rawaa_Api.Services.ControlPanel
             return null;
         }
 
-        public Restaurant Delete(int id)
+        public Restaurant? Delete(int id)
         {
-            return null;
+            var entity = context.Restaurants.AsNoTracking().SingleOrDefault(b => b.Id == id);
+            var result = context.Remove(entity);
+            context.SaveChanges();
+            return entity;
         }
        
         public List<Restaurant> Search(string searchString)

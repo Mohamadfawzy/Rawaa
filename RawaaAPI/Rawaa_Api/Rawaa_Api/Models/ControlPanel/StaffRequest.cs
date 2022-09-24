@@ -5,7 +5,7 @@ namespace Rawaa_Api.Models.ControlPanel
     public class StaffRequest
     {
         public int Id { get; set; }
-        public string FullName { get; set; } = null!;
+        public string? FullName { get; set; } = null!;
         public string UserName { get; set; } = null!;
         public string Password { get; set; } = null!;
         public DateTime? CreateOn { get; set; }

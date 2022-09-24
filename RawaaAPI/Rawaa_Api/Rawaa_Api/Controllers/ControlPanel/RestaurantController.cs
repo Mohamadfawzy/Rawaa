@@ -57,7 +57,8 @@ namespace Rawaa_Api.Controllers.ControlPanel
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, string lang)
         {
-            return Ok();
+            var result = data.Delete(id);
+            return Ok(result);
         }
     }
 }

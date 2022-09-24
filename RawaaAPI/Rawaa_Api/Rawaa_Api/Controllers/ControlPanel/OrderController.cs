@@ -18,9 +18,9 @@ namespace Rawaa_Api.Controllers.ControlPanel
 
         // get all order of user
         [HttpGet("totalPrice")]
-        public IActionResult GetAll()
+        public IActionResult GetTotalPrice()
         {
-            var result = data.List();
+            var result = data.TotalPrice();
             if (result == null)
             {
                 return NoContent();
@@ -28,8 +28,32 @@ namespace Rawaa_Api.Controllers.ControlPanel
             return Ok(result);
         }
 
-       
+        // list of orders has stats
+        [HttpGet("all")]
+        public IActionResult GetList(int state,int pageNumber=1, int pageSize=10, int day = 1)
+        {
+            var result = data.List(state, pageNumber,pageSize,day);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
 
+
+        // cancel order by user
+        [HttpPut()]
+        public IActionResult PutCancelOrder([FromBody] OrderStatusRequest state)
+        {
+            if (state.OrderStatus == 0 || state.OrderStatus > 5)
+            {
+                return BadRequest(new ErrorClass("400", "you must insert order status and between 1-5 "));
+            }
+            var result = data.UpdateOrder(state);
+            if (result != null)
+                return Ok(result);
+            return BadRequest(new ErrorClass("400", "check your password or user not found"));
+        }
 
     }
 }

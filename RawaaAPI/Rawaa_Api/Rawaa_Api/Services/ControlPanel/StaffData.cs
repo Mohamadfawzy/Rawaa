@@ -5,6 +5,7 @@ using Rawaa_Api.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Newtonsoft.Json;
+using Rawaa_Api.Helper;
 
 namespace Rawaa_Api.Services.ControlPanel
 {
@@ -28,8 +29,17 @@ namespace Rawaa_Api.Services.ControlPanel
             context.SaveChanges();
             return res;
         }
+        
+        // login
+        public Staff Login(StaffRequest model)
+        {
+           
+            var res = context.Staffs.Where(e => e.UserName == model.UserName && e.Password == model.Password).FirstOrDefault();
+            
+            return res;
+        }
 
-
+        // find
         public StaffRequest? Find(int? id)
         {
             //var staffInfo = new StaffRequest();
@@ -48,7 +58,7 @@ namespace Rawaa_Api.Services.ControlPanel
             return staffInfo;
         }
 
-
+        // list
         public List<Staff> List(string lang)
         {
             var entity = context.Staffs.ToList();
@@ -56,6 +66,7 @@ namespace Rawaa_Api.Services.ControlPanel
             return entity;
         }
 
+        // search
         public List<StaffRequest> Search(string searchString)
         {
             var staffs = (from s in context.Staffs
@@ -74,6 +85,8 @@ namespace Rawaa_Api.Services.ControlPanel
                           }).ToList();
             return staffs;
         }
+
+        // update 
         public StaffRequest? Update(int id, Staff model)
         {
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -90,8 +103,9 @@ namespace Rawaa_Api.Services.ControlPanel
             context.SaveChanges();
             //model = Find(id);
             StaffRequest? staffInfo = JsonConvert.DeserializeObject<StaffRequest>(JsonConvert.SerializeObject(entity));
-
-            return staffInfo;
+            
+            var afrer = Find(id);
+            return afrer;
 
         }
 
@@ -102,7 +116,7 @@ namespace Rawaa_Api.Services.ControlPanel
                 return null;
             if (entity.UserName == "admin")
                 return null;
-            var result = context.Remove(entity);
+            context.Remove(entity);
             context.SaveChanges();
 
             return entity;

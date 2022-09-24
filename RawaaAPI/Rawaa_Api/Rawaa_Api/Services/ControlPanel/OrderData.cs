@@ -66,7 +66,7 @@ namespace Rawaa_Api.Services.ControlPanel
             //order.OrderDetails = orderDetails;
         }
 
-        public Order? CancelOrder(OrderStatusRequest state)
+        public Order? UpdateOrder(OrderStatusRequest state)
         {
             var entity = context.Orders.Find(state.Id);
 
@@ -81,7 +81,7 @@ namespace Rawaa_Api.Services.ControlPanel
             return entity;
         }
         
-        public object List()
+        public object TotalPrice()
         {
             var dateCriteria = DateTime.Now.Date.AddDays(-1);
 
@@ -100,6 +100,18 @@ namespace Rawaa_Api.Services.ControlPanel
             return s;
         }
 
+
+        public List<Order> List(int state, int pageNumber = 1, int pageSize = 10,int day = 1)
+        {
+            var date = DateTime.Now.Date.AddDays(-day);
+            var list = context.Orders.Where(e => 
+                        e.OrderStatus == state && e.OrderDate >= date)
+                        .Skip((pageNumber -1) * pageSize)
+                        .Take(pageSize)
+                        .OrderByDescending(d=>d.OrderDate)
+                        .ToList();
+            return list;
+        }
         public object? OrderDetails(int? orderId, string lang)
         {
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;

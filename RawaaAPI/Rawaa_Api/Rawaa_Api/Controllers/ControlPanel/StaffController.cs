@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rawaa_Api.Helper;
+using Rawaa_Api.Models;
+using Rawaa_Api.Models.ControlPanel;
 using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Services.ControlPanel;
 
@@ -36,10 +38,32 @@ namespace Rawaa_Api.Controllers.ControlPanel
                 if(isValed)
                     return BadRequest(new ErrorClass("400", "user Name is exist please choose another userName"));
             }
+            if(staff.Jop== "admin")
+            {
+                return BadRequest(new ErrorClass("400", "can not add admin jop from web. we add admin from just database"));
+            }
             // add
             var result = data.Add(staff);
             return Created("", result);
         }
+
+        // login
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] StaffRequest model)
+        {
+            if (string.IsNullOrEmpty(model.UserName) || model.UserName.Contains(" "))
+            {
+                return BadRequest(new ErrorClass("400", "user Name is invalid"));
+            }
+            
+            var result = data.Login(model);
+            if (result == null)
+            {
+                return BadRequest(new ErrorClass("400", "Password or email is invalid"));
+            }
+            return Created("", result);
+        }
+        // id
         [HttpGet("{id}")]
         public IActionResult GetSingle(int id)
         {
@@ -76,6 +100,7 @@ namespace Rawaa_Api.Controllers.ControlPanel
             return Ok(result);
         }
 
+        // update 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Staff model)
         {
@@ -89,7 +114,7 @@ namespace Rawaa_Api.Controllers.ControlPanel
             var result = data.Delete(id);
             if(result!=null)
                 return Ok(result);
-            return NoContent();
+            return BadRequest(new ErrorClass("400", "can not delete admin or id not found"));
         }
     }
 }

@@ -64,6 +64,7 @@ namespace Rawaa_Api.Controllers.Client
             }
             return Created("", result);
         }
+        
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Customer user)
         {
@@ -93,6 +94,7 @@ namespace Rawaa_Api.Controllers.Client
                 return Ok(result);
             return BadRequest(new ErrorClass("400", "check your password or user not found"));
         }
+
 
         // end clint
 
