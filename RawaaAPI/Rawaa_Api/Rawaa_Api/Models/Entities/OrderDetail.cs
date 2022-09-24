@@ -24,7 +24,7 @@ namespace Rawaa_Api.Models.Entities
         public virtual Drink? Drink { get; set; }
         [JsonIgnore]
         public virtual Order? Order { get; set; } = null!;
-        [JsonIgnore]
+        [JsonIgnore (Condition = JsonIgnoreCondition.WhenWritingNull)]
         public virtual Product? Product { get; set; } = null!;
         [JsonIgnore]
         public virtual ICollection<MealExtra>? MealExtras { get; set; }

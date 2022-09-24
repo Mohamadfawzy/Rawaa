@@ -40,19 +40,59 @@ namespace Rawaa_Api.Controllers.ControlPanel
             return Ok(result);
         }
 
-
-        // cancel order by user
-        [HttpPut()]
-        public IActionResult PutCancelOrder([FromBody] OrderStatusRequest state)
+        // list of orders has stats
+        [HttpGet("allJoinUserData")]
+        public IActionResult GetListJoinUserData(int state, int pageNumber = 1, int pageSize = 10, int day = 1)
         {
-            if (state.OrderStatus == 0 || state.OrderStatus > 5)
+            var result = data.ListJoinUserData(state, pageNumber, pageSize, day);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+
+
+        // get order details with address
+        [HttpGet("orderDetail/{id}")]
+        public IActionResult GetOrderDetail(int id, string lang)
+        {
+            if (id < 1)
+                return BadRequest(new ErrorClass("400", "id is invalid"));
+            var res = data.OrderDetails(id, lang);
+            if (res == null)
+            {
+                return NoContent();
+            }
+            return Ok(res);
+        }
+
+        // get all products in the order by order id
+        [HttpGet("list-products/order/{id}")]
+        public IActionResult GetProductsInOrder(int id, string lang)
+        {
+            if (id < 1)
+                return BadRequest(new ErrorClass("400", "id is invalid"));
+            var res = data.ProductsInOrder(id, lang);
+            if (res == null)
+            {
+                return NoContent();
+            }
+            return Ok(res);
+        }
+
+        // change status in  order by statff
+        [HttpPut()]
+        public IActionResult PutCancelOrder([FromBody] OrderStatusRequest model)
+        {
+            if (model.OrderStatus == 0 || model.OrderStatus > 5)
             {
                 return BadRequest(new ErrorClass("400", "you must insert order status and between 1-5 "));
             }
-            var result = data.UpdateOrder(state);
+            var result = data.UpdateOrder(model);
             if (result != null)
                 return Ok(result);
-            return BadRequest(new ErrorClass("400", "check your password or user not found"));
+            return BadRequest(new ErrorClass("400", "not found by id"));
         }
 
     }

@@ -21,7 +21,8 @@ namespace Rawaa_Api.Models.Entities
         public DateTime? CreateOn { get; set; }
         public DateTime? UpdateOn { get; set; }
         public bool? EmailVerification { get; set; }
-        public string Password { get; set; } = null!;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Password { get; set; } = null!;
 
 
         [JsonIgnore]
