@@ -1,9 +1,12 @@
-﻿using Rawaa_Api.Models;
+﻿using Rawaa.Helper;
+using Rawaa_Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.CommunityToolkit.UI.Views.Options;
 using Xamarin.Essentials;
-
+using Xamarin.Forms;
+using Xamarin.CommunityToolkit.Extensions;
 namespace Rawaa
 {
     public static class AppSettings
@@ -12,6 +15,8 @@ namespace Rawaa
         public const string ApiUrl = "http://192.168.1.101:5117";
         public const string ImageUrl = ApiUrl + "/api/file/";
         public static int countOfCart = 0;
+        public static string currentLang = LocalizationResourceManager.storedLanguageName;
+
         public static string UserId
         {
             get => Preferences.Get("userId", "0");
@@ -24,6 +29,22 @@ namespace Rawaa
             set => Preferences.Set("fullName", value);
         }
 
+        public static async void Alert(string massege)
+        {
+            var op = new ToastOptions()
+            {
+                BackgroundColor = Color.Black,
+                MessageOptions = new MessageOptions
+                {
+                    Message = massege,
+                },
+                CornerRadius = 10,
+                Duration = TimeSpan.FromSeconds(6),
+            };
+
+            await Shell.Current.DisplayToastAsync(op);
+            Console.WriteLine("\n\n\n\n massege is: "+massege);
+        }
 
     }
 }

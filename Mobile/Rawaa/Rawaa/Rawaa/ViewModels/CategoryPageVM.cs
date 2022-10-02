@@ -1,7 +1,10 @@
 ﻿using Rawaa.Models;
+using Rawaa.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,6 +13,11 @@ namespace Rawaa.ViewModels
     public  class CategoryPageVM : BaseViewModel
     {
         Category selectedCategory = new Category();
+        
+        
+        public RequestProvider<Category> requestProvider = new RequestProvider<Category>();
+        public List<Category> FoodMenu { get; set; }
+
         public Category SelectedCategory
         {
             get {return selectedCategory;}
@@ -34,11 +42,15 @@ namespace Rawaa.ViewModels
         // Command 
         public ICommand SelectedCategoryCommand => new Command<Category>(SelectedCategoryExecute);
         public  List<Category> Categories { get; set; }
+        public static Category StaticSelectedCategory;
         public CategoryPageVM()
         {
+            FoodMenu = new List<Category>();
             Categories = new List<Category>();
+            StaticSelectedCategory = new Category();
             RefreshCountBasket();
             Categories = categories;
+            Task.Run(() => FetchCategory());
         }
 
 
@@ -46,8 +58,17 @@ namespace Rawaa.ViewModels
         private async void SelectedCategoryExecute(Category item)
         {
             if (SelectedCategory == null) return;
-            await Shell.Current.GoToAsync($"ProductsPage?category={item.Id}");
+            StaticSelectedCategory = selectedCategory;
+            await Shell.Current.GoToAsync($"ProductsPage");
             SelectedCategory = null;
+        }
+
+        // Categoreis
+        private async Task FetchCategory()
+        {
+            var list = await requestProvider.GetListAsync($"{AppSettings.currentLang}/api/client/Category/all");
+            FoodMenu = list.ToList();
+            OnPropertyChanged("FoodMenu");
         }
 
     }

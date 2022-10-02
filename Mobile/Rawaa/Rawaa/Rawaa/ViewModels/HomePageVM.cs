@@ -20,8 +20,8 @@ namespace Rawaa.ViewModels
         public int SliderPosition { get; set; }
 
 
-        public IDataStore<AdsM> requestProvider = new AdData();
-        public RequestProvider<Category> requestProviderr = new RequestProvider<Category>();
+        
+        public RequestProvider<Category> requestProvider = new RequestProvider<Category>();
         public List<AdsM> Sliders { get; set; }
         public List<Category> FoodMenu { get; set; }
         public List<Product> MostPopularMeals { get; set; }
@@ -39,6 +39,7 @@ namespace Rawaa.ViewModels
 
         public HomePageVM()
         {
+            FoodMenu = new List<Category>();
             RefreshCountBasket();
             Task.Run(()=>FetchAds());
             Task.Run(() => FetchCategory());
@@ -63,16 +64,16 @@ namespace Rawaa.ViewModels
         }
 
         // tip return task for exeptions
-        private async Task ss2()
-        {
-            var result = await requestProvider.GetItemsAsync(true);
-            var cl1 = new AdsM() { Image = result.FirstOrDefault().Image };
-            var cl2 = new AdsM() { Image = result.FirstOrDefault().Image };
-            var cl3 = result.FirstOrDefault();
-            Sliders = new List<AdsM>() { cl1, cl2, cl3 };
-            SetSliderPosition(3);
-            OnPropertyChanged("Sliders");
-        }
+        //private async Task ss2()
+        //{
+        //    var result = await requestProvider.GetItemsAsync(true);
+        //    var cl1 = new AdsM() { Image = result.FirstOrDefault().Image };
+        //    var cl2 = new AdsM() { Image = result.FirstOrDefault().Image };
+        //    var cl3 = result.FirstOrDefault();
+        //    Sliders = new List<AdsM>() { cl1, cl2, cl3 };
+        //    SetSliderPosition(3);
+        //    OnPropertyChanged("Sliders");
+        //}
 
 
 
@@ -108,7 +109,7 @@ namespace Rawaa.ViewModels
                 new Category { Image = "m3.jpg", Title= "الصنف" }, new Category { Image = "m2.jpg" , Title= "الصنف"}, new Category { Image = "m1.jpg" , Title= "الصنف"}, 
 
             };
-            var list = requestProviderr.GetListAsync("ar/api/client/Category/all");
+            var list = requestProvider.GetListAsync($"{AppSettings.currentLang}/api/client/Category/all");
             FoodMenu = list.Result.ToList();
             OnPropertyChanged("FoodMenu");
         }  

@@ -2,6 +2,7 @@
 using Rawaa_Api.Models.Entities;
 using Rawaa_Api.Models;
 using Rawaa_Api.Services.Client;
+using System.Linq.Expressions;
 
 // cp
 namespace Rawaa_Api.Services.ControlPanel
@@ -80,6 +81,7 @@ namespace Rawaa_Api.Services.ControlPanel
                           {
                               Id = o.Id,
                               OrderNumber = o.OrderNumber,
+                              Total = o.Total,
                               OrderStatus = o.OrderStatus,
                               PymentMethod = o.PymentMethod,
                               DeliveryFee = o.DeliveryFee,
@@ -174,25 +176,28 @@ namespace Rawaa_Api.Services.ControlPanel
             return orderDetails;
         }
 
-        public object? ProductsInOrder(int? orderId, string lang)
+        public async Task<int>? NumberOfOrders(int day = 1, int state =1)
         {
-            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var date = DateTime.Now.Date.AddDays(-day);
+            //if (state == 6)
+            //    return;
 
-            var orderDetail = (from od in context.OrderDetails
-                               join p in context.Products on od.ProductId equals p.Id
-                               join t in context.ProductTitleTranslations on p.Id equals t.ProductId
-                               join l in context.LanguageNames on t.LanguageId equals l.Id
-                               where l.Name == lang
-                               where od.OrderId == orderId
-                               select new
-                               {
-                                   Title = t.Title,
-                                   Image = p.Image,
-                                   ProductPrice = od.ProductPrice,
-                                   Quantity = od.Quantity,
-                                   Size = od.Size
-                               }).ToList();
-            return orderDetail;
+            var o = new Order();
+            Expression<Func<Order, bool>> Is42s = (v) => v.OrderDate >=date;
+
+            var numberOfOrders = await context.Orders.CountAsync(Is42s);
+            return numberOfOrders;
+        }
+
+       
+
+
+
+        public async Task<int>? Aggregation(int day = 1)
+        {
+            var date = DateTime.Now.Date.AddDays(-day);
+            var numberOfOrders = await context.Orders.CountAsync(c => c.OrderDate == date);
+            return numberOfOrders;
         }
     }
 }

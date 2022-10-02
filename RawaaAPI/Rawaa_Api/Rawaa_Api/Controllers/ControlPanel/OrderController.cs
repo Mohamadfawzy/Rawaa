@@ -67,17 +67,16 @@ namespace Rawaa_Api.Controllers.ControlPanel
             return Ok(res);
         }
 
-        // get all products in the order by order id
-        [HttpGet("list-products/order/{id}")]
-        public IActionResult GetProductsInOrder(int id, string lang)
+
+        [HttpGet("numberOfOrders")]
+        public  IActionResult NumberOfOrders(int day = 1)
         {
-            if (id < 1)
-                return BadRequest(new ErrorClass("400", "id is invalid"));
-            var res = data.ProductsInOrder(id, lang);
-            if (res == null)
+            var result = data.NumberOfOrders(day)?.Result;
+            if (result == null)
             {
                 return NoContent();
             }
+            var res = new { count = result };
             return Ok(res);
         }
 
@@ -94,6 +93,7 @@ namespace Rawaa_Api.Controllers.ControlPanel
                 return Ok(result);
             return BadRequest(new ErrorClass("400", "not found by id"));
         }
+
 
     }
 }

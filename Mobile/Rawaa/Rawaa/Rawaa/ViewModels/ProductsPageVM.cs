@@ -1,12 +1,17 @@
 ﻿using Rawaa.Models;
+using Rawaa.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Rawaa.ViewModels
 {
     public class ProductsPageVM : BaseViewModel
     {
+        
+        public RequestProvider<Product> requestProvider = new RequestProvider<Product>();
         List<Product> produts = new List<Product>()
         {
            new Product { Image = "m2.jpg", Calories = 1234, Title = "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا ", SmallSizePrice = 21.50 },
@@ -23,7 +28,22 @@ namespace Rawaa.ViewModels
         public ProductsPageVM()
         {
             RefreshCountBasket();
-            Produts = produts;
+            Task.Run(() => FetchProducts(CategoryPageVM.StaticSelectedCategory.Id));
+            //Produts = produts;
+
+        }
+        public static Product StaticSelectedProduct;
+
+        // productes
+        public async void FetchProducts(int id)
+        {
+
+                //await Task.Delay(0);
+                StaticSelectedProduct = new Product();
+                var list = await requestProvider.GetListAsync($"{AppSettings.currentLang}/api/client/Product/all/{id}");
+                Produts = list.ToList();
+                OnPropertyChanged("Produts");
+
         }
     }
 }

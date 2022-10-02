@@ -16,7 +16,7 @@ namespace Rawaa.Models
         public int? CategoryId { get; set; }
 
         [JsonIgnore]
-        public string ImageUrl => AppSettings.ApiUrl + Image;
+        public string ImageUrl => AppSettings.ImageUrl + Image;
 
 
     }

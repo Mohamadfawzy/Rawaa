@@ -123,7 +123,7 @@
                          BackgroundColor="{StaticResource white}"
                          Spacing="0">
                 <CollectionView x:Name="CVMenus"
-                                ItemsSource="{Binding Categories}"
+                                ItemsSource="{Binding FoodMenu}"
                                 HorizontalOptions="CenterAndExpand"
                                 VerticalOptions="Center"
                                 SelectionMode="Single"
@@ -138,6 +138,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Padding="7,10"
+                                         BackgroundColor="WhiteSmoke"
                                          VerticalOptions="CenterAndExpand">
                                 <frame:PancakeView CornerRadius="10"
                                                    Padding="0"

@@ -44,6 +44,12 @@
 -->
 
             <Color x:Key="Primary">#2B388F</Color>
+            <Style TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="{StaticResource blueDark}" />
+                <Setter Property="FontFamily"
+                        Value="CairoRequler" />
+            </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">

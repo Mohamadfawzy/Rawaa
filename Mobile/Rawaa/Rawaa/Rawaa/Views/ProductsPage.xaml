@@ -130,17 +130,21 @@
                 <CollectionView ItemsSource="{Binding  Produts}"
                                 Margin="0,0"
                                 x:Name="MealsCV"
-                                BackgroundColor="Transparent">
+                                BackgroundColor="Transparent"
+                                SelectionMode="Single"
+                                SelectionChanged="MealsCV_SelectionChanged">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                          SnapPointsAlignment="Center" 
                                          Span="2"/>
                     </CollectionView.ItemsLayout>
+                    
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid VerticalOptions="Fill"
                                   RowSpacing="1"
                                   BackgroundColor="Transparent">
+                                
                                 <frame:PancakeView Margin="8,5"
                                                    CornerRadius="10"
                                                    Padding="0"
@@ -150,6 +154,7 @@
                                     <StackLayout Spacing="5"
                                                  HorizontalOptions="FillAndExpand"
                                                  BackgroundColor="MintCream">
+                                        
                                         <image:CachedImage Source="{Binding ImageUrl}"
                                                            HorizontalOptions="Fill"
                                                            Aspect="AspectFill"
