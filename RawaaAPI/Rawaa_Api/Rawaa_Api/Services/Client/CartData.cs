@@ -25,7 +25,6 @@ namespace Rawaa_Api.Services.Client
             {
                 res = context.Update(model).Entity;
                 context.Entry(model).Property(e => e.CreateOn).IsModified = false;
-
             }
             else
             {
@@ -49,6 +48,8 @@ namespace Rawaa_Api.Services.Client
             var entity = context.Carts.Where(e => e.CustomerId == userId).ToList();
 
             var products = (from c in context.Carts
+                            join u in context.Customers on c.CustomerId equals u.Id
+                            where c.CustomerId == userId
                             join p in context.Products on c.ProductId equals p.Id
                             join t in context.ProductTitleTranslations on p.Id equals t.ProductId
                             join l in context.LanguageNames on t.LanguageId equals l.Id
@@ -85,12 +86,16 @@ namespace Rawaa_Api.Services.Client
             var entity = context.Carts.Where(e =>
                          e.CustomerId == userId &&
                          e.ProductId == productId).FirstOrDefault();
-            if(entity != null)
-            {
-                context.Remove(entity);
-                return true;
-            }
-            return false;
+            if (entity == null)
+                return false;
+
+            context.Carts.Remove(entity);
+            context.SaveChanges();
+
+            var res = context.Carts.Where(e =>
+                        e.CustomerId == userId &&
+                        e.ProductId == productId).Any();
+            return !res;
         }
     }
 }

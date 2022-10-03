@@ -107,7 +107,7 @@
 
             </frame:PancakeView>
 
-            <!-- Collection of MostPopularMeals -->
+            <!-- Collection of  -->
             <CollectionView ItemsSource="{Binding ListOfProducts}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical"

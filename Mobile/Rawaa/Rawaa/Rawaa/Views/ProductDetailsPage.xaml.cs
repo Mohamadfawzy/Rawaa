@@ -17,6 +17,7 @@ namespace Rawaa.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetailsPage : ContentPage
     {
+        ProductDetailsPageVM vm;
         public Product SelectedProduct
         {
             set
@@ -28,27 +29,28 @@ namespace Rawaa.Views
         public ProductDetailsPage()
         {
             InitializeComponent();
+            vm = (BindingContext as ProductDetailsPageVM);
             previousFrame = smallFrame;
             previousLable = smallLable;
 
             previousFrameTeste = frameTesteNormal;
             previousLableTeste = labelTesteNormal;
             previousLableCheckbox = labelTesteCheckbox;
-
         }
 
         void Load(Product product)
         {
             (BindingContext as ProductDetailsPageVM).Meal = product;
-
         }
+
+        // size section
         PancakeView previousFrame = new PancakeView();
         Label previousLable = new Label();
-        private void small_Tapped(object sender, EventArgs e)
+        private void Size_Tapped(object sender, EventArgs e)
         {
             var frame = (PancakeView)sender;
             var gester = (TapGestureRecognizer)frame.GestureRecognizers.FirstOrDefault();
-            var name = gester.CommandParameter.ToString();
+            var sizeName = gester.CommandParameter.ToString();
             var label = frame.Content as Label;
 
             previousFrame.Style = (Style)Resources["deselectedFrame"];
@@ -58,22 +60,28 @@ namespace Rawaa.Views
             label.Style = (Style)Resources["selectedLabel"];
 
 
-            switch (name)
+            switch (sizeName)
             {
                 case "small":
-
+                    vm.SelectedSizePrice = vm.Meal.SmallSizePrice;
+                    break;
+                case "medium":
+                    vm.SelectedSizePrice = (double)vm.Meal.MediumSizePrice;
+                    break;
+                case "larg":
+                    vm.SelectedSizePrice = (double)vm.Meal.BigSizePrice;
                     break;
             }
             previousFrame = frame;
             previousLable = frame.Content as Label;
             //AppSettings.Alert(name);
+            vm.CalculatePrice();
         }
 
-
+        // Teste section
         PancakeView previousFrameTeste = new PancakeView();
         Label previousLableTeste = new Label();
         Label previousLableCheckbox = new Label();
-
         private void Teste_Tapped(object sender, EventArgs e)
         {
             var frame = (PancakeView)sender;
@@ -98,32 +106,47 @@ namespace Rawaa.Views
             //AppSettings.Alert(name);
         }
 
+        // drink section
         PancakeView previousFrameDrink = new PancakeView();
         private void Drink_Tapped(object sender, EventArgs e)
         {
             var frame = (PancakeView)sender;
             var gester = (TapGestureRecognizer)frame.GestureRecognizers.FirstOrDefault();
             var name = gester.CommandParameter;
-            
+
             previousFrameDrink.Opacity = 0.7;
             previousFrameDrink.Border = new Border() { Color = Color.Gray, Thickness = 1 };
             previousFrameDrink.Scale = 1;
-            
+
 
             frame.Opacity = 1;
-            frame.Border = new Border() { Color = Color.FromHex("#F6B21B"), Thickness = 4};
+            frame.Border = new Border() { Color = Color.FromHex("#F6B21B"), Thickness = 4 };
             frame.Scale = 1.08;
             previousFrameDrink = frame;
         }
 
+        // quantity section
+        int quantity = 0;
+        int _price = 0;
         private void Plus_Tapped(object sender, EventArgs e)
         {
-
+            var puls = sender as Label;
+            int.TryParse(labelQuantity.Text, out quantity);
+            quantity++;
+            labelQuantity.Text = quantity.ToString();
+            int.TryParse(price.Text, out _price);
+            price.Text = (_price += _price).ToString();
         }
 
         private void Minus_Tapped(object sender, EventArgs e)
         {
-
+            int.TryParse(labelQuantity.Text, out quantity);
+            if (quantity < 1)
+                return;
+            quantity--;
+            labelQuantity.Text = quantity.ToString();
+            int.TryParse(price.Text, out _price);
+            price.Text = (_price -= _price).ToString();
         }
     }
 }

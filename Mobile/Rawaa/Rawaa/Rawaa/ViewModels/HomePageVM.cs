@@ -202,3 +202,13 @@ namespace Rawaa.ViewModels
 private readonly IDataStore<AdsM> requestProvider;
 requestProvider = DependencyService.Get<IDataStore<AdsM>>();
  */
+/*
+ Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+{
+    Device.BeginInvokeOnMainThread (() => 
+    {
+      ItemCount++;
+    });
+    return true;
+}
+ */

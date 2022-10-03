@@ -84,7 +84,7 @@ namespace Rawaa.ViewModels
         // Execute Methodes -----------------------------------
         protected void GoToBasketPage()
         {
-            Shell.Current.GoToAsync("SettingPage");
+            Shell.Current.GoToAsync("CartPage");
         }
         protected void GoToSearchtPage()
         {

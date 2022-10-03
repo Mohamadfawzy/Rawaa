@@ -10,9 +10,11 @@
              xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{StaticResource white}"
              x:Name="page">
+    
     <ContentPage.BindingContext>
         <vm:ProductDetailsPageVM />
     </ContentPage.BindingContext>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
 
@@ -54,13 +56,18 @@
 
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="ProductDetailsPage" />
+            <Label Text="ProductDetailsPage"
+                   FontSize="Medium"
+                   TextColor="{StaticResource white}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand"/>
             <!-- Cart Icon -->
             <AbsoluteLayout HeightRequest="36"
                             WidthRequest="36"
+                            Margin="20,0"
                             HorizontalOptions="Start"
                             VerticalOptions="Center"
                             FlowDirection="LeftToRight">
@@ -102,11 +109,16 @@
             </AbsoluteLayout>
         </StackLayout>
     </Shell.TitleView>
+    
     <ContentPage.Content>
         <StackLayout Spacing="0">
+            
+            <!-- content section -->            
             <ScrollView>
                 <StackLayout Margin="10,0"
                              Spacing="20">
+                    
+                    <!-- Image & heart icon -->
                     <Grid>
                         <image:CachedImage Source="{Binding Meal.ImageUrl}"
                                            HeightRequest="300"
@@ -117,8 +129,9 @@
                                Margin="10"
                                HorizontalOptions="End" />
                     </Grid>
+                    
+                    <!-- Quantity plus & Minus-->
                     <StackLayout>
-
                         <frame:PancakeView BackgroundColor="{StaticResource whiteSmoke}"
                                            Shadow="{frame:ShadowMarkup Color=Gray, BlurRadius=10 ,Offset='10,10'}"
                                            CornerRadius="30"
@@ -134,12 +147,12 @@
                                        Margin="10"
                                        HorizontalOptions="End">
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Plus_Tapped" />
+                                        <TapGestureRecognizer Command="{Binding Plus_Command}" />
                                     </Label.GestureRecognizers>
                                 </Label>
 
                                 <Label x:Name="labelQuantity"
-                                       Text="10"
+                                       Text="{Binding Quantity}"
                                        FontSize="16"
                                        TextColor="{StaticResource blueDark}"
                                        VerticalOptions="Center"
@@ -151,15 +164,19 @@
                                        Margin="10"
                                        HorizontalOptions="Start">
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Minus_Tapped" />
+                                        <TapGestureRecognizer Command="{Binding Minus_Command}"
+                                                              />
                                     </Label.GestureRecognizers>
                                 </Label>
 
                             </StackLayout>
                         </frame:PancakeView>
                     </StackLayout>
+                    
+                    <!-- description part -->
                     <StackLayout>
-
+                        
+                        <!-- title-->
                         <Label Text="{Binding Meal.Title}"
                                FontSize="Title"
                                TextColor="{StaticResource blueRegular}" />
@@ -184,7 +201,8 @@
                         <!-- price pefore descount -->
                         <StackLayout Orientation="Horizontal"
                                      VerticalOptions="Center"
-                                     Spacing="-10">
+                                     Spacing="-10"
+                                     IsVisible="false">
                             <Label Text="{Binding Meal.SmallSizePrice}"
                                    FontSize="16"
                                    TextDecorations="Strikethrough"
@@ -211,12 +229,25 @@
                                    VerticalOptions="Center"
                                    FontFamily="CairoRegular" />
                         </StackLayout>
-
-                        <!-- size -->
-                        <Label Text="اختر الحجم"
-                               Margin="0,30,0,0"
-                               FontSize="Medium" />
-                        <frame:PancakeView x:Name="sizeFrame"
+                        
+                        <!-- size section -->
+                        <StackLayout Spacing="0">
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout"
+                                             Binding="{Binding Meal.MediumSizePrice}"
+                                             Value="0">
+                                    <Setter Property="IsVisible"
+                                            Value="False" />
+                                    <!-- multiple Setters elements are allowed -->
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+                            <!-- size label -->
+                            <Label Text="اختر الحجم"
+                                   Margin="0,30,0,0"
+                                   FontSize="Medium" />
+                            
+                            <!-- -->
+                            <frame:PancakeView x:Name="sizeFrame"
                                            Shadow="{frame:ShadowMarkup Color=Red, BlurRadius=2 ,Offset='10,10'}"
                                            Margin="15,5"
                                            BackgroundColor="{StaticResource whiteSmoke}"
@@ -232,7 +263,7 @@
                                            Text="صغير"
                                            Style="{DynamicResource selectedLabel}" />
                                     <frame:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="small_Tapped"
+                                        <TapGestureRecognizer Tapped="Size_Tapped"
                                                               CommandParameter="small" />
                                     </frame:PancakeView.GestureRecognizers>
                                 </frame:PancakeView>
@@ -244,7 +275,7 @@
                                            Text="وسط"
                                            Style="{DynamicResource deselectedLabel}" />
                                     <frame:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="small_Tapped"
+                                        <TapGestureRecognizer Tapped="Size_Tapped"
                                                               CommandParameter="medium" />
                                     </frame:PancakeView.GestureRecognizers>
                                 </frame:PancakeView>
@@ -255,7 +286,7 @@
                                            Text="كبير"
                                            Style="{DynamicResource deselectedLabel}" />
                                     <frame:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="small_Tapped"
+                                        <TapGestureRecognizer Tapped="Size_Tapped"
                                                               CommandParameter="larg" />
                                     </frame:PancakeView.GestureRecognizers>
                                 </frame:PancakeView>
@@ -263,21 +294,22 @@
                             </StackLayout>
 
                         </frame:PancakeView>
+                        </StackLayout>
 
-                        <!-- teste -->
+                        <!-- chose teste lable -->
                         <Label Text="اختر المذاق"
                                Margin="0,30,0,0"
                                FontSize="Medium" />
 
                         <!-- Teste section -->
-                        <StackLayout>
+                        <StackLayout Margin="15,5">
 
                             <!-- Normal -->
                             <frame:PancakeView CornerRadius="30"
                                                x:Name="frameTesteNormal"
                                                HeightRequest="30"
                                                Style="{DynamicResource selectedFrame}"
-                                               Border="{frame:BorderMarkup Color={StaticResource blueRegular} , Thickness=1}">
+                                               Shadow="{frame:ShadowMarkup  BlurRadius=3}">
                                 <StackLayout Orientation="Horizontal">
                                     <Label x:Name="labelTesteNormal"
                                            Text="عادي"
@@ -300,7 +332,7 @@
                             <frame:PancakeView CornerRadius="30"
                                                HeightRequest="30"
                                                Style="{DynamicResource deselectedFrame}"
-                                               Border="{frame:BorderMarkup Color={StaticResource blueRegular} , Thickness=1}">
+                                               Shadow="{frame:ShadowMarkup  BlurRadius=3}">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="حار"
                                            HorizontalOptions="StartAndExpand"
@@ -370,10 +402,10 @@
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
-
+            
+            <!-- fixed section -->
             <StackLayout Orientation="Horizontal"
                          Padding="0"
-                         
                          Spacing="0">
 
                 <!-- button add to cart -->
@@ -382,32 +414,37 @@
                         CornerRadius="2"
                         HeightRequest="45"
                         VerticalOptions="Center"
-                        BackgroundColor="{StaticResource yellowDark}"
-                        TextColor="{StaticResource blueDark}"
+                        BackgroundColor="{StaticResource blueRegular}"
+                        TextColor="{StaticResource white}"
                         FontFamily="CairoBold"
-                        Command="{Binding BindingContext.AddProductToBasket, Source={x:Reference Name=page}}"
-                        CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                        Command="{Binding AddProductToBasket}"
+                        CommandParameter="{Binding Meal}"
                         HorizontalOptions="FillAndExpand" />
+                
                 <!-- total price -->
                 <StackLayout Orientation="Horizontal"
                              Margin="15,0"
                              VerticalOptions="Center"
+                             WidthRequest="110"
                              Spacing="0">
-                    <Label Text="{Binding Meal.SmallSizePrice}"
+                    <Label Text="{Binding Price}"
+                           x:Name="price"
                            FontSize="20"
                            TextColor="{StaticResource blueDark}"
                            VerticalOptions="Center"
+                           HorizontalOptions="CenterAndExpand"
                            FontFamily="CairoBold" />
                     <Label Text="ج.م"
                            FontSize="16"
                            Margin="10,0"
                            TextColor="{StaticResource blueDark}"
                            VerticalOptions="Center"
+                           HorizontalOptions="Start"
                            FontFamily="CairoBold" />
                 </StackLayout>
             </StackLayout>
 
         </StackLayout>
-
     </ContentPage.Content>
+    
 </ContentPage>
