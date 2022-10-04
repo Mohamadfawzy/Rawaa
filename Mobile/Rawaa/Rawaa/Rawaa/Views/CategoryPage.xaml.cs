@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rawaa.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,16 @@ namespace Rawaa.Views
         public CategoryPage()
         {
             InitializeComponent();
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (BindingContext as CategoryPageVM).RefreshCountBasket();
         }
     }
 }

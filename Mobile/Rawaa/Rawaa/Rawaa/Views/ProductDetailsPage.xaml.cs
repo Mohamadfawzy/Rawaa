@@ -59,23 +59,26 @@ namespace Rawaa.Views
             frame.Style = (Style)Resources["selectedFrame"];
             label.Style = (Style)Resources["selectedLabel"];
 
-
+            byte size = 1;
             switch (sizeName)
             {
                 case "small":
                     vm.SelectedSizePrice = vm.Meal.SmallSizePrice;
                     break;
                 case "medium":
-                    vm.SelectedSizePrice = (double)vm.Meal.MediumSizePrice;
+                    size = 2;
+                    vm.SelectedSizePrice = vm.Meal.MediumSizePrice;
                     break;
                 case "larg":
-                    vm.SelectedSizePrice = (double)vm.Meal.BigSizePrice;
+                    size = 2;
+                    vm.SelectedSizePrice = vm.Meal.BigSizePrice;
                     break;
             }
             previousFrame = frame;
             previousLable = frame.Content as Label;
             //AppSettings.Alert(name);
             vm.CalculatePrice();
+            vm.CartOption.Size = size;
         }
 
         // Teste section
@@ -103,6 +106,7 @@ namespace Rawaa.Views
             previousLableTeste = label1;
             previousLableCheckbox = label2;
 
+            vm.CartOption.Taste = Convert.ToByte(name);
             //AppSettings.Alert(name);
         }
 

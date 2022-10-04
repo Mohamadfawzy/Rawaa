@@ -7,6 +7,8 @@ using Xamarin.CommunityToolkit.UI.Views.Options;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.CommunityToolkit.Extensions;
+using System.Threading.Tasks;
+
 namespace Rawaa
 {
     public static class AppSettings
@@ -22,6 +24,11 @@ namespace Rawaa
             get => Preferences.Get("userId", "0");
             set => Preferences.Set("userId", value);
         }
+        public static string AddressId
+        {
+            get => Preferences.Get("addressId", "0");
+            set => Preferences.Set("addressId", value);
+        }
 
         public static string FullName
         {
@@ -29,7 +36,7 @@ namespace Rawaa
             set => Preferences.Set("fullName", value);
         }
 
-        public static async void Alert(string massege)
+        public static async Task Alert(string massege,int seconds=5)
         {
             var op = new ToastOptions()
             {
@@ -39,11 +46,16 @@ namespace Rawaa
                     Message = massege,
                 },
                 CornerRadius = 10,
-                Duration = TimeSpan.FromSeconds(6),
+                Duration = TimeSpan.FromSeconds(seconds),
             };
 
             await Shell.Current.DisplayToastAsync(op);
             Console.WriteLine("\n\n\n\n massege is: "+massege);
+        }
+
+        public static void RefreshCountBasket()
+        {
+
         }
 
     }

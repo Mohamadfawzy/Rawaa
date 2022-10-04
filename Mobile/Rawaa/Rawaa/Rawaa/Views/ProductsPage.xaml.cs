@@ -45,7 +45,8 @@ namespace Rawaa.Views
             try
             {
                 var item =e.CurrentSelection.FirstOrDefault() as Product;
-                ProductsPageVM.StaticSelectedProduct = item;
+                //ProductsPageVM.StaticSelectedProduct = item;
+                ProductDetailsPageVM.Initializer(item);
                 await Shell.Current.GoToAsync($"ProductDetailsPage");
 
             }

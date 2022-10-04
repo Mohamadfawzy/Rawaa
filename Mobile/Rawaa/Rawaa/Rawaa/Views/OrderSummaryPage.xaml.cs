@@ -1,7 +1,5 @@
-﻿using Rawaa.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,15 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Rawaa.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CartPage : ContentPage
+    public partial class OrderSummaryPage : ContentPage
     {
-        CartPageVM vm;
-        public CartPage()
+        public OrderSummaryPage()
         {
             InitializeComponent();
-            vm = BindingContext as CartPageVM;
         }
-
-        
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,6 +17,7 @@ namespace Rawaa.ViewModels
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
         bool isBusy = false;
+        [JsonIgnore]
         public bool IsBusy
         {
             get { return isBusy; }
@@ -23,6 +25,7 @@ namespace Rawaa.ViewModels
         }
 
         string title = string.Empty;
+        [JsonIgnore]
         public string Title
         {
             get { return title; }
@@ -30,6 +33,7 @@ namespace Rawaa.ViewModels
         }
 
         string cartIcon = Fonts.IconFont.Cart;
+        [JsonIgnore]
         public string CartIcon
         {
             get { return cartIcon; }
@@ -38,29 +42,21 @@ namespace Rawaa.ViewModels
 
 
         // Cart visible
-        public bool countBasketVisible = false;
+        bool countBasketVisible = false;
+        [JsonIgnore]
         public bool CountBasketVisible
         {
-            get => countBasketVisible;
-            set
-            {
-                if (countBasketVisible == value) return;
-                countBasketVisible = value;
-                OnPropertyChanged(nameof(CountBasketVisible));
-            }
+            get { return countBasketVisible; }
+            set { SetProperty(ref countBasketVisible, value); }
         }
 
         // Cart count
-        public string countBasket = "";
-        public string CountBasket
+        int countBasket =0;
+        [JsonIgnore]
+        public int CountBasket
         {
-            get => countBasket;
-            set
-            {
-                if (countBasket == value) return;
-                countBasket = value;
-                OnPropertyChanged(nameof(CountBasket));
-            }
+            get { return countBasket; }
+            set { SetProperty(ref countBasket, value); }
         }
 
         FlowDirection currentFlowDirection = FlowDirection.RightToLeft;
@@ -90,18 +86,14 @@ namespace Rawaa.ViewModels
         {
             Shell.Current.GoToAsync("SearchPage", false);
         }
-        int add = 0;
-        protected void ExceuteAddProductToBasket(Product product)
+        
+        public async void ExceuteAddProductToBasket(Product product)
         {
-            //if (product != null)
-            //{
-            //    int.TryParse(CountBasket, out int result);
-            //    CountBasket = result++.ToString();
-            //}
+            var r = await RequestServices.PostProductToCart(product);
             AppSettings.countOfCart++;
             RefreshCountBasket();
         }
-        protected void RefreshCountBasket()
+        public void RefreshCountBasket()
         {
             Task.Run(() =>
             {
@@ -111,7 +103,7 @@ namespace Rawaa.ViewModels
                 {
                     if (item > 0)
                     {
-                        CountBasket = AppSettings.countOfCart.ToString();
+                        CountBasket = AppSettings.countOfCart;
                         CountBasketVisible = true;
                     }
                     else

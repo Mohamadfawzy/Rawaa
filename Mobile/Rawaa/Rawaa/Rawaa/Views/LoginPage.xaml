@@ -10,6 +10,7 @@
              xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{StaticResource white}"
              Shell.NavBarIsVisible="False"
+             Title="{x:Static lang:LanguageResources.loginPage_title}"
              x:Name="page">
     <ContentPage.Content>
         <StackLayout Spacing="30"

@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.AllDeliveryAddressPage"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="True"
+             x:Name="page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="12" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:AllDeliveryAddressPageVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsBusy}"
+                     RefreshColor="{StaticResource yellowDark}">
+            <StackLayout Margin="0,20">
+                <!-- Collection -->
+                <CollectionView ItemsSource="{Binding ListAddress }"
+                                x:Name="cvAddrss"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding SelectedItemCommand}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvAddrss}}"
+                                SelectedItem="{Binding SelectedCartItem }"
+                                Margin="10,0">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <frame:PancakeView CornerRadius="15"
+                                               BackgroundColor="White"
+                                               Padding="10"
+                                               Border="{frame:BorderMarkup Thickness=2,Color=LightGray}">
+                                <StackLayout VerticalOptions="Fill">
+                                    <!-- row 1 -->
+                                    <StackLayout>
+                                        <!-- -->
+                                        <Label Text="{Binding ShortName}"
+                                               FontSize="16"
+                                               FontFamily="CairoRequler" />
+                                        <StackLayout Orientation="Horizontal">
+                                            <!-- -->
+                                            <Label Text="{Binding BuildingNumber, StringFormat='{0},'}"
+                                                   FontFamily="CairoRequler" />
+                                            <!-- -->
+                                            <Label Text="{Binding Street, StringFormat='{0},'}"
+                                                   FontFamily="CairoRequler" />
+                                            <!-- -->
+                                            <Label Text="{Binding City, StringFormat='{0},'}"
+                                                   FontFamily="CairoRequler" />
+                                            <!-- -->
+                                            <Label Text="{Binding Governorate, StringFormat='{0},'}"
+                                                   FontFamily="CairoRequler" />
+                                            <!-- -->
+                                            <Label Text="{x:Static lang:LanguageResources.DATurnNumber}"
+                                                   FontFamily="CairoRequler" />
+
+                                            <!-- -->
+                                            <Label Text="{Binding FloorrUmber}"
+                                                   FontFamily="CairoRequler" />
+                                            <!-- -->
+                                            <Label Text="{x:Static lang:LanguageResources.DAApartmentNumber}"
+                                                   FontFamily="CairoRequler" />
+
+                                            <Label Text="{Binding ApartmentNumber}"
+                                                   FontFamily="CairoRequler" />
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <!-- row 2-->
+                                    <StackLayout Margin="10"
+                                                 Orientation="Horizontal">
+
+                                        <!-- lable of no selected-->
+                                        <StackLayout VerticalOptions="Center"
+                                                     HorizontalOptions="StartAndExpand">
+                                            <!-- -->
+                                            <Label Text="حدد هذا العنوان"
+                                                   VerticalOptions="Center"
+                                                   FontFamily="CairoRequler" />
+
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.SelectedThisAddressCommand, Source={x:Reference Name=page}}"
+                                                                      CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
+                                            </StackLayout.GestureRecognizers>
+                                            <!-- Triggers -->
+                                            <StackLayout.Triggers>
+                                                <DataTrigger TargetType="StackLayout"
+                                                             Binding="{Binding Source={x:Reference stackSlected},Path=IsVisible}"
+                                                             Value="true">
+                                                    <Setter Property="IsVisible"
+                                                            Value="False" />
+                                                    <!-- multiple Setters elements are allowed -->
+                                                </DataTrigger>
+                                            </StackLayout.Triggers>
+                                        </StackLayout>
+
+                                        <!-- of is selected -->
+                                        <StackLayout VerticalOptions="Center"
+                                                     IsVisible="{Binding IsSelected}"
+                                                     x:Name="stackSlected"
+                                                     HorizontalOptions="StartAndExpand">
+                                            <frame:PancakeView BackgroundColor="{StaticResource lightGray}"
+                                                               CornerRadius="20"
+                                                               Padding="10,2">
+
+                                                <StackLayout Orientation="Horizontal">
+                                                    <!-- -->
+                                                    <Label Text="العنوان الحالي"
+                                                           FontFamily="CairoRequler"
+                                                           VerticalOptions="Center" />
+                                                    <Label Text="{x:Static icon:IconFont.CheckboxMarkedCircle}"
+                                                           FontFamily="IconFont"
+                                                           VerticalOptions="Center" />
+                                                </StackLayout>
+                                            </frame:PancakeView>
+                                        </StackLayout>
+
+                                        <!-- delete -->
+                                        <Label Text="{x:Static icon:IconFont.Delete}"
+                                               Margin="20,0"
+                                               FontFamily="IconFont"
+                                               FontSize="15"
+                                               Padding="7"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=page}}"
+                                                                      CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </frame:PancakeView>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <!-- buttom -->
+                <Button Text="إضافة عنوان جديد"
+                        Margin="20,10"
+                        CornerRadius="3"
+                        HeightRequest="45"
+                        VerticalOptions="Center"
+                        BackgroundColor="{StaticResource yellowDark}"
+                        TextColor="{StaticResource blueDark}"
+                        FontFamily="CairoBold"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding AddNewAddressCommand}" />
+
+            </StackLayout>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

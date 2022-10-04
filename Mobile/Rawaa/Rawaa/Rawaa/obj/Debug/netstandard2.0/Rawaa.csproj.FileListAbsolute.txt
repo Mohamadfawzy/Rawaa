@@ -27,3 +27,6 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\refint\Rawa
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Rawaa.pdb
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\ref\Rawaa.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\CartPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\OrderSummaryPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\CreateDeliveryAddressPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\AllDeliveryAddressPage.xaml.g.cs

@@ -12,7 +12,8 @@ namespace Rawaa.ViewModels
 {
     public class ProductDetailsPageVM : BaseViewModel
     {
-        public RequestProvider<Product> requestProvider = new RequestProvider<Product>();
+        public RequestProvider<Cart> requestProvider = new RequestProvider<Cart>();
+        public Cart CartOption = new Cart();
         Product meal;
         public Product Meal
         {
@@ -27,8 +28,8 @@ namespace Rawaa.ViewModels
             set { SetProperty(ref price, value); }
         }
 
-        double _quantity = 1;
-        public double Quantity
+        int _quantity = 1;
+        public int Quantity
         {
             get { return _quantity; }
             set { SetProperty(ref _quantity, value); }
@@ -43,12 +44,13 @@ namespace Rawaa.ViewModels
 
         public ICommand Plus_Command => new Command(PlusExcuted);
         public ICommand Minus_Command => new Command(MinusExcuted);
+        public ICommand AddProductToBasketCommand => new Command(AddProductToBasketexEcuted);
 
         // ctor
         public ProductDetailsPageVM()
         {
             //Meal = new Product();
-            Meal = ProductsPageVM.StaticSelectedProduct;
+            Meal = staticProduct;//ProductsPageVM.StaticSelectedProduct;
             price = meal.SmallSizePrice;
             RefreshCountBasket();
             SelectedSizePrice = meal.SmallSizePrice;
@@ -65,6 +67,8 @@ namespace Rawaa.ViewModels
             Quantity++;
             Price = SelectedSizePrice * Quantity;
 
+            CartOption.Quantity = Quantity;
+
         }
 
         private void MinusExcuted()
@@ -73,6 +77,8 @@ namespace Rawaa.ViewModels
                 return;
             Quantity--;
             Price = SelectedSizePrice * Quantity;
+
+            CartOption.Quantity = Quantity;
         }
 
         public void CalculatePrice()
@@ -82,12 +88,38 @@ namespace Rawaa.ViewModels
             if (selectedSize * (_quantity + 1) >= 999)
             {
                 AppSettings.Alert("max");
-                while(price > 999)
+                while (price > 999)
                 {
                     MinusExcuted();
                 }
                 return;
             }
+        }
+
+        private static Product staticProduct = new Product();
+        public static void Initializer(Product product)
+        {
+            staticProduct = product;
+        }
+
+        private async void AddProductToBasketexEcuted()
+        {
+            IsBusy = true;
+            CartOption.ProductId = meal.Id;
+            CartOption.CustomerId = Convert.ToInt32(AppSettings.UserId);
+            
+            var rs = await requestProvider.PostOneAsync<Cart>(CartOption, $"{AppSettings.currentLang}/api/client/cart");
+            if (rs != null)
+            {
+                await AppSettings.Alert("added",2);
+                IsBusy = false;
+                AppSettings.countOfCart++;
+                RefreshCountBasket();
+                return;
+            }
+            await AppSettings.Alert("Can not added",2);
+
+
         }
         private async Task FetchCategory()
         {

@@ -9,159 +9,244 @@
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{StaticResource white}"
-             Shell.NavBarIsVisible="False"
+             Shell.NavBarIsVisible="True"
+             Title="{x:Static lang:LanguageResources.CartTitlePage}"
              x:Name="page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label"
+                   x:Key="priceLabel">
+                <Setter Property="FontFamily"
+                        Value="CairoBold" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource blueDark}" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+            </Style>
+            <Style TargetType="Label"
+                   x:Key="priceCurrency"
+                   BaseResourceKey="priceLabel">
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="Text"
+                        Value="{x:Static lang:LanguageResources.GlobalCurrency}" />
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
         <vm:CartPageVM />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            
-            <!-- is empty -->
-            <StackLayout IsVisible="true"
-                         Margin="0,40,0,0">
-                
-                <!-- -->
-                <Label Text="{x:Static icon:IconFont.CartOutline}"
-                       FontFamily="IconFont"
-                       FontSize="50"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center" />
-                <!-- -->
-                <Label Text="السلة فارغة"
-                       FontFamily="CairoRequler"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center" />
-            </StackLayout>
-            
-            <!-- colocetion-->
-            <CollectionView ItemsSource="{Binding Carts }"
-                            Margin="10,0">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"
-                                       ItemSpacing="0" />
-                </CollectionView.ItemsLayout>
+        <RefreshView IsRefreshing="{Binding IsBusy}"
+                     RefreshColor="{StaticResource yellowDark}">
+            <StackLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid VerticalOptions="Fill"
-                              RowSpacing="1">
-                            <frame:PancakeView Margin="8,5"
-                                               HeightRequest="250"
-                                               CornerRadius="10"
-                                               Padding="0"
-                                               Shadow="{frame:ShadowMarkup BlurRadius=3}"
-                                               VerticalOptions="FillAndExpand"
-                                               BackgroundColor="White">
-                                <!-- MintCream -->
-                                <StackLayout HorizontalOptions="FillAndExpand"
-                                             Spacing="5"
-                                             Orientation="Horizontal"
-                                             BackgroundColor="White">
+                <!-- is empty -->
+                <StackLayout x:Name="emptyStack"
+                             IsVisible="{Binding EmptyIsVisible}"
+                             VerticalOptions="CenterAndExpand"
+                             Margin="0,70,0,0">
+                    <!-- -->
+                    <Label Text="{x:Static icon:IconFont.CartOutline}"
+                           FontFamily="IconFont"
+                           FontSize="50"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                    <!-- -->
+                    <Label Text="{x:Static lang:LanguageResources.CartEmpty}"
+                           FontFamily="CairoRequler"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </StackLayout>
 
-                                    <StackLayout HorizontalOptions="FillAndExpand"
-                                                 Padding="10">
-                                        <!-- Title  -->
-                                        <Label Text="{Binding Product.Title}"
-                                               FontSize="18"
-                                               TextColor="{StaticResource blueRegular}"
-                                               LineBreakMode="TailTruncation"
-                                               Margin="0" />
+                <!-- content -->
+                <StackLayout x:Name="stackContent">
+                    
+                    <!-- Collection -->
+                    <CollectionView ItemsSource="{Binding Carts }"
+                                    x:Name="cvCarts"
+                                    SelectionMode="Single"
+                                    SelectionChangedCommand="{Binding SelectedItemCommand}"
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvCarts}}"
+                                    SelectedItem="{Binding SelectedCartItem }"
+                                    Margin="10,0">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"
+                                               ItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
 
-                                        <!-- price -->
-                                        <StackLayout Orientation="Horizontal"
-                                                     VerticalOptions="Center"
-                                                     Spacing="0">
-                                            <Label Text="{Binding Price }"
-                                                   FontSize="20"
-                                                   TextColor="{StaticResource blueDark}"
-                                                   VerticalOptions="Center"
-                                                   FontFamily="CairoBold" />
-                                            <Label Text="ج.م"
-                                                   FontSize="16"
-                                                   Margin="10,0"
-                                                   TextColor="{StaticResource blueDark}"
-                                                   VerticalOptions="Center"
-                                                   FontFamily="CairoBold" />
-                                        </StackLayout>
-
-                                        <StackLayout Orientation="Horizontal">
-                                            <!-- size   -->
-                                            <Label Text="الحجم: "
-                                                   FontSize="18"
-                                                   TextColor="{StaticResource blueRegular}"
-                                                   LineBreakMode="TailTruncation"
-                                                   Margin="0" />
-                                            <!-- Title  -->
-                                            <Label Text="{Binding SizeName}"
-                                                   FontSize="18"
-                                                   TextColor="{StaticResource blueRegular}"
-                                                   LineBreakMode="TailTruncation"
-                                                   Margin="0" />
-                                        </StackLayout>
-
-                                        <!-- Quantity plus & Minus-->
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalOptions="Fill"
+                                      RowSpacing="1"
+                                      BackgroundColor="{StaticResource white}">
+                                    <frame:PancakeView Margin="8,5"
+                                                       CornerRadius="10"
+                                                       Padding="0"
+                                                       Shadow="{frame:ShadowMarkup BlurRadius=3}"
+                                                       VerticalOptions="FillAndExpand"
+                                                       BackgroundColor="{StaticResource white}">
                                         <StackLayout>
-                                            <frame:PancakeView BackgroundColor="{StaticResource whiteSmoke}"
-                                                               Shadow="{frame:ShadowMarkup Color=Gray, BlurRadius=10 ,Offset='10,10'}"
-                                                               CornerRadius="30"
-                                                               Margin="15,5"
-                                                               Padding="0"
-                                                               HorizontalOptions="Start"
-                                                               HeightRequest="45"
-                                                               WidthRequest="130">
-                                                <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{x:Static icon:IconFont.PlusCircle}"
-                                                           FontFamily="IconFont"
-                                                           FontSize="25"
-                                                           Margin="10"
-                                                           HorizontalOptions="End">
-                                                        <Label.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding BindingContext.Plus_Command, Source={x:Reference Name=page}}"
-                                                                                  CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
-                                                        </Label.GestureRecognizers>
-                                                    </Label>
+                                            <!-- MintCream -->
+                                            <StackLayout Orientation="Horizontal"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         Spacing="5"
+                                                         BackgroundColor="White">
 
-                                                    <Label x:Name="labelQuantity"
-                                                           Text="{Binding Quantity}"
-                                                           FontSize="16"
-                                                           TextColor="{StaticResource blueDark}"
-                                                           VerticalOptions="Center"
-                                                           HorizontalOptions="CenterAndExpand" />
+                                                <StackLayout HorizontalOptions="FillAndExpand"
+                                                             Padding="10">
+                                                    <!-- Title  -->
+                                                    <Label Text="{Binding Product.Title}"
+                                                           FontSize="18"
+                                                           TextColor="{StaticResource blueRegular}"
+                                                           LineBreakMode="TailTruncation"
+                                                           Margin="0" />
 
-                                                    <Label Text="{x:Static icon:IconFont.MinusCircle}"
-                                                           FontFamily="IconFont"
-                                                           FontSize="25"
-                                                           Margin="10"
-                                                           HorizontalOptions="Start">
-                                                        <Label.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding BindingContext.Minus_Command, Source={x:Reference Name=page}}"
-                                                                                  CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
-                                                        </Label.GestureRecognizers>
-                                                    </Label>
+                                                    <!-- price -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 VerticalOptions="Center"
+                                                                 Spacing="0">
+                                                        <Label Text="{Binding Price }"
+                                                               Style="{StaticResource priceLabel}" />
+                                                        <Label Style="{StaticResource priceCurrency}" />
+                                                    </StackLayout>
 
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <!-- size   -->
+                                                        <Label Text="{x:Static lang:LanguageResources.CartSize}"
+                                                               FontSize="18"
+                                                               TextColor="{StaticResource blueRegular}"
+                                                               LineBreakMode="TailTruncation"
+                                                               Margin="0" />
+                                                        <!-- Title  -->
+                                                        <Label Text="{Binding SizeName}"
+                                                               FontSize="18"
+                                                               TextColor="{StaticResource blueRegular}"
+                                                               LineBreakMode="TailTruncation"
+                                                               Margin="0" />
+                                                    </StackLayout>
                                                 </StackLayout>
-                                            </frame:PancakeView>
+
+                                                <!-- Image -->
+                                                <frame:PancakeView CornerRadius="10"
+                                                                   Shadow="{frame:ShadowMarkup BlurRadius=1}"
+                                                                   BackgroundColor="WhiteSmoke">
+                                                    <image:CachedImage Source="{Binding Product.ImageUrl}"
+                                                                       Aspect="AspectFill"
+                                                                       WidthRequest="120"
+                                                                       VerticalOptions="Center" />
+                                                </frame:PancakeView>
+
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal">
+
+                                                <!-- Quantity plus & Minus-->
+                                                <frame:PancakeView BackgroundColor="{StaticResource whiteSmoke}"
+                                                                   Shadow="{frame:ShadowMarkup Color=Gray, BlurRadius=10 ,Offset='10,10'}"
+                                                                   CornerRadius="30"
+                                                                   Margin="15,5"
+                                                                   Padding="0"
+                                                                   HorizontalOptions="StartAndExpand"
+                                                                   HeightRequest="45"
+                                                                   WidthRequest="130">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{x:Static icon:IconFont.PlusCircle}"
+                                                               FontFamily="IconFont"
+                                                               FontSize="25"
+                                                               Margin="10"
+                                                               HorizontalOptions="End">
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding BindingContext.Plus_Command, Source={x:Reference Name=page}}"
+                                                                                      CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+
+                                                        <Label x:Name="labelQuantity"
+                                                               Text="{Binding Quantity}"
+                                                               FontSize="16"
+                                                               TextColor="{StaticResource blueDark}"
+                                                               VerticalOptions="Center"
+                                                               HorizontalOptions="CenterAndExpand" />
+
+                                                        <Label Text="{x:Static icon:IconFont.MinusCircle}"
+                                                               FontFamily="IconFont"
+                                                               FontSize="25"
+                                                               Margin="10"
+                                                               HorizontalOptions="Start">
+                                                            <Label.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding BindingContext.Minus_Command, Source={x:Reference Name=page}}"
+                                                                                      CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
+                                                            </Label.GestureRecognizers>
+                                                        </Label>
+
+                                                    </StackLayout>
+                                                </frame:PancakeView>
+
+                                                <!-- delete -->
+                                                <Label Text="{x:Static icon:IconFont.Delete}"
+                                                       Margin="20,0"
+                                                       FontFamily="IconFont"
+                                                       FontSize="20"
+                                                       Padding="7"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference Name=page}}"
+                                                                              CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}" />
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                            </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-
-                                    <!-- Image -->
-                                    <frame:PancakeView CornerRadius="10"
-                                                       Shadow="{frame:ShadowMarkup BlurRadius=1}"
-                                                       BackgroundColor="WhiteSmoke">
-                                        <image:CachedImage Source="{Binding Product.ImageUrl}"
-                                                           Aspect="AspectFill"
-                                                           WidthRequest="120"
-                                                           VerticalOptions="Center" />
                                     </frame:PancakeView>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                                </StackLayout>
-                            </frame:PancakeView>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    <!-- Cart Payment Summary -->
+                    <StackLayout Orientation="Horizontal">
+                        <!-- price -->
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="20,0">
+                            <Label Text="{Binding TotalPrice }"
+                                   Style="{StaticResource priceLabel}" />
+                            <Label Style="{StaticResource priceCurrency}" />
+                        </StackLayout>
 
-        </StackLayout>
+                        <!-- buttom -->
+                        <Button Text="{x:Static lang:LanguageResources.CartContinueRoRequest}"
+                                Margin="5,0,5,7"
+                                CornerRadius="3"
+                                HeightRequest="45"
+                                VerticalOptions="Center"
+                                BackgroundColor="{StaticResource yellowDark}"
+                                TextColor="{StaticResource blueDark}"
+                                FontFamily="CairoBold"
+                                HorizontalOptions="FillAndExpand"
+                                Command="{Binding ContinueRequestCommand}" />
+
+                    </StackLayout>
+
+                    <!-- Triggers -->
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout"
+                                     Binding="{Binding Source={x:Reference emptyStack},Path=IsVisible}"
+                                     Value="true">
+                            <Setter Property="IsVisible"
+                                    Value="False" />
+                            <!-- multiple Setters elements are allowed -->
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+
+                </StackLayout>
+
+            </StackLayout>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

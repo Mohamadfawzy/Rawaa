@@ -117,8 +117,77 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CartContinueRoRequest" xml:space="preserve">
+    <value>تابع تنفيذ الطلب</value>
+  </data>
+  <data name="CartDeliveryFee" xml:space="preserve">
+    <value>رسوم التوصيل</value>
+  </data>
+  <data name="CartEmpty" xml:space="preserve">
+    <value>السلة فارغة</value>
+  </data>
+  <data name="CartOrderNotes" xml:space="preserve">
+    <value>ملاحظات الطلب</value>
+  </data>
+  <data name="CartOrderValue" xml:space="preserve">
+    <value>قيمة الطلب</value>
+  </data>
+  <data name="CartPaymentSummary" xml:space="preserve">
+    <value>ملخص الدفع</value>
+  </data>
+  <data name="CartSize" xml:space="preserve">
+    <value>الحجم: </value>
+  </data>
+  <data name="CartTitlePage" xml:space="preserve">
+    <value>السلة</value>
+  </data>
+  <data name="CartTotalSummation" xml:space="preserve">
+    <value>المجموع الكلي</value>
+  </data>
+  <data name="CartWriteYourComment" xml:space="preserve">
+    <value>اكتب ملاحظتك</value>
+  </data>
+  <data name="DAAdditionalInformation" xml:space="preserve">
+    <value>معلومات إضافية</value>
+  </data>
+  <data name="DAApartmentNumber" xml:space="preserve">
+    <value>رقم الشقة</value>
+  </data>
+  <data name="DABuildingNumber" xml:space="preserve">
+    <value>رقم العمارة/الفيلا</value>
+  </data>
+  <data name="DACityCenterRegion" xml:space="preserve">
+    <value>المدينة/المركز/المنطقة</value>
+  </data>
+  <data name="DACreate" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="DADeliveryAddressTitle" xml:space="preserve">
+    <value>عنوان التوصيل</value>
+  </data>
+  <data name="DAGovernorate" xml:space="preserve">
+    <value>المحافظة</value>
+  </data>
+  <data name="DAShortNameTitle" xml:space="preserve">
+    <value>اسم مختصر للعنوان</value>
+  </data>
+  <data name="DAStreetName" xml:space="preserve">
+    <value>اسم الشارع</value>
+  </data>
+  <data name="DATurnNumber" xml:space="preserve">
+    <value>رقم الدور</value>
+  </data>
   <data name="first" xml:space="preserve">
     <value>محمد فوزي</value>
+  </data>
+  <data name="GlobalCalories" xml:space="preserve">
+    <value>سعرة حرارية</value>
+  </data>
+  <data name="GlobalCurrency" xml:space="preserve">
+    <value> ج.م</value>
+  </data>
+  <data name="GlobalDelete" xml:space="preserve">
+    <value>حذف</value>
   </data>
   <data name="LanguagePage_Ok" xml:space="preserve">
     <value>تأكيد</value>

@@ -117,8 +117,77 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CartContinueRoRequest" xml:space="preserve">
+    <value>Continue to Request</value>
+  </data>
+  <data name="CartDeliveryFee" xml:space="preserve">
+    <value>delivery fee</value>
+  </data>
+  <data name="CartEmpty" xml:space="preserve">
+    <value>Cart is Empty</value>
+  </data>
+  <data name="CartOrderNotes" xml:space="preserve">
+    <value>Order notes</value>
+  </data>
+  <data name="CartOrderValue" xml:space="preserve">
+    <value>order value</value>
+  </data>
+  <data name="CartPaymentSummary" xml:space="preserve">
+    <value>Payment Summary</value>
+  </data>
+  <data name="CartSize" xml:space="preserve">
+    <value>the size: </value>
+  </data>
+  <data name="CartTitlePage" xml:space="preserve">
+    <value>Basket</value>
+  </data>
+  <data name="CartTotalSummation" xml:space="preserve">
+    <value>Total summation</value>
+  </data>
+  <data name="CartWriteYourComment" xml:space="preserve">
+    <value>Write your comment</value>
+  </data>
+  <data name="DAAdditionalInformation" xml:space="preserve">
+    <value>additional information</value>
+  </data>
+  <data name="DAApartmentNumber" xml:space="preserve">
+    <value>Apartment number</value>
+  </data>
+  <data name="DABuildingNumber" xml:space="preserve">
+    <value>Building/Villa No</value>
+  </data>
+  <data name="DACityCenterRegion" xml:space="preserve">
+    <value>City/Center/Region</value>
+  </data>
+  <data name="DACreate" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="DADeliveryAddressTitle" xml:space="preserve">
+    <value>Delivery Address</value>
+  </data>
+  <data name="DAGovernorate" xml:space="preserve">
+    <value>Governorate</value>
+  </data>
+  <data name="DAShortNameTitle" xml:space="preserve">
+    <value>Short name for title</value>
+  </data>
+  <data name="DAStreetName" xml:space="preserve">
+    <value>Street name</value>
+  </data>
+  <data name="DATurnNumber" xml:space="preserve">
+    <value>turn number</value>
+  </data>
   <data name="first" xml:space="preserve">
     <value>Mohamed fawzy</value>
+  </data>
+  <data name="GlobalCalories" xml:space="preserve">
+    <value>Calories</value>
+  </data>
+  <data name="GlobalCurrency" xml:space="preserve">
+    <value> EGP</value>
+  </data>
+  <data name="GlobalDelete" xml:space="preserve">
+    <value>delete</value>
   </data>
   <data name="LanguagePage_Ok" xml:space="preserve">
     <value>OK</value>

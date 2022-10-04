@@ -29,6 +29,7 @@ namespace Rawaa.Views
             Carousel.TranslationY = 0;
             Carousel.Opacity = 1;
             (BindingContext as HomePageVM).SliderIsLoop = true;
+            (BindingContext as HomePageVM).RefreshCountBasket();
         }
         protected override void OnDisappearing()
         {

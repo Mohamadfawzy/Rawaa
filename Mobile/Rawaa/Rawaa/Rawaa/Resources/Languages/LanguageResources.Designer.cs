@@ -61,11 +61,218 @@ namespace Rawaa.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Continue to Request.
+        /// </summary>
+        public static string CartContinueRoRequest {
+            get {
+                return ResourceManager.GetString("CartContinueRoRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delivery fee.
+        /// </summary>
+        public static string CartDeliveryFee {
+            get {
+                return ResourceManager.GetString("CartDeliveryFee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cart is Empty.
+        /// </summary>
+        public static string CartEmpty {
+            get {
+                return ResourceManager.GetString("CartEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order notes.
+        /// </summary>
+        public static string CartOrderNotes {
+            get {
+                return ResourceManager.GetString("CartOrderNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to order value.
+        /// </summary>
+        public static string CartOrderValue {
+            get {
+                return ResourceManager.GetString("CartOrderValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Summary.
+        /// </summary>
+        public static string CartPaymentSummary {
+            get {
+                return ResourceManager.GetString("CartPaymentSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the size: .
+        /// </summary>
+        public static string CartSize {
+            get {
+                return ResourceManager.GetString("CartSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basket.
+        /// </summary>
+        public static string CartTitlePage {
+            get {
+                return ResourceManager.GetString("CartTitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total summation.
+        /// </summary>
+        public static string CartTotalSummation {
+            get {
+                return ResourceManager.GetString("CartTotalSummation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write your comment.
+        /// </summary>
+        public static string CartWriteYourComment {
+            get {
+                return ResourceManager.GetString("CartWriteYourComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to additional information.
+        /// </summary>
+        public static string DAAdditionalInformation {
+            get {
+                return ResourceManager.GetString("DAAdditionalInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apartment number.
+        /// </summary>
+        public static string DAApartmentNumber {
+            get {
+                return ResourceManager.GetString("DAApartmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Building/Villa No.
+        /// </summary>
+        public static string DABuildingNumber {
+            get {
+                return ResourceManager.GetString("DABuildingNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City/Center/Region.
+        /// </summary>
+        public static string DACityCenterRegion {
+            get {
+                return ResourceManager.GetString("DACityCenterRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string DACreate {
+            get {
+                return ResourceManager.GetString("DACreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivery Address.
+        /// </summary>
+        public static string DADeliveryAddressTitle {
+            get {
+                return ResourceManager.GetString("DADeliveryAddressTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Governorate.
+        /// </summary>
+        public static string DAGovernorate {
+            get {
+                return ResourceManager.GetString("DAGovernorate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Short name for title.
+        /// </summary>
+        public static string DAShortNameTitle {
+            get {
+                return ResourceManager.GetString("DAShortNameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street name.
+        /// </summary>
+        public static string DAStreetName {
+            get {
+                return ResourceManager.GetString("DAStreetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to turn number.
+        /// </summary>
+        public static string DATurnNumber {
+            get {
+                return ResourceManager.GetString("DATurnNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mohamed fawzy.
         /// </summary>
         public static string first {
             get {
                 return ResourceManager.GetString("first", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calories.
+        /// </summary>
+        public static string GlobalCalories {
+            get {
+                return ResourceManager.GetString("GlobalCalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  EGP.
+        /// </summary>
+        public static string GlobalCurrency {
+            get {
+                return ResourceManager.GetString("GlobalCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        public static string GlobalDelete {
+            get {
+                return ResourceManager.GetString("GlobalDelete", resourceCulture);
             }
         }
         

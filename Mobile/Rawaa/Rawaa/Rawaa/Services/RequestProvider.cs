@@ -19,6 +19,8 @@ namespace Rawaa.Services
         private const string BaseUrl = "http://192.168.1.101:5117";
         HttpClientHandler httpClientHandler = new HttpClientHandler();
         HttpClient client;
+
+
         public RequestProvider()
         {
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
@@ -47,8 +49,10 @@ namespace Rawaa.Services
 
                 return valueReturned; // default(TResult);
             }
-
-
+            else
+            {
+                Console.WriteLine(response);
+            }
             return default(T);
         }
 
@@ -70,7 +74,7 @@ namespace Rawaa.Services
             {
                 Console.WriteLine(ex);
             }
-            return await Task.FromResult(new List<T>());
+            return null;
         }
 
         // Get single  by ID

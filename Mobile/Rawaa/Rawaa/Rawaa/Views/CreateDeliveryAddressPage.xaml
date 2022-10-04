@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.CreateDeliveryAddressPage"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="True"
+             x:Name="page"
+             >
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <!-- -->
+            <Label Text="{x:Static lang:LanguageResources.DADeliveryAddressTitle}"
+                   FontSize="Title"
+                   TextColor="{StaticResource white}"
+                   FontFamily="CairoRequler" />
+        </StackLayout>
+    </Shell.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label"
+                   x:Key="lable">
+                <Setter Property="FontFamily"
+                        Value="CairoRequler" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource blueDark}" />
+                <Setter Property="HorizontalOptions"
+                        Value="Start" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="FontSize"
+                        Value="15" />
+            </Style>
+
+            <Style TargetType="frame:PancakeView"
+                   x:Key="frame">
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="CornerRadius"
+                        Value="15" />
+                <Setter Property="Padding"
+                        Value="10,0" />
+                <Setter Property="Border"
+                        Value="{frame:BorderMarkup Color=LightGray,Thickness=1}" />
+                <Setter Property="WidthRequest"
+                        Value="70" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontSize"
+                        Value="14" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+
+            <!-- Governorate-->
+            <StackLayout  Spacing="0">
+                <Label Text="{x:Static lang:LanguageResources.DAGovernorate}"
+                       Style="{StaticResource lable}" />
+                <frame:PancakeView Style="{StaticResource frame}">
+                    <StackLayout Spacing="0">
+                        <Entry x:Name="governorate" >
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </frame:PancakeView>
+            </StackLayout>
+
+            <!-- DACityCenterRegion-->
+            <StackLayout  Spacing="0">
+                <Label Text="{x:Static lang:LanguageResources.DACityCenterRegion}"
+                       Style="{StaticResource lable}" />
+                <frame:PancakeView Style="{StaticResource frame}">
+                    <StackLayout Spacing="0">
+                        <Entry x:Name="city">
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </frame:PancakeView>
+            </StackLayout>
+
+            <!-- DAStreetName-->
+            <StackLayout  Spacing="0">
+                <Label Text="{x:Static lang:LanguageResources.DAStreetName}"
+                       Style="{StaticResource lable}" />
+                <frame:PancakeView Style="{StaticResource frame}">
+                    <StackLayout Spacing="0">
+                        <Entry x:Name="street">
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </frame:PancakeView>
+            </StackLayout>
+            
+            <!-- 3 nummer -->
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="FillAndExpand">
+
+                <!-- DABuildingNumber-->
+                <StackLayout Spacing="0"
+                             HorizontalOptions="StartAndExpand">
+                    <Label Text="{x:Static lang:LanguageResources.DABuildingNumber}"
+                           Style="{StaticResource lable}" />
+                    <frame:PancakeView Style="{StaticResource frame}">
+                        <StackLayout Spacing="0">
+                            <Entry x:Name="buildingNumber">
+                                <Entry.Effects>
+                                    <xct:RemoveBorderEffect />
+                                </Entry.Effects>
+                            </Entry>
+                        </StackLayout>
+                    </frame:PancakeView>
+                </StackLayout>
+
+                <!-- DATurnNumber-->
+                <StackLayout  Spacing="0"
+                              HorizontalOptions="CenterAndExpand">
+                    <Label Text="{x:Static lang:LanguageResources.DATurnNumber}"
+                           Style="{StaticResource lable}" />
+                    <frame:PancakeView Style="{StaticResource frame}">
+                        <StackLayout Spacing="0">
+                            <Entry x:Name="turnNumber"
+                                   FontSize="15">
+                                <Entry.Effects>
+                                    <xct:RemoveBorderEffect />
+                                </Entry.Effects>
+                            </Entry>
+                        </StackLayout>
+                    </frame:PancakeView>
+                </StackLayout>
+
+                <!-- DAApartmentNumber-->
+                <StackLayout  Spacing="0"
+                              HorizontalOptions="EndAndExpand">
+                    <Label Text="{x:Static lang:LanguageResources.DAApartmentNumber}"
+                           Style="{StaticResource lable}" />
+                    <frame:PancakeView Style="{StaticResource frame}">
+                        <StackLayout Spacing="0">
+                            <Entry x:Name="apartmentNumber"
+                                   FontSize="15">
+                                <Entry.Effects>
+                                    <xct:RemoveBorderEffect />
+                                </Entry.Effects>
+                            </Entry>
+                        </StackLayout>
+                    </frame:PancakeView>
+                </StackLayout>
+
+            </StackLayout>
+            
+            <!-- Additional Information-->
+            <StackLayout  Spacing="0">
+                <Label Text="{x:Static lang:LanguageResources.DAAdditionalInformation}"
+                       Style="{StaticResource lable}" />
+                <frame:PancakeView Style="{StaticResource frame}">
+                    <StackLayout Spacing="0">
+                        <Entry x:Name="notes"
+                               FontSize="15">
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </frame:PancakeView>
+            </StackLayout>
+
+            <!-- Short Name Title-->
+            <StackLayout  Spacing="0">
+                <Label Text="{x:Static lang:LanguageResources.DAShortNameTitle}"
+                       Style="{StaticResource lable}" />
+                <frame:PancakeView Style="{StaticResource frame}">
+                    <StackLayout Spacing="0">
+                        <Entry x:Name="shortName"
+                               FontSize="15">
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                    </StackLayout>
+                </frame:PancakeView>
+            </StackLayout>
+
+            <Button Text="{x:Static lang:LanguageResources.DACreate}"
+                    Margin="5,0,5,7"
+                    CornerRadius="30"
+                    HeightRequest="45"
+                    VerticalOptions="Center"
+                    BackgroundColor="{StaticResource yellowDark}"
+                    TextColor="{StaticResource blueDark}"
+                    FontFamily="CairoBold"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="Button_Clicked">
+                
+            </Button>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
