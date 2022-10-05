@@ -1,5 +1,3 @@
-E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\typemaps.armeabi-v7a.ll
-E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\app_shared_libraries\arm64-v8a\libxamarin-app.so
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\bin\Debug\Rawaa.Android.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\bin\Debug\Rawaa.Android.pdb
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\bin\Debug\com.companyname.rawaa.apk
@@ -286,6 +284,7 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\assets
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\assets\Xamarin.Google.Android.Material.pdb
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\assets\Xamarin.Google.Guava.ListenableFuture.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\typemaps.arm64-v8a.ll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\typemaps.armeabi-v7a.ll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\typemaps.x86.ll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\typemaps.x86_64.ll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\AndroidManifest.xml
@@ -722,6 +721,7 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\jni_re
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\jni_remap.armeabi-v7a.o
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\jni_remap.x86.o
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\android\jni_remap.x86_64.o
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\app_shared_libraries\arm64-v8a\libxamarin-app.so
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\app_shared_libraries\armeabi-v7a\libxamarin-app.so
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\app_shared_libraries\x86\libxamarin-app.so
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa.Android\obj\Debug\120\app_shared_libraries\x86_64\libxamarin-app.so

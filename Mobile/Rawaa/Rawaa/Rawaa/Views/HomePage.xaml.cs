@@ -30,6 +30,7 @@ namespace Rawaa.Views
             Carousel.Opacity = 1;
             (BindingContext as HomePageVM).SliderIsLoop = true;
             (BindingContext as HomePageVM).RefreshCountBasket();
+            (BindingContext as HomePageVM).OnAppearing();
         }
         protected override void OnDisappearing()
         {

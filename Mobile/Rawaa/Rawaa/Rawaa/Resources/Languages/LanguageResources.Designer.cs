@@ -367,6 +367,123 @@ namespace Rawaa.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelling order.
+        /// </summary>
+        public static string ODCancellingOrder {
+            get {
+                return ResourceManager.GetString("ODCancellingOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cash for delivery.
+        /// </summary>
+        public static string ODCashdelivery {
+            get {
+                return ResourceManager.GetString("ODCashdelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delivery fee.
+        /// </summary>
+        public static string ODDeliveryFee {
+            get {
+                return ResourceManager.GetString("ODDeliveryFee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivery to.
+        /// </summary>
+        public static string ODDeliveryTo {
+            get {
+                return ResourceManager.GetString("ODDeliveryTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Execution of the request.
+        /// </summary>
+        public static string ODExecutionRequest {
+            get {
+                return ResourceManager.GetString("ODExecutionRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice details.
+        /// </summary>
+        public static string ODInvoiceDetails {
+            get {
+                return ResourceManager.GetString("ODInvoiceDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meals on demand.
+        /// </summary>
+        public static string ODMealsInOrder {
+            get {
+                return ResourceManager.GetString("ODMealsInOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The order has been delivered.
+        /// </summary>
+        public static string ODOrderDelivered {
+            get {
+                return ResourceManager.GetString("ODOrderDelivered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The order is now being prepared.
+        /// </summary>
+        public static string ODOrderPrepared {
+            get {
+                return ResourceManager.GetString("ODOrderPrepared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to order value.
+        /// </summary>
+        public static string ODOrderValue {
+            get {
+                return ResourceManager.GetString("ODOrderValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment method.
+        /// </summary>
+        public static string ODPaymentMethod {
+            get {
+                return ResourceManager.GetString("ODPaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the request has been canceled.
+        /// </summary>
+        public static string ODRequestCanceled {
+            get {
+                return ResourceManager.GetString("ODRequestCanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to total bill.
+        /// </summary>
+        public static string ODTotalPrice {
+            get {
+                return ResourceManager.GetString("ODTotalPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Acount.
         /// </summary>
         public static string Shell_Title_Acount {

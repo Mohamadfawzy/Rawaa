@@ -26,6 +26,8 @@ namespace Rawaa.Views
         {
             base.OnAppearing();
             (BindingContext as CategoryPageVM).RefreshCountBasket();
+            (BindingContext as CategoryPageVM).OnAppearing();
+
         }
     }
 }

@@ -19,6 +19,11 @@ namespace Rawaa
         public static int countOfCart = 0;
         public static string currentLang = LocalizationResourceManager.storedLanguageName;
 
+        // vm
+        public static double staticTotalPrice = 0.0;
+
+
+
         public static string UserId
         {
             get => Preferences.Get("userId", "0");

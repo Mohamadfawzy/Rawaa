@@ -2,6 +2,7 @@
 using Rawaa.Models;
 using Rawaa.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,42 +14,63 @@ using Xamarin.Forms.Xaml;
 
 namespace Rawaa.Views
 {
-    //[QueryProperty(nameof(SelectedProduct), "meal")]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetailsPage : ContentPage
     {
         ProductDetailsPageVM vm;
-        public Product SelectedProduct
-        {
-            set
-            {
-                Load(value);
-                //LoadAnimal(value);
-            }
-        }
+
+        PancakeView previousFrame = new PancakeView();
+        Label previousLable = new Label();
+
+        PancakeView previousFrameTeste = new PancakeView();
+        Label previousLableTeste = new Label();
+        Label previousLableCheckbox = new Label();
+
+        PancakeView previousFrameDrink = new PancakeView();
+
+        // ctor
         public ProductDetailsPage()
         {
             InitializeComponent();
+
             vm = (BindingContext as ProductDetailsPageVM);
+
             previousFrame = smallFrame;
             previousLable = smallLable;
 
             previousFrameTeste = frameTesteNormal;
             previousLableTeste = labelTesteNormal;
             previousLableCheckbox = labelTesteCheckbox;
+
+            HandleUiFromCart();
         }
 
-        void Load(Product product)
-        {
-            (BindingContext as ProductDetailsPageVM).Meal = product;
-        }
 
         // size section
-        PancakeView previousFrame = new PancakeView();
-        Label previousLable = new Label();
         private void Size_Tapped(object sender, EventArgs e)
         {
             var frame = (PancakeView)sender;
+            HandleSizeMela(frame);
+        }
+
+        // teste section
+        private void Teste_Tapped(object sender, EventArgs e)
+        {
+            var frame = (PancakeView)sender;
+            HandleTesteFrame(frame);
+        }
+
+        // drink section
+        private void Drink_Tapped(object sender, EventArgs e)
+        {
+            var frame = (PancakeView)sender;
+            HandleDrinkItems(frame);
+
+        }
+
+        //
+        private void HandleSizeMela(PancakeView frame)
+        {
             var gester = (TapGestureRecognizer)frame.GestureRecognizers.FirstOrDefault();
             var sizeName = gester.CommandParameter.ToString();
             var label = frame.Content as Label;
@@ -67,27 +89,22 @@ namespace Rawaa.Views
                     break;
                 case "medium":
                     size = 2;
-                    vm.SelectedSizePrice = vm.Meal.MediumSizePrice;
+                    vm.SelectedSizePrice = (double)vm.Meal.MediumSizePrice;
                     break;
                 case "larg":
-                    size = 2;
-                    vm.SelectedSizePrice = vm.Meal.BigSizePrice;
+                    size = 3;
+                    vm.SelectedSizePrice = (double)vm.Meal.BigSizePrice;
                     break;
             }
             previousFrame = frame;
             previousLable = frame.Content as Label;
-            //AppSettings.Alert(name);
             vm.CalculatePrice();
             vm.CartOption.Size = size;
         }
 
-        // Teste section
-        PancakeView previousFrameTeste = new PancakeView();
-        Label previousLableTeste = new Label();
-        Label previousLableCheckbox = new Label();
-        private void Teste_Tapped(object sender, EventArgs e)
+        //
+        private void HandleTesteFrame(PancakeView frame)
         {
-            var frame = (PancakeView)sender;
             var gester = (TapGestureRecognizer)frame.GestureRecognizers.FirstOrDefault();
             var name = gester.CommandParameter.ToString();
             var stack = (StackLayout)frame.Content;
@@ -107,17 +124,14 @@ namespace Rawaa.Views
             previousLableCheckbox = label2;
 
             vm.CartOption.Taste = Convert.ToByte(name);
-            //AppSettings.Alert(name);
         }
 
-        // drink section
-        PancakeView previousFrameDrink = new PancakeView();
-        private void Drink_Tapped(object sender, EventArgs e)
+        // 
+        private void HandleDrinkItems(PancakeView frame)
         {
-            var frame = (PancakeView)sender;
+
             var gester = (TapGestureRecognizer)frame.GestureRecognizers.FirstOrDefault();
             var name = gester.CommandParameter;
-
             previousFrameDrink.Opacity = 0.7;
             previousFrameDrink.Border = new Border() { Color = Color.Gray, Thickness = 1 };
             previousFrameDrink.Scale = 1;
@@ -128,29 +142,69 @@ namespace Rawaa.Views
             frame.Scale = 1.08;
             previousFrameDrink = frame;
         }
-
-        // quantity section
-        int quantity = 0;
-        int _price = 0;
-        private void Plus_Tapped(object sender, EventArgs e)
+        //
+        private void HandleUiFromCart()
         {
-            var puls = sender as Label;
-            int.TryParse(labelQuantity.Text, out quantity);
-            quantity++;
-            labelQuantity.Text = quantity.ToString();
-            int.TryParse(price.Text, out _price);
-            price.Text = (_price += _price).ToString();
+            var vm = ProductDetailsPageVM.StaticCart;
+            var frame = new PancakeView();
+            if (vm == null) return;
+            switch (vm.Size)
+            {
+                case 1:
+                    frame = smallFrame;
+                    break;
+                case 2:
+                    frame = mediumFrame;
+                    break;
+                case 3:
+                    frame = largFrame;
+                    break;
+            }
+            HandleSizeMela(frame);
+
+            switch (vm.Taste)
+            {
+                case 1:
+                    frame = frameTesteNormal;
+                    break;
+                case 2:
+                    frame = frameTesteHot;
+                    break;
+            }
+            HandleTesteFrame(frame);
+
+            test();
         }
 
-        private void Minus_Tapped(object sender, EventArgs e)
+        // 
+        private async void test()
         {
-            int.TryParse(labelQuantity.Text, out quantity);
-            if (quantity < 1)
-                return;
-            quantity--;
-            labelQuantity.Text = quantity.ToString();
-            int.TryParse(price.Text, out _price);
-            price.Text = (_price -= _price).ToString();
+            var list = flexDrinks.Children.ToList();
+            foreach (var item in list)
+            {
+                var stack = (StackLayout)item;
+                var frame = (PancakeView)stack.Children[0];
+                var gester = (TapGestureRecognizer)frame.GestureRecognizers[0];
+                var name = gester.CommandParameter.ToString();
+                if (name == "mohamed5")
+                {
+                    previousFrameDrink.Opacity = 0.7;
+                    previousFrameDrink.Border = new Border() { Color = Color.Gray, Thickness = 1 };
+                    previousFrameDrink.Scale = 1;
+
+
+                    frame.Opacity = 1;
+                    frame.Border = new Border() { Color = Color.FromHex("#F6B21B"), Thickness = 4 };
+                    frame.Scale = 1.08;
+                    previousFrameDrink = frame;
+
+                }
+            }
+
+
+
+            //await AppSettings.Alert(name.ToString());
         }
+
     }
 }

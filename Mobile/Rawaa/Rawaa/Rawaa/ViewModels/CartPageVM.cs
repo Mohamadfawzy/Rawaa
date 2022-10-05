@@ -9,22 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using Rawaa.Views;
 
 namespace Rawaa.ViewModels
 {
-    public  class CartPageVM : BaseViewModel
+    public class CartPageVM : BaseViewModel
     {
-        
         public RequestProvider<Cart> requestProvider = new RequestProvider<Cart>();
-
-
-        public ObservableCollection<Cart> carts;
-        
         public ObservableCollection<Cart> Carts { get; set; }
-        //{
-        //    get { return carts; }
-        //    set { SetProperty(ref carts, value); }
-        //}
+
         Cart selectedCartItem;
         public Cart SelectedCartItem
         {
@@ -38,6 +31,7 @@ namespace Rawaa.ViewModels
             get { return totalPrice; }
             set { SetProperty(ref totalPrice, value); }
         }
+
         bool emptyIsVisible;
         public bool EmptyIsVisible
         {
@@ -64,7 +58,7 @@ namespace Rawaa.ViewModels
         public ICommand SelectedItemCommand => new Command<Cart>(SelectedItemExcuted);
         public ICommand DeleteItemCommand => new Command<Cart>(DeleteItemExcuted);
         public ICommand ContinueRequestCommand => new Command(ContinueRequestExcuted);
-        
+
         // ctor ------------------------------------------------------------------
         public CartPageVM()
         {
@@ -73,17 +67,17 @@ namespace Rawaa.ViewModels
         }
 
         // feth
-        private async Task FetchCartItems()
+        private async void FetchCartItems()
         {
             IsBusy = true;
-            var list = await requestProvider.GetListAsync($"{AppSettings.currentLang}/api/client/cart/all/"+AppSettings.UserId);
-            if (list == null || list.Count <1)
+            var list = await requestProvider.GetListAsync($"{AppSettings.currentLang}/api/client/cart/all/" + AppSettings.UserId);
+            if (list == null || list.Count < 1)
             {
                 EmptyIsVisible = true;
                 IsBusy = false;
                 return;
             }
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 var priceQuantity = 0.0D;
                 switch (item.Size)
@@ -94,14 +88,14 @@ namespace Rawaa.ViewModels
                         priceQuantity += item.Product.SmallSizePrice * item.Quantity;
                         break;
                     case 2:
-                        item.Price = item.Product.MediumSizePrice;
+                        item.Price = (double)item.Product.MediumSizePrice;
                         item.SizeName = "متوسط";
-                        priceQuantity += item.Product.MediumSizePrice * item.Quantity;
+                        priceQuantity += (double)item.Product.MediumSizePrice * item.Quantity;
                         break;
                     case 3:
-                        item.Price = item.Product.BigSizePrice;
+                        item.Price = (double)item.Product.BigSizePrice;
                         item.SizeName = "كبير";
-                        priceQuantity += item.Product.BigSizePrice * item.Quantity;
+                        priceQuantity += (double)item.Product.BigSizePrice * item.Quantity;
                         break;
                 }
                 Carts.Add(item);
@@ -113,17 +107,18 @@ namespace Rawaa.ViewModels
         }
 
         // plus Quantity++
-        private void PlusExcuted(Cart parm)
+        private async void PlusExcuted(Cart parm)
         {
             var index = Carts.IndexOf(parm);
-            if (Carts[index].Price * (Carts[index].Quantity + 1) >= 999)
+            if (totalPrice + (Carts[index].Price + (Carts[index].Quantity + 1)) >= 999)
             {
-                AppSettings.Alert("max");
+                await AppSettings.Alert("max",2);
                 return;
             }
             Carts[index].Quantity++;
             TotalPrice += GetSelectedSizePrice(parm.Size, parm.Product);
         }
+
         // Minus Quantity--
         private void MinusExcuted(Cart parm)
         {
@@ -137,20 +132,28 @@ namespace Rawaa.ViewModels
         private async void SelectedItemExcuted(Cart parm)
         {
             if (SelectedCartItem == null) return;
-            ProductDetailsPageVM.Initializer(parm.Product);
+            ProductDetailsPageVM.Initializer(parm.Product, parm);
             await Shell.Current.GoToAsync($"ProductDetailsPage");
             SelectedCartItem = null;
         }
 
-        private void DeleteItemExcuted(Cart parm)
+        private async void DeleteItemExcuted(Cart parm)
         {
-            AppSettings.Alert("delete action");
+            var url = $"ar/api/client/cart/{AppSettings.UserId}/{parm.ProductId}";
+            var res = await requestProvider.DeleteOneAsync(url);
+            if (res)
+            {
+                Carts.Remove(parm);
+                OnPropertyChanged("Carts");
+            }
+            await AppSettings.Alert($"delete action is: {res}");
         }
 
         private async void ContinueRequestExcuted()
         {
             IsBusy = true;
-            var list = await requestProvider.GetListAsync($"api/client/DeliveryAddress/all/user/" + AppSettings.UserId);
+            var url = $"api/client/DeliveryAddress/all/user/" + AppSettings.UserId;
+            var list = await requestProvider.GetListAsync(url);
 
             if (list == null || list.Count < 1)
             {
@@ -158,7 +161,17 @@ namespace Rawaa.ViewModels
                 await Shell.Current.GoToAsync("CreateDeliveryAddressPage");
                 return;
             }
-            await Shell.Current.GoToAsync("AllDeliveryAddressPage");
+            else
+            {
+                if (AppSettings.AddressId == "0")
+                    await Shell.Current.GoToAsync("AllDeliveryAddressPage");
+                else
+                {
+                    AppSettings.staticTotalPrice = TotalPrice;
+                    OrderDetailsPageVM.Initializer(Carts.ToList());
+                    await Shell.Current.GoToAsync("OrderDetailsPage");
+                }
+            }
         }
         public void UpdateCartData()
         {
@@ -174,10 +187,10 @@ namespace Rawaa.ViewModels
                     price = item.SmallSizePrice;
                     break;
                 case 2:
-                    price = item.MediumSizePrice;
+                    price = (double)item.MediumSizePrice;
                     break;
                 case 3:
-                    price = item.BigSizePrice;
+                    price = (double)item.BigSizePrice;
                     break;
             }
             return price;

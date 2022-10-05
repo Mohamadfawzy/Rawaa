@@ -16,7 +16,7 @@ namespace Rawaa.Services
     public class RequestProvider<T>
     {
 
-        private const string BaseUrl = "http://192.168.1.101:5117";
+        private const string BaseUrl = AppSettings.ApiUrl;// "http://www.rawaa.somee.com";
         HttpClientHandler httpClientHandler = new HttpClientHandler();
         HttpClient client;
 
@@ -78,20 +78,54 @@ namespace Rawaa.Services
         }
 
         // Get single  by ID
-        public async Task<T> GetById(int id, string uri, string token = "")
+        public async Task<T> GetById(string uri, string id, string token = "")
+        {
+            var valueReturned = default(T);
+            try
+            {
+                var response = await client.GetAsync(uri + id);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return valueReturned;
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+                var listFromT = JsonConvert.DeserializeObject<T>(json);
+                return await Task.FromResult(listFromT);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return valueReturned;
+        }
+
+        // remove 
+        public async Task<bool> DeleteOneAsync(string uri, string id="", string token = "")
         {
             try
             {
-                client.DefaultRequestHeaders.Add("id", id.ToString());
-                var json = await client.GetStringAsync("Students");
-                T result = await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
-                return result;
+                var response = await client.DeleteAsync(uri + id);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return false;
+                }
+
+                var Json = await response.Content.ReadAsStringAsync();
+                //T model = JsonConvert.DeserializeObject<T>(Json);
+                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                Console.WriteLine(ex.Message);
             }
+            return false;
         }
+
+
 
 
         #region

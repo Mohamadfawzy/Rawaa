@@ -48,19 +48,32 @@ namespace Rawaa.ViewModels
             FoodMenu = new List<Category>();
             Categories = new List<Category>();
             StaticSelectedCategory = new Category();
-            RefreshCountBasket();
             Categories = categories;
             Task.Run(() => FetchCategory());
+            
         }
 
+        public void OnAppearing()
+        {
+            RefreshCountBasket();
+        }
 
         // private methonds
         private async void SelectedCategoryExecute(Category item)
         {
-            if (SelectedCategory == null) return;
-            StaticSelectedCategory = selectedCategory;
-            await Shell.Current.GoToAsync($"ProductsPage");
-            SelectedCategory = null;
+            try
+            {
+                if (SelectedCategory == null) return;
+                StaticSelectedCategory = selectedCategory;
+                await Shell.Current.GoToAsync($"ProductsPage");
+                SelectedCategory = null;
+            }
+            catch (Exception ex )
+            {
+
+                await AppSettings.Alert(ex.Message);
+            }
+           
         }
 
         // Categoreis
@@ -70,6 +83,8 @@ namespace Rawaa.ViewModels
             FoodMenu = list.ToList();
             OnPropertyChanged("FoodMenu");
         }
+
+
 
     }
 }

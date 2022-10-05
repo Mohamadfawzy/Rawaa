@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.OrderDetailsPage"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="true"
+             Shell.TabBarIsVisible="False"
+             x:Name="page">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="14" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="priceLabel">
+                <Setter Property="FontFamily"
+                        Value="CairoBold" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource blueDark}" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="EndAndExpand" />
+            </Style>
+            <Style TargetType="Label"
+                   x:Key="priceCurrency"
+                   BaseResourceKey="priceLabel">
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="Text"
+                        Value="{x:Static lang:LanguageResources.GlobalCurrency}" />
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:OrderDetailsPageVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <RefreshView>
+            <Grid>
+                <ScrollView>
+                    <StackLayout Spacing="20">
+
+                        <!-- row 1  Order Prepared -->
+                        <StackLayout HeightRequest="130"
+                                     x:Name="stackOrderStatus"
+                                     BackgroundColor="{Binding BindingContext.StatusOrderBackgournColor, Source={x:Reference Name=page}}">
+                            <!-- -->
+                            <Label Text="{Binding OrderStatus}"
+                                   FontSize="18"
+                                   FontFamily="CairoBold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand" />
+                            <!-- Triggers -->
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout"
+                                             Binding="{Binding Source={x:Reference btnCancellingOrder },Path=IsVisible}"
+                                             Value="false">
+                                    <Setter Property="IsVisible"
+                                            Value="False" />
+                                    <!-- multiple Setters elements are allowed -->
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+                        </StackLayout>
+
+                        <!-- row 2  mels in order -->
+                        <StackLayout Margin="15,0">
+                            <!-- -->
+                            <Label Text="{x:Static lang:LanguageResources.ODMealsInOrder}"
+                                   FontFamily="CairoBold"
+                                   FontSize="16" />
+                            <frame:PancakeView CornerRadius="15"
+                                               BackgroundColor="{StaticResource whiteSmoke}">
+                                <!-- -->
+                                <Label Text="{Binding  OrderStatus}"
+                                       FontFamily="CairoRequler"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+
+                            </frame:PancakeView>
+
+                        </StackLayout>
+
+                        <!-- row 3  Delivery To -->
+                        <StackLayout BindingContext="{Binding Order}"
+                                     Margin="15,0">
+                            <!-- -->
+                            <Label Text="{x:Static lang:LanguageResources.ODDeliveryTo}"
+                                   FontSize="15"
+                                   FontFamily="CairoBold" />
+                            <frame:PancakeView CornerRadius="15"
+                                               BackgroundColor="{StaticResource whiteSmoke}">
+                                <StackLayout Padding="10,5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <!-- regoin icon  -->
+                                        <Label Text="{x:Static icon:IconFont.MapMarker }"
+                                               FontFamily="IconFont"
+                                               VerticalOptions="Center" />
+                                        <!-- Short Name -->
+                                        <Label Text="{Binding DeliveryAddress.ShortName}"
+                                               FontSize="16"
+                                               FontFamily="CairoBold" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <!-- -->
+                                        <Label Text="{Binding DeliveryAddress.BuildingNumber, StringFormat='{0},'}"
+                                               FontFamily="CairoRequler" />
+                                        <!-- -->
+                                        <Label Text="{Binding DeliveryAddress.Street, StringFormat='{0},'}"
+                                               FontFamily="CairoRequler" />
+                                        <!-- -->
+                                        <Label Text="{Binding DeliveryAddress.City, StringFormat='{0},'}"
+                                               FontFamily="CairoRequler" />
+                                        <!-- -->
+                                        <Label Text="{Binding DeliveryAddress.Governorate, StringFormat='{0},'}"
+                                               FontFamily="CairoRequler" />
+                                        <!-- -->
+                                        <Label Text="{x:Static lang:LanguageResources.DATurnNumber}"
+                                               FontFamily="CairoRequler" />
+
+                                        <!-- -->
+                                        <Label Text="{Binding DeliveryAddress.FloorrUmber}"
+                                               FontFamily="CairoRequler" />
+                                        <!-- -->
+                                        <Label Text="{x:Static lang:LanguageResources.DAApartmentNumber}"
+                                               FontFamily="CairoRequler" />
+
+                                        <Label Text="{Binding DeliveryAddress.ApartmentNumber}"
+                                               FontFamily="CairoRequler" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </frame:PancakeView>
+                        </StackLayout>
+
+                        <!-- row 4   Payment Method-->
+                        <StackLayout Margin="15,0">
+                            <!-- -->
+                            <Label Text="{x:Static lang:LanguageResources.ODPaymentMethod}"
+                                   FontSize="16"
+                                   FontFamily="CairoBold" />
+                            <frame:PancakeView CornerRadius="15"
+                                               Padding="10"
+                                               BackgroundColor="{StaticResource whiteSmoke}">
+                                <StackLayout Orientation="Horizontal">
+                                    <!-- -->
+                                    <Label Text="{x:Static icon:IconFont.Cash}"
+                                           FontSize="25"
+                                           FontFamily="IconFont"
+                                           VerticalOptions="Center" />
+                                    <!-- -->
+                                    <Label Text="{x:Static lang:LanguageResources.ODCashdelivery}"
+                                           FontFamily="CairoRequler"
+                                           VerticalOptions="Center" />
+
+                                </StackLayout>
+                            </frame:PancakeView>
+
+                        </StackLayout>
+
+                        <!-- row 5  Total Price Details-->
+                        <frame:PancakeView BackgroundColor="{StaticResource whiteSmoke}"
+                                           CornerRadius="15"
+                                           Padding="10,20"
+                                           Margin="20,15,20,15">
+                            <StackLayout>
+                                <!-- -->
+                                <Label Text="{x:Static lang:LanguageResources.ODInvoiceDetails}"
+                                       FontSize="16"
+                                       FontFamily="CairoRequler" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{x:Static lang:LanguageResources.ODOrderValue}"
+                                           FontFamily="CairoRequler"
+                                           HorizontalOptions="StartAndExpand" />
+                                    <!-- price -->
+                                    <StackLayout Orientation="Horizontal"
+                                                 Margin="20,0">
+                                        <Label Text="{Binding TotalPrice }"
+                                               Style="{StaticResource priceLabel}" />
+                                        <Label Style="{StaticResource priceCurrency}" />
+                                    </StackLayout>
+
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{x:Static lang:LanguageResources.ODDeliveryFee	}"
+                                           FontFamily="CairoRequler"
+                                           HorizontalOptions="StartAndExpand" />
+                                    <!-- price -->
+                                    <StackLayout Orientation="Horizontal"
+                                                 Margin="20,0">
+                                        <Label Text="{Binding DeliveryFee }"
+                                               Style="{StaticResource priceLabel}" />
+                                        <Label Style="{StaticResource priceCurrency}" />
+                                    </StackLayout>
+
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{x:Static lang:LanguageResources.ODTotalPrice	}"
+                                           HorizontalOptions="StartAndExpand"
+                                           FontFamily="CairoRequler" />
+                                    <!-- price -->
+                                    <StackLayout Orientation="Horizontal"
+                                                 Margin="20,0">
+                                        <Label Text="{Binding TotalBill }"
+                                               Style="{StaticResource priceLabel}" />
+                                        <Label Style="{StaticResource priceCurrency}" />
+                                    </StackLayout>
+
+                                </StackLayout>
+
+                            </StackLayout>
+                        </frame:PancakeView>
+                        
+                        <!-- row 6  Button  Conform && cancel order -->
+                        <StackLayout Grid.Row="1"
+                                     VerticalOptions="End">
+                            <!-- -->
+                            <Button Text="{x:Static lang:LanguageResources.ODCancellingOrder}"
+                                    IsVisible="{Binding CancellingOrderIsVisible}"
+                                    x:Name="btnCancellingOrder"
+                                    Margin="20"
+                                    CornerRadius="15"
+                                    HeightRequest="45"
+                                    VerticalOptions="Center"
+                                    BackgroundColor="{StaticResource yellowDark}"
+                                    TextColor="{StaticResource blueDark}"
+                                    FontFamily="CairoBold"
+                                    HorizontalOptions="FillAndExpand"
+                                    Command="{Binding BindingContext.ConformOrderCommand, Source={x:Reference Name=page}}">
+                            </Button>
+                            
+                            <Button Text="{x:Static lang:LanguageResources.ODExecutionRequest}"
+                                    Margin="20"
+                                    CornerRadius="15"
+                                    HeightRequest="45"
+                                    VerticalOptions="Center"
+                                    BackgroundColor="{StaticResource yellowDark}"
+                                    TextColor="{StaticResource blueDark}"
+                                    FontFamily="CairoBold"
+                                    HorizontalOptions="FillAndExpand"
+                                    Command="{Binding BindingContext.ConformOrderCommand, Source={x:Reference Name=page}}">
+                                <!-- Triggers -->
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+                                                 Binding="{Binding CancellingOrderIsVisible}"
+                                                 Value="true">
+                                        <Setter Property="IsVisible"
+                                                Value="False" />
+                                        <!-- multiple Setters elements are allowed -->
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            
+                            
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

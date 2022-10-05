@@ -10,6 +10,7 @@
              xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{StaticResource white}"
              Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
              Title="{x:Static lang:LanguageResources.CartTitlePage}"
              x:Name="page">
     <ContentPage.Resources>

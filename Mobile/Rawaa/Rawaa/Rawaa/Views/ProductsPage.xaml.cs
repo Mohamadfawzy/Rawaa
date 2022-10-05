@@ -11,34 +11,34 @@ using Xamarin.Forms.Xaml;
 
 namespace Rawaa.Views
 {
-    //[QueryProperty(nameof(SelectedCategorytID), "category")]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductsPage : ContentPage
     {
-        public int SelectedCategorytID
-        {
-            set
-            {
-                Load(value);
-            }
-        }
+        //[QueryProperty(nameof(SelectedCategorytID), "category")]
+        //public int SelectedCategorytID
+        //{
+        //    set
+        //    {
+        //        Load(value);
+        //    }
+        //}
+        //void Load(int id)
+        //{
+        //    try
+        //    {
+        //        (BindingContext as ProductsPageVM).FetchProducts(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        Console.WriteLine("Failed to load animal.");
+        //    }
+        //}
+
         public ProductsPage()
         {
             InitializeComponent();
         }
 
-
-        void  Load(int id)
-        {
-            try
-            {
-                (BindingContext as ProductsPageVM).FetchProducts(id);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Failed to load animal.");
-            }
-        }
 
         private async void MealsCV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -53,7 +53,7 @@ namespace Rawaa.Views
             catch (Exception ex )
             {
 
-                AppSettings.Alert(ex.Message);
+                await AppSettings.Alert(ex.Message);
             }
         }
     }

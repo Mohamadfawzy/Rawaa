@@ -219,6 +219,45 @@
   <data name="MainPage_SearchPlaceHolder" xml:space="preserve">
     <value>عن ماذا تبحث؟</value>
   </data>
+  <data name="ODCancellingOrder" xml:space="preserve">
+    <value>إلغاء الطلب</value>
+  </data>
+  <data name="ODCashdelivery" xml:space="preserve">
+    <value>كاش عن التوصيل</value>
+  </data>
+  <data name="ODDeliveryFee" xml:space="preserve">
+    <value>رسوم التوصيل</value>
+  </data>
+  <data name="ODDeliveryTo" xml:space="preserve">
+    <value>التوصيل إلى</value>
+  </data>
+  <data name="ODExecutionRequest" xml:space="preserve">
+    <value>تنفيذ الطلب</value>
+  </data>
+  <data name="ODInvoiceDetails" xml:space="preserve">
+    <value>تفاصيل الفاتورة</value>
+  </data>
+  <data name="ODMealsInOrder" xml:space="preserve">
+    <value>الوجبات في الطلب</value>
+  </data>
+  <data name="ODOrderDelivered" xml:space="preserve">
+    <value>تم توصيل الطلب</value>
+  </data>
+  <data name="ODOrderPrepared" xml:space="preserve">
+    <value>يتم تحضير الطلب الآن</value>
+  </data>
+  <data name="ODOrderValue" xml:space="preserve">
+    <value>قيمة الطلب</value>
+  </data>
+  <data name="ODPaymentMethod" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="ODRequestCanceled" xml:space="preserve">
+    <value>تم الغاء الطلب</value>
+  </data>
+  <data name="ODTotalPrice" xml:space="preserve">
+    <value>إجمالي الفاتورة</value>
+  </data>
   <data name="Shell_Title_Acount" xml:space="preserve">
     <value>الحساب</value>
   </data>

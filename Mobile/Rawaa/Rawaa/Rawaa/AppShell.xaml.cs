@@ -21,6 +21,7 @@ namespace Rawaa
             Routing.RegisterRoute(nameof(CartPage), typeof(CartPage));
             Routing.RegisterRoute(nameof(CreateDeliveryAddressPage), typeof(CreateDeliveryAddressPage));
             Routing.RegisterRoute(nameof(AllDeliveryAddressPage), typeof(AllDeliveryAddressPage));
+            Routing.RegisterRoute(nameof(OrderDetailsPage), typeof(OrderDetailsPage));
             //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
         

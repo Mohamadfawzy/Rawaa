@@ -28,8 +28,8 @@ namespace Rawaa.ViewModels
             set { SetProperty(ref price, value); }
         }
 
-        int _quantity = 1;
-        public int Quantity
+        byte _quantity = 1;
+        public byte Quantity
         {
             get { return _quantity; }
             set { SetProperty(ref _quantity, value); }
@@ -54,8 +54,22 @@ namespace Rawaa.ViewModels
             price = meal.SmallSizePrice;
             RefreshCountBasket();
             SelectedSizePrice = meal.SmallSizePrice;
+            if (StaticCart != null)
+            {
+                Quantity = StaticCart.Quantity;
+
+            }
         }
 
+        private static Product staticProduct = new Product();
+        public static Cart StaticCart = new Cart();
+        public static void Initializer(Product product, Cart cart = null)
+        {
+            staticProduct = product;
+            StaticCart = cart;
+
+
+        }
         // quantity section
         private void PlusExcuted()
         {
@@ -96,28 +110,26 @@ namespace Rawaa.ViewModels
             }
         }
 
-        private static Product staticProduct = new Product();
-        public static void Initializer(Product product)
-        {
-            staticProduct = product;
-        }
 
+
+
+        void fun() { }
         private async void AddProductToBasketexEcuted()
         {
             IsBusy = true;
             CartOption.ProductId = meal.Id;
             CartOption.CustomerId = Convert.ToInt32(AppSettings.UserId);
-            
+
             var rs = await requestProvider.PostOneAsync<Cart>(CartOption, $"{AppSettings.currentLang}/api/client/cart");
             if (rs != null)
             {
-                await AppSettings.Alert("added",2);
+                await AppSettings.Alert("added", 2);
                 IsBusy = false;
                 AppSettings.countOfCart++;
                 RefreshCountBasket();
                 return;
             }
-            await AppSettings.Alert("Can not added",2);
+            await AppSettings.Alert("Can not added", 2);
 
 
         }

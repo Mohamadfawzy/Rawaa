@@ -219,6 +219,45 @@
   <data name="MainPage_SearchPlaceHolder" xml:space="preserve">
     <value />
   </data>
+  <data name="ODCancellingOrder" xml:space="preserve">
+    <value>Cancelling order</value>
+  </data>
+  <data name="ODCashdelivery" xml:space="preserve">
+    <value>cash for delivery</value>
+  </data>
+  <data name="ODDeliveryFee" xml:space="preserve">
+    <value>delivery fee</value>
+  </data>
+  <data name="ODDeliveryTo" xml:space="preserve">
+    <value>Delivery to</value>
+  </data>
+  <data name="ODExecutionRequest" xml:space="preserve">
+    <value>Execution of the request</value>
+  </data>
+  <data name="ODInvoiceDetails" xml:space="preserve">
+    <value>Invoice details</value>
+  </data>
+  <data name="ODMealsInOrder" xml:space="preserve">
+    <value>Meals on demand</value>
+  </data>
+  <data name="ODOrderDelivered" xml:space="preserve">
+    <value>The order has been delivered</value>
+  </data>
+  <data name="ODOrderPrepared" xml:space="preserve">
+    <value>The order is now being prepared</value>
+  </data>
+  <data name="ODOrderValue" xml:space="preserve">
+    <value>order value</value>
+  </data>
+  <data name="ODPaymentMethod" xml:space="preserve">
+    <value>Payment method</value>
+  </data>
+  <data name="ODRequestCanceled" xml:space="preserve">
+    <value>the request has been canceled</value>
+  </data>
+  <data name="ODTotalPrice" xml:space="preserve">
+    <value>total bill</value>
+  </data>
   <data name="Shell_Title_Acount" xml:space="preserve">
     <value>Acount</value>
   </data>

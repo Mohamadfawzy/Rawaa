@@ -10,9 +10,14 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Rawaa.Gener
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\App.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\AppShell.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\AccountPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\AllDeliveryAddressPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\CartPage.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\CategoryPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\CreateDeliveryAddressPage.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\HomePage.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\LoginPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\OrderDetailsPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\OrderSummaryPage.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\ProductDetailsPage.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\ProductsPage.xaml.g.cs
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\SearchPage.xaml.g.cs
@@ -26,7 +31,3 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Rawaa.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\refint\Rawaa.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Rawaa.pdb
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\ref\Rawaa.dll
-E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\CartPage.xaml.g.cs
-E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\OrderSummaryPage.xaml.g.cs
-E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\CreateDeliveryAddressPage.xaml.g.cs
-E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\AllDeliveryAddressPage.xaml.g.cs

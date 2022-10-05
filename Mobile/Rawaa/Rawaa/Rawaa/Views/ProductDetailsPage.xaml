@@ -247,7 +247,7 @@
                                        Margin="0,30,0,0"
                                        FontSize="Medium" />
 
-                                <!-- -->
+                                <!-- the 3 frames  -->
                                 <frame:PancakeView x:Name="sizeFrame"
                                                    Shadow="{frame:ShadowMarkup Color=Red, BlurRadius=2 ,Offset='10,10'}"
                                                    Margin="15,5"
@@ -271,6 +271,7 @@
 
                                         <!-- medium -->
                                         <frame:PancakeView Style="{DynamicResource deselectedFrame}"
+                                                           x:Name="mediumFrame"
                                                            HorizontalOptions="CenterAndExpand">
                                             <Label x:Name="medium"
                                                    Text="وسط"
@@ -282,7 +283,8 @@
                                         </frame:PancakeView>
 
                                         <!-- larg -->
-                                        <frame:PancakeView Style="{DynamicResource deselectedFrame}">
+                                        <frame:PancakeView Style="{DynamicResource deselectedFrame}"
+                                                           x:Name="largFrame">
                                             <Label x:Name="larg"
                                                    Text="كبير"
                                                    Style="{DynamicResource deselectedLabel}" />
@@ -303,7 +305,8 @@
                                    FontSize="Medium" />
 
                             <!-- Teste section -->
-                            <StackLayout Margin="15,5">
+                            <StackLayout Margin="15,5"
+                                         x:Name="StackTeste">
 
                                 <!-- Normal -->
                                 <frame:PancakeView CornerRadius="30"
@@ -331,6 +334,7 @@
 
                                 <!-- Hot -->
                                 <frame:PancakeView CornerRadius="30"
+                                                   x:Name="frameTesteHot"
                                                    HeightRequest="30"
                                                    Style="{DynamicResource deselectedFrame}"
                                                    Shadow="{frame:ShadowMarkup  BlurRadius=3}">
@@ -356,7 +360,7 @@
                             <ScrollView  Orientation="Horizontal"
                                          Margin="0,30,0,0"
                                          HorizontalScrollBarVisibility="Never">
-                                <FlexLayout Direction="Column"
+                                <FlexLayout x:Name="flexDrinks" Direction="Column"
                                             Wrap="Wrap"
                                             AlignItems="Start"
                                             AlignContent="Start"
@@ -365,11 +369,11 @@
                                             HeightRequest="180">
                                     <BindableLayout.ItemsSource>
                                         <x:Array Type="{x:Type x:String}">
-                                            <x:String>mohamed</x:String>
-                                            <x:String>mohamed</x:String>
-                                            <x:String>mohamed</x:String>
-                                            <x:String>mohamed</x:String>
-                                            <x:String>mohamed</x:String>
+                                            <x:String>mohamed2</x:String>
+                                            <x:String>mohamed2</x:String>
+                                            <x:String>mohamed3</x:String>
+                                            <x:String>mohamed4</x:String>
+                                            <x:String>mohamed5</x:String>
                                             <x:String>mohamed</x:String>
                                             <x:String>mohamed</x:String>
                                             <x:String>mohamed</x:String>

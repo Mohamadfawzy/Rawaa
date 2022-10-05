@@ -13,7 +13,7 @@
              x:Name="page"
              xmlns:converter="clr-namespace:Rawaa.Converters"
              Shell.PresentationMode="NotAnimated">
-<!--
+    <!--
 Text="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
 FontFamily="CairoRequler"
     

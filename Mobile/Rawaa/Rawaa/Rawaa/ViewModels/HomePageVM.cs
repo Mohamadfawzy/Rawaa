@@ -47,6 +47,11 @@ namespace Rawaa.ViewModels
             Task.Run(() => FetchOffers());
         }
 
+        public void OnAppearing()
+        {
+            RefreshCountBasket();
+        }
+
         // excuted
         private async void SelectedProductExecute(Product item)
         {
