@@ -44,7 +44,11 @@ namespace Rawaa.Views
 
             HandleUiFromCart();
         }
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (BindingContext as ProductDetailsPageVM).RefreshCountBasket();
+        }
 
         // size section
         private void Size_Tapped(object sender, EventArgs e)
@@ -107,7 +111,7 @@ namespace Rawaa.Views
         {
             var gester = (TapGestureRecognizer)frame.GestureRecognizers.FirstOrDefault();
             var name = gester.CommandParameter.ToString();
-            var stack = (StackLayout)frame.Content;
+            var stack = frame.Content as StackLayout;
             var label1 = (Label)stack.Children[0];
             var label2 = (Label)stack.Children[1];
 
@@ -159,6 +163,9 @@ namespace Rawaa.Views
                 case 3:
                     frame = largFrame;
                     break;
+                default:
+                    frame = smallFrame;
+                    break;
             }
             HandleSizeMela(frame);
 
@@ -170,8 +177,13 @@ namespace Rawaa.Views
                 case 2:
                     frame = frameTesteHot;
                     break;
+                default:
+                    frame = frameTesteNormal;
+                    break;
+
             }
             HandleTesteFrame(frame);
+
 
             test();
         }

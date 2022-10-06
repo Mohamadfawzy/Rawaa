@@ -31,3 +31,5 @@ E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Rawaa.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\refint\Rawaa.dll
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Rawaa.pdb
 E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\ref\Rawaa.dll
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\OrdersPage.xaml.g.cs
+E:\_Projects\Rawaa\Mobile\Rawaa\Rawaa\Rawaa\obj\Debug\netstandard2.0\Views\RegisterPage.xaml.g.cs

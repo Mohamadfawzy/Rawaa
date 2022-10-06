@@ -1,4 +1,6 @@
-﻿using Rawaa.ViewModels;
+﻿using Newtonsoft.Json;
+using Rawaa.Resources.Languages;
+using Rawaa.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +15,7 @@ namespace Rawaa.Models
         public byte PymentMethod { get; set; }
         public double Total { get; set; }
         public DateTime? OrderDate { get; set; }
-        public double? DeliveryFee { get; set; }
+        public double? DeliveryFee { get; set; } = 0;
         public int? RestaurantId { get; set; }
         public int? CustomerId { get; set; }
         public int? DeliveryAddressId { get; set; }
@@ -26,6 +28,15 @@ namespace Rawaa.Models
             set { SetProperty(ref deliveryAddress, value); }
         }
         public List<OrderDetails> OrderDetails { get; set; }
+
+
+        //
+        [JsonIgnore]
+        public string StatusName { get; set; } = LanguageResources.OrderPending;
+        [JsonIgnore]
+        public string StatuseBackgrounColore { get; set; } = "#FFF8DC";
+        [JsonIgnore]
+        public string StatuseTextColore { get; set; } = "#B8860B";
 
     }
 }

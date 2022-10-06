@@ -27,5 +27,13 @@ namespace Rawaa.Services
                 return false;
             return true;
         }
+
+        public static  string GetCountOfProductInCart(string url)
+        {
+            var provider = new RequestProvider<string>();
+            var res = provider.GetById(url, AppSettings.UserId).Result;
+            return res;
+
+        }
     }
 }

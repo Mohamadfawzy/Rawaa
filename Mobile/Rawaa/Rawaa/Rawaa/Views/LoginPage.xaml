@@ -109,7 +109,11 @@
                 <Label Text="{x:Static lang:LanguageResources.loginPage_regesterNow}"
                        FontFamily="CairoBold"
                        HorizontalOptions="Center"
-                       VerticalOptions="Center" />
+                       VerticalOptions="Center">
+                     <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GoToRegisterPage_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
 
         </StackLayout>

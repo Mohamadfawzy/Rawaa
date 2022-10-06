@@ -39,7 +39,11 @@ namespace Rawaa.Views
             InitializeComponent();
         }
 
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (BindingContext as ProductsPageVM).RefreshCountBasket();
+        }
         private async void MealsCV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try

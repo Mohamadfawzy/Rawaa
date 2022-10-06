@@ -46,166 +46,153 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-
-        <StackLayout>
-            <!-- Frame searchBar -Contain 2 elements -->
-            <frame:PancakeView CornerRadius="7"
-                               HorizontalOptions="FillAndExpand"
-                               BackgroundColor="White"
-                               Margin="8,2,8,8"
-                               Padding="0"
-                               Border="{frame:BorderMarkup Color=Gray, Thickness=1}">
-                <!-- Containar -have MagnifyIcon,SearchEntry,ClearIcon -->
-                <StackLayout HorizontalOptions="FillAndExpand"
-                             VerticalOptions="Center"
-                             Orientation="Horizontal"
-                             Spacing="0">
-                    <!-- Magnify Icon-->
-                    <Label Text="{x:Static icon:IconFont.Magnify}"
-                           FontFamily="IconFont"
-                           Padding="10,0"
-                           FontSize="25"
-                           Margin="0,4,0,0"
-                           VerticalOptions="Center"
-                           TextColor="Red" />
-                    <!-- Entry for search -->
-                    <Entry Placeholder="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
-                           x:Name="entrySearch"
-                           FontFamily="CairoRequler"
-                           FontSize="14"
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalOptions="FillAndExpand"
-                           Text="{Binding EntrySearch}">
-                        <Entry.Effects>
-                            <xct:RemoveBorderEffect />
-                        </Entry.Effects>
-                    </Entry>
-                    <!-- Frame Clear icon -->
-                    <Frame Style="{StaticResource FrameCircleTouch}"
-                           xct:TouchEffect.Command="{Binding EraseEntrySearshCommand}">
-                        <Label Text="{x:Static icon:IconFont.Close}"
-                               IsVisible="true"
+        <RefreshView IsRefreshing="{Binding IsBusy}"
+                     RefreshColor="{StaticResource yellowDark}">
+            <StackLayout>
+                <!-- Frame searchBar -Contain 2 elements -->
+                <frame:PancakeView CornerRadius="7"
+                                   HorizontalOptions="FillAndExpand"
+                                   BackgroundColor="White"
+                                   Margin="8,2,8,8"
+                                   Padding="0"
+                                   Border="{frame:BorderMarkup Color=Gray, Thickness=1}">
+                    <!-- Containar -have MagnifyIcon,SearchEntry,ClearIcon -->
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Center"
+                                 Orientation="Horizontal"
+                                 Spacing="0">
+                        <!-- Magnify Icon-->
+                        <Label Text="{x:Static icon:IconFont.Magnify}"
                                FontFamily="IconFont"
-                               FontSize="20"
-                               Padding="10"
-                               VerticalOptions="Fill"
-                               HorizontalOptions="End"
-                               TextColor="Orange"
-                               BackgroundColor="Transparent">
-                        </Label>
-                        <!-- Trigger if  entrySearch not empty => IsVisible = false -->
-                        <Frame.Triggers>
-                            <DataTrigger TargetType="Frame"
-                                         Binding="{Binding Source={x:Reference entrySearch},Path=Text.Length}"
-                                         Value="0">
-                                <Setter Property="IsVisible"
-                                        Value="False" />
-                            </DataTrigger>
-                        </Frame.Triggers>
-                    </Frame>
-                </StackLayout>
+                               Padding="10,0"
+                               FontSize="25"
+                               Margin="0,4,0,0"
+                               VerticalOptions="Center"
+                               TextColor="Red" />
+                        <!-- Entry for search -->
+                        <Entry Placeholder="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                               x:Name="entrySearch"
+                               FontFamily="CairoRequler"
+                               FontSize="14"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               Text="{Binding EntrySearch}">
+                            <Entry.Effects>
+                                <xct:RemoveBorderEffect />
+                            </Entry.Effects>
+                        </Entry>
+                        <!-- Frame Clear icon -->
+                        <Frame Style="{StaticResource FrameCircleTouch}"
+                               xct:TouchEffect.Command="{Binding EraseEntrySearshCommand}">
+                            <Label Text="{x:Static icon:IconFont.Close}"
+                                   IsVisible="true"
+                                   FontFamily="IconFont"
+                                   FontSize="20"
+                                   Padding="10"
+                                   VerticalOptions="Fill"
+                                   HorizontalOptions="End"
+                                   TextColor="Orange"
+                                   BackgroundColor="Transparent">
+                            </Label>
+                            <!-- Trigger if  entrySearch not empty => IsVisible = false -->
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame"
+                                             Binding="{Binding Source={x:Reference entrySearch},Path=Text.Length}"
+                                             Value="0">
+                                    <Setter Property="IsVisible"
+                                            Value="False" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </StackLayout>
 
-            </frame:PancakeView>
+                </frame:PancakeView>
 
-            <!-- Collection of  -->
-            <CollectionView ItemsSource="{Binding ListOfProducts}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"
-                                       ItemSpacing="0" />
-                </CollectionView.ItemsLayout>
+                <!-- Collection of  -->
+                <CollectionView ItemsSource="{Binding ListOfProducts}"
+                                SelectionMode="Single"
+                                SelectionChanged="CollectionView_SelectionChanged">
+                    
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="0" />
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid VerticalOptions="Fill"
-                              RowSpacing="1">
-                            <frame:PancakeView Margin="8,5"
-                                               HeightRequest="150"
-                                               CornerRadius="10"
-                                               Padding="0"
-                                               Shadow="{frame:ShadowMarkup BlurRadius=3}"
-                                               VerticalOptions="FillAndExpand"
-                                               BackgroundColor="White">
-                                <!-- MintCream -->
-                                <StackLayout HorizontalOptions="FillAndExpand"
-                                             Spacing="5"
-                                             Orientation="Horizontal"
-                                             BackgroundColor="White">
-
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid VerticalOptions="Fill"
+                                  RowSpacing="1">
+                                <frame:PancakeView Margin="8,5"
+                                                   HeightRequest="150"
+                                                   CornerRadius="10"
+                                                   Padding="0"
+                                                   Shadow="{frame:ShadowMarkup BlurRadius=3}"
+                                                   VerticalOptions="FillAndExpand"
+                                                   BackgroundColor="White">
+                                    <!-- MintCream -->
                                     <StackLayout HorizontalOptions="FillAndExpand"
-                                                 Padding="10">
-                                        <!-- Title  -->
-                                        <Label Text="{Binding Title}"
-                                               FontSize="18"
-                                               TextColor="{StaticResource blueRegular}"
-                                               LineBreakMode="TailTruncation"
-                                               Margin="0" />
+                                                 Spacing="5"
+                                                 Orientation="Horizontal"
+                                                 BackgroundColor="White">
 
-                                        <!-- price -->
-                                        <StackLayout Orientation="Horizontal"
-                                                     VerticalOptions="Center"
-                                                     Spacing="0">
-                                            <Label Text="{Binding SmallSizePrice}"
-                                                   FontSize="20"
-                                                   TextColor="{StaticResource blueDark}"
-                                                   VerticalOptions="Center"
-                                                   FontFamily="CairoBold" />
-                                            <Label Text="ج.م"
-                                                   FontSize="16"
-                                                   Margin="10,0"
-                                                   TextColor="{StaticResource blueDark}"
-                                                   VerticalOptions="Center"
-                                                   FontFamily="CairoBold" />
+                                        <StackLayout HorizontalOptions="FillAndExpand"
+                                                     Padding="10">
+                                            <!-- Title  -->
+                                            <Label Text="{Binding Title}"
+                                                   FontSize="18"
+                                                   TextColor="{StaticResource blueRegular}"
+                                                   LineBreakMode="TailTruncation"
+                                                   Margin="0" />
+
+                                            <!-- price -->
+                                            <StackLayout Orientation="Horizontal"
+                                                         VerticalOptions="Center"
+                                                         Spacing="0">
+                                                <Label Text="{Binding SmallSizePrice}"
+                                                       FontSize="20"
+                                                       TextColor="{StaticResource blueDark}"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoBold" />
+                                                <Label Text="ج.م"
+                                                       FontSize="16"
+                                                       Margin="10,0"
+                                                       TextColor="{StaticResource blueDark}"
+                                                       VerticalOptions="Center"
+                                                       FontFamily="CairoBold" />
+                                            </StackLayout>
+
+                                            <!-- button add to cart -->
+                                            <Button Text="اضافة للسلة"
+                                                    Margin="5,0,5,7"
+                                                    xct:ShadowEffect.Color="{StaticResource yellowDark}"
+                                                    Padding="30,0"
+                                                    CornerRadius="30"
+                                                    HeightRequest="30"
+                                                    VerticalOptions="End"
+                                                    HorizontalOptions="Center"
+                                                    BackgroundColor="{StaticResource yellowDark}"
+                                                    TextColor="{StaticResource blueDark}"
+                                                    FontFamily="CairoBold" />
                                         </StackLayout>
 
-                                        <!-- price pefore descount -->
-                                        <StackLayout Orientation="Horizontal"
-                                                     VerticalOptions="Center"
-                                                     Spacing="-10">
-                                            <Label Text="{Binding SmallSizePrice}"
-                                                   FontSize="16"
-                                                   TextDecorations="Strikethrough"
-                                                   VerticalOptions="Center"
-                                                   FontFamily="CairoRegular">
-                                            </Label>
-                                            <Label Text="   ج.م"
-                                                   FontSize="16"
-                                                   TextDecorations="Strikethrough"
-                                                   Margin="10,0"
-                                                   VerticalOptions="Center"
-                                                   FontFamily="CairoRegular" />
-                                        </StackLayout>
+                                        <!-- Image -->
+                                        <frame:PancakeView CornerRadius="10"
+                                                           Shadow="{frame:ShadowMarkup BlurRadius=1}"
+                                                           BackgroundColor="WhiteSmoke">
+                                            <image:CachedImage Source="{Binding ImageUrl}"
+                                                               Aspect="AspectFill"
+                                                               WidthRequest="120"
+                                                               VerticalOptions="Center" />
+                                        </frame:PancakeView>
 
-                                        <!-- button add to cart -->
-                                        <Button Text="اضافة للسلة"
-                                                Margin="5,0,5,7"
-                                                xct:ShadowEffect.Color="{StaticResource yellowDark}"
-                                                Padding="30,0"
-                                                CornerRadius="30"
-                                                HeightRequest="30"
-                                                VerticalOptions="End"
-                                                HorizontalOptions="Center"
-                                                BackgroundColor="{StaticResource yellowDark}"
-                                                TextColor="{StaticResource blueDark}"
-                                                FontFamily="CairoBold" />
                                     </StackLayout>
+                                </frame:PancakeView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                                    <!-- Image -->
-                                    <frame:PancakeView CornerRadius="10"
-                                                       Shadow="{frame:ShadowMarkup BlurRadius=1}"
-                                                       BackgroundColor="WhiteSmoke">
-                                        <image:CachedImage Source="{Binding ImageUrl}"
-                                                           Aspect="AspectFill"
-                                                           WidthRequest="120"
-                                                           VerticalOptions="Center" />
-                                    </frame:PancakeView>
-
-                                </StackLayout>
-                            </frame:PancakeView>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-        </StackLayout>
+            </StackLayout>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

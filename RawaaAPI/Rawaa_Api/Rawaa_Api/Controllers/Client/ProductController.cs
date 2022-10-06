@@ -39,6 +39,15 @@ namespace Rawaa_Api.Controllers.Client
 
             return Ok(result);
         }
+        [HttpGet("max")]
+        public IActionResult GetMax(string lang)
+        {
+            var result = data.Max(lang);
+            if (result == null)
+                return NotFound(new ErrorClass("404", "There are no Products to display"));
+
+            return Ok(result);
+        }
 
         [HttpGet("Search/{text}")]
         public IActionResult GetAllSearch(string text,string lang)

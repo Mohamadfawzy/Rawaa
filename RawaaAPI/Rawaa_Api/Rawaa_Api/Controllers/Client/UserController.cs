@@ -46,16 +46,20 @@ namespace Rawaa_Api.Controllers.Client
             {
                 return BadRequest(new ErrorClass("400", "Password are required"));
             }
-            if (string.IsNullOrEmpty(user.Email) || user.Email.Contains(" "))
+            if (!string.IsNullOrEmpty(user.Email))
             {
-                return BadRequest(new ErrorClass("400", "Email is invalid"));
+                if (user.Email.Contains(" "))
+                {
+                    return BadRequest(new ErrorClass("400", "Email is invalid"));
+                }
+                else
+                {
+                    var isValed = data.checkEmail(user.Email);
+                    if (!isValed)
+                        return BadRequest(new ErrorClass("400", "email is not exist"));
+                }
             }
-            else
-            {
-                var isValed = data.checkEmail(user.Email);
-                if (!isValed)
-                    return BadRequest(new ErrorClass("400", "email is not exist"));
-            }
+           
             // add
             var result = data.Login(user);
             if(result == null)

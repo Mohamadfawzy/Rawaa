@@ -142,23 +142,24 @@
                                          VerticalOptions="CenterAndExpand">
                                 <frame:PancakeView CornerRadius="10"
                                                    Padding="0"
-                                                   HeightRequest="170"
+                                                   HeightRequest="150"
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center"
                                                    IsClippedToBounds="True"
                                                    BackgroundColor="WhiteSmoke"
                                                    Border="{frame:BorderMarkup Color=NavajoWhite, Thickness=2}">
-                                    <StackLayout Padding="10">
+                                    <StackLayout>
                                         <image:CachedImage Source="{Binding ImageUrl}"
                                                            Aspect="AspectFill" 
+
                                                            VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="{Binding Title}"
-                                               FontSize="13"
-                                               TextColor="Black"
-                                               FontFamily="CairoBold"
-                                               HorizontalOptions="Center" />
                                     </StackLayout>
                                 </frame:PancakeView>
+                                <Label Text="{Binding Title}"
+                                       FontSize="13"
+                                       TextColor="Black"
+                                       FontFamily="CairoBold"
+                                       HorizontalOptions="Center" />
 
                             </StackLayout>
                         </DataTemplate>

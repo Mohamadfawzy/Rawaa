@@ -1,17 +1,22 @@
 ﻿using Rawaa.Models;
+using Rawaa.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Rawaa.ViewModels
 {
     public class SearchPageVM : BaseViewModel
     {
-        private string entrySearch = "";
+        private RequestProvider<Product> requestProvider = new RequestProvider<Product>();
+        public ObservableCollection<Product> ListOfProducts { get; set; }
 
+        private string entrySearch = "";
         public string EntrySearch
         {
             get => entrySearch;
@@ -19,41 +24,41 @@ namespace Rawaa.ViewModels
             {
                 if (entrySearch == value) return;
                 entrySearch = value;
-                getReseltFromSearch(EntrySearch);
+                Fetch(EntrySearch);
                 OnPropertyChanged(nameof(EntrySearch));
             }
         }
-        
-        private List<Product> StoredList = new List<Product>()
-        {
-            new Product { Image = "m2.jpg", Calories = 1234, Title = "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا ", SmallSizePrice = 21.50 },
-            new Product { Image = "m1.jpg", Calories = 1234, Title = "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا ", SmallSizePrice = 21.99 },
-            new Product { Image = "p1.jpg", Calories = 1241, Title = "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا ", SmallSizePrice = 21.50 },
-            new Product { Image = "p2.jpg", Calories = 1341, Title = "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا ", SmallSizePrice = 21.99 },
-            new Product { Image = "p3.jpg", Calories = 1241, Title = "بيتزا مشكل محوج طعمة جميل ولا في احلي من كدا ", SmallSizePrice = 21.50 },
-            new Product { Image = "p3.jpg", Calories = 1241, Title = "met", SmallSizePrice = 21.50 },
-            new Product { Image = "p3.jpg", Calories = 1241, Title = "met", SmallSizePrice = 21.50 },
-            new Product { Image = "p3.jpg", Calories = 1241, Title = "bitza", SmallSizePrice = 21.50 },
-            new Product { Image = "p3.jpg", Calories = 1241, Title = "bitza", SmallSizePrice = 21.50 },
 
-        };
+        public ICommand RemainingItemsThresholdReachedCommand => new Command(Incrementally);
 
+        // ctor
         public SearchPageVM()
         {
             ListOfProducts = new ObservableCollection<Product>();
-            Task.Run(()=> AddResultsInTheRecentSearchList(StoredList));
         }
-        public ObservableCollection<Product> ListOfProducts { get; set; }
-        private void getReseltFromSearch(string search)
+        int page = 0;
+        private async void Incrementally()
         {
-            if (string.IsNullOrEmpty(search))
-                return;
-            var ListOfResult = StoredList.Where(s => s.Title.ToLower().Contains(search.ToLower())).OrderBy((x) => x.Title).ToList();
-            
-            AddResultsInTheRecentSearchList(ListOfResult);
+            IsBusy = true;
+
+            page++;
+
+            IsBusy = false;
+
         }
 
-        private async void AddResultsInTheRecentSearchList(List<Product> list)
+
+
+        private async Task Fetch(string text)
+        {
+            IsBusy = true;
+            var url = $"{AppSettings.currentLang}/api/cp/Product/search/{text}";
+            var list = await requestProvider.GetListAsync(url);
+            RefreshList(list);
+            IsBusy = false;
+        }
+
+        private void RefreshList(List<Product> list)
         {
             try
             {
@@ -70,6 +75,18 @@ namespace Rawaa.ViewModels
 
                 Console.WriteLine(ex.Message) ;
             }
+        }
+
+
+
+
+        private void getReseltFromSearch(string search)
+        {
+            if (string.IsNullOrEmpty(search))
+                return;
+            //var ListOfResult = StoredList.Where(s => s.Title.ToLower().Contains(search.ToLower())).OrderBy((x) => x.Title).ToList();
+
+            //AddResultsInTheRecentSearchList(ListOfResult);
         }
 
     }

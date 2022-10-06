@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Rawaa.Views.OrdersPage"
+             xmlns:vm="clr-namespace:Rawaa.ViewModels"
+             xmlns:icon="clr-namespace:Rawaa.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:lang="clr-namespace:Rawaa.Resources.Languages"
+             xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:frame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="{StaticResource white}"
+             Shell.NavBarIsVisible="True"
+             Title="{x:Static lang:LanguageResources.OrdersTitle}"
+             x:Name="page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label"
+                   x:Key="priceLabel">
+                <Setter Property="FontFamily"
+                        Value="CairoBold" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource blueDark}" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+            </Style>
+            <Style TargetType="Label"
+                   x:Key="priceCurrency"
+                   BaseResourceKey="priceLabel">
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="Text"
+                        Value="{x:Static lang:LanguageResources.GlobalCurrency}" />
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:OrdersPageVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="0,10">
+
+            <!-- Collection -->
+            <CollectionView ItemsSource="{Binding Orders }"
+                            x:Name="cvOrder"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedOrderItem }"
+                            SelectionChangedCommand="{Binding SelectedItemCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference cvOrder}}"
+                            Margin="10,0">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout BackgroundColor="{StaticResource white}">
+                            <frame:PancakeView CornerRadius="10"
+                                               Padding="15,10"
+                                               Border="{frame:BorderMarkup Color=LightGray, Thickness=1}">
+                                <StackLayout Orientation="Horizontal">
+
+                                    <!-- Column 1 -->
+                                    <StackLayout HorizontalOptions="StartAndExpand">
+
+                                        <!-- Order Number -->
+                                        <Label Text="{Binding OrderNumber}"
+                                               FontFamily="CairoBold"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+
+                                        <!-- Order Date -->
+                                        <Label Text="{Binding OrderDate}"
+                                               FontFamily="CairoRequler"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+
+                                        <!-- Frame status name-->
+                                        <frame:PancakeView BackgroundColor="{Binding StatuseBackgrounColore}"
+                                                           CornerRadius="25"
+                                                           Padding="15,5">
+                                            <!-- Status Name Lable -->
+                                            <Label Text="{Binding StatusName}"
+                                                   TextColor="{Binding StatuseTextColore}"
+                                                   FontFamily="CairoBold"
+                                                   FontSize="13"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                        </frame:PancakeView>
+
+                                    </StackLayout>
+
+                                    <!-- Stack Price-->
+                                    <StackLayout VerticalOptions="CenterAndExpand">
+                                        <!-- price -->
+                                        <StackLayout Orientation="Horizontal"
+                                                     Margin="20,0">
+                                            <Label Text="{Binding Total}"
+                                                   Style="{StaticResource priceLabel}" />
+                                            <Label Style="{StaticResource priceCurrency}" />
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </frame:PancakeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -48,27 +48,14 @@ namespace Rawaa_Api.Services.Client
             price += deliveryFee;
 
             model.Total = price;
-            // genirate order Number
 
             model.OrderNumber = DateTime.Now.ToString("yyMMddHHmmssff");
             var res = context.Orders.Add(model).Entity;
             context.SaveChanges();
+
+            Remove((int)model.CustomerId);
             return res;
 
-
-            //var order = new Order();
-            //order.OrderStatus = 1;
-            //order.CustomerId = model.CustomerId;
-            //order.DeliveryAddressId = model.DeliveryAddressId;
-            //order.PymentMethod = model.PymentMethod;
-
-            //var orderDetails = new OrderDetail();
-            //orderDetails.ProductId = model.ProductId;
-            //orderDetails.Taste = model.Taste;
-            //orderDetails.Size = model.Size;
-            //orderDetails.Quantity = model.Quantity;
-
-            //order.OrderDetails = orderDetails;
         }
 
         public Order? CancelOrder(OrderStatusRequest state)
@@ -87,7 +74,10 @@ namespace Rawaa_Api.Services.Client
         }
         public List<Order> List(int userId)
         {
-            var entity = context.Orders.Where(e => e.CustomerId == userId).ToList();
+            var entity = context.Orders
+                .Where(e => e.CustomerId == userId)
+                .OrderByDescending(e => e.OrderDate)
+                .ToList();
             return entity;
         }
 
@@ -116,7 +106,6 @@ namespace Rawaa_Api.Services.Client
                                        City = da.City,
                                        Street = da.Street,
                                        Id = da.Id
-                                       
                                    }
 
                                }).FirstOrDefault();
@@ -144,6 +133,22 @@ namespace Rawaa_Api.Services.Client
                                    Size = od.Size
                                }).ToList();
             return orderDetail;
+        }
+
+        // remove All items in cart of user
+        private bool Remove(int userId)
+        {
+            var entity = context.Carts.Where(e =>
+                         e.CustomerId == userId).ToList();
+            if (entity == null)
+                return false;
+
+            context.Carts.RemoveRange(entity);
+            context.SaveChanges();
+
+            var res = context.Carts.Where(e =>
+                        e.CustomerId == userId).Any();
+            return !res;
         }
 
     }

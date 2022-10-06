@@ -38,6 +38,12 @@ namespace Rawaa.ViewModels
             get { return emptyIsVisible; }
             set { SetProperty(ref emptyIsVisible, value); }
         }
+        bool contentsVisible = true;
+        public bool ContentsVisible
+        {
+            get { return contentsVisible; }
+            set { SetProperty(ref contentsVisible, value); }
+        }
 
         double _quantity = 1;
         public double Quantity
@@ -74,6 +80,7 @@ namespace Rawaa.ViewModels
             if (list == null || list.Count < 1)
             {
                 EmptyIsVisible = true;
+                ContentsVisible = false;
                 IsBusy = false;
                 return;
             }
@@ -145,6 +152,10 @@ namespace Rawaa.ViewModels
             {
                 Carts.Remove(parm);
                 OnPropertyChanged("Carts");
+            }
+            if (Carts.Count < 1)
+            {
+                EmptyIsVisible = true;
             }
             await AppSettings.Alert($"delete action is: {res}");
         }

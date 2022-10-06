@@ -43,6 +43,18 @@ namespace Rawaa_Api.Controllers.Client
             return Ok(result);
         }
 
+        // get all product in cart of user
+        [HttpGet("quantity/{userId}")]
+        public IActionResult GetQuantity(int userId)
+        {
+            var result = data.CountProductInCart(userId);
+            if (result == null)
+            {
+                return NoContent();
+            }
+            return Ok(result);
+        }
+
         [HttpDelete("{userId}/{productId}")]
         public IActionResult DeleteProductFromCart(int userId, int productId)
         {

@@ -21,6 +21,7 @@ namespace Rawaa.Views
         {
             base.OnDisappearing();
 
+
         }
         protected override void OnAppearing()
         {

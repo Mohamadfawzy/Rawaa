@@ -258,6 +258,24 @@
   <data name="ODTotalPrice" xml:space="preserve">
     <value>total bill</value>
   </data>
+  <data name="OrderCanceled" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="OrderCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="OrderPending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="OrderProcessing" xml:space="preserve">
+    <value>OrderProcessing Processing</value>
+  </data>
+  <data name="OrderRejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="OrdersTitle" xml:space="preserve">
+    <value>my previous orders</value>
+  </data>
   <data name="Shell_Title_Acount" xml:space="preserve">
     <value>Acount</value>
   </data>

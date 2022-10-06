@@ -17,11 +17,13 @@ namespace Rawaa
             Routing.RegisterRoute(nameof(CategoryPage), typeof(CategoryPage));
             Routing.RegisterRoute(nameof(ProductsPage), typeof(ProductsPage));
             Routing.RegisterRoute(nameof(ProductDetailsPage), typeof(ProductDetailsPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(CartPage), typeof(CartPage));
             Routing.RegisterRoute(nameof(CreateDeliveryAddressPage), typeof(CreateDeliveryAddressPage));
             Routing.RegisterRoute(nameof(AllDeliveryAddressPage), typeof(AllDeliveryAddressPage));
             Routing.RegisterRoute(nameof(OrderDetailsPage), typeof(OrderDetailsPage));
+            Routing.RegisterRoute(nameof(OrdersPage), typeof(OrdersPage));
             //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
         

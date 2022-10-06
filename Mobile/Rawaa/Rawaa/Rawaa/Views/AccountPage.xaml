@@ -11,24 +11,35 @@
              BackgroundColor="{StaticResource white}"
              Shell.NavBarIsVisible="False"
              x:Name="page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily"
+                        Value="CairoRequler" />
+                <Setter Property="CornerRadius"
+                        Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Margin="10,0">
-            <Label Text="Welcome to Xamarin.Forms!" />
-            <Button Clicked="Button_Clicked"
-                    Text="longin" />
-            <!-- lang-->
-            <frame:PancakeView>
-                <StackLayout>
-                    <!-- -->
-                    <Label Text="{x:Static lang:LanguageResources.loginPage_title}"
-                           FontFamily="CairoRequler"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" />
-                </StackLayout>
-                <frame:PancakeView.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Language_Tapped" />
-                </frame:PancakeView.GestureRecognizers>
-            </frame:PancakeView>
+        <StackLayout Margin="20">
+
+            <Button Text="طلباتي"
+                    x:Name="btOrders"
+                    Clicked="GoToOrdersPage" />
+            <Button Text="انشاء حساب"
+                    x:Name="btRegister"
+                    Clicked="GoToRegisterPage" />
+            <Button Text="{x:Static lang:LanguageResources.loginPage_title}"
+                    x:Name="btLogin"
+                    Clicked="GoToLoginPage" />
+            <Button Text="اللغة"
+                    x:Name="btLang"
+                    Clicked="GoToLanguage_Tapped" />
+            <Button Text="تسجيل خروج"
+                    x:Name="btLogout"
+                    Clicked="Button_Clicked" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

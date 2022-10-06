@@ -136,8 +136,8 @@ FontFamily="IconFont"
                         <TapGestureRecognizer Command="{Binding GoToBasketPageCommand}" />
                     </AbsoluteLayout.GestureRecognizers>
                 </AbsoluteLayout>
-
             </StackLayout>
+
             <ScrollView Scrolled="ScrollView_Scrolled">
                 <StackLayout Spacing="0">
                     <!-- Carousel Ads -->
@@ -494,6 +494,7 @@ FontFamily="IconFont"
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

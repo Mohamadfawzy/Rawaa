@@ -258,6 +258,24 @@
   <data name="ODTotalPrice" xml:space="preserve">
     <value>إجمالي الفاتورة</value>
   </data>
+  <data name="OrderCanceled" xml:space="preserve">
+    <value>تم الغاء الطلب</value>
+  </data>
+  <data name="OrderCompleted" xml:space="preserve">
+    <value>الطلب وصل</value>
+  </data>
+  <data name="OrderPending" xml:space="preserve">
+    <value>الطلب معلق</value>
+  </data>
+  <data name="OrderProcessing" xml:space="preserve">
+    <value>يتم تحضير الطلب الآن</value>
+  </data>
+  <data name="OrderRejected" xml:space="preserve">
+    <value>الطلب اترفض</value>
+  </data>
+  <data name="OrdersTitle" xml:space="preserve">
+    <value>طلباتي السابقة</value>
+  </data>
   <data name="Shell_Title_Acount" xml:space="preserve">
     <value>الحساب</value>
   </data>

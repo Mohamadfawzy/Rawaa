@@ -1,4 +1,5 @@
-﻿using Rawaa.Models;
+﻿using Rawaa.Helper;
+using Rawaa.Models;
 using Rawaa.Resources.Languages;
 using Rawaa.Services;
 using System;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 
 namespace Rawaa.ViewModels
 {
@@ -17,21 +19,9 @@ namespace Rawaa.ViewModels
 
         static bool isCart;
         static List<Cart> staticCart = new List<Cart>();
-        private static Order staticOrder = new Order();
+        static Order staticOrder = new Order();
 
-        string statusOrderBackgournColor = "#28a745";
-        public string StatusOrderBackgournColor
-        {
-            get { return statusOrderBackgournColor; }
-            set { SetProperty(ref statusOrderBackgournColor, value); }
-        }
 
-        string orderStatus = LanguageResources.ODOrderPrepared;
-        public string OrderStatus
-        {
-            get { return orderStatus; }
-            set { SetProperty(ref orderStatus, value); }
-        }
         bool cancellingOrderIsVisible = false;
         public bool CancellingOrderIsVisible
         {
@@ -39,6 +29,12 @@ namespace Rawaa.ViewModels
             set { SetProperty(ref cancellingOrderIsVisible, value); }
         }
 
+        bool buttonsVisible = true;
+        public bool ButtonsVisible
+        {
+            get { return buttonsVisible; }
+            set { SetProperty(ref buttonsVisible, value); }
+        }
 
         double totalPrice;
         public double TotalPrice
@@ -62,16 +58,18 @@ namespace Rawaa.ViewModels
         }
 
         // Properteis public 
-        Order order;
+        Order _order;
         public Order Order
         {
-            get { return order; }
-            set { SetProperty(ref order, value); }
+            get { return _order; }
+            set { SetProperty(ref _order, value); }
         }
         public ObservableCollection<Order> List { get; set; }
 
+
         // Commands
         public ICommand ConformOrderCommand => new Command(ConformOrder);
+        public ICommand CancelOrderCommand => new Command(Cancelrder);
 
         // ctor
         public OrderDetailsPageVM()
@@ -114,9 +112,13 @@ namespace Rawaa.ViewModels
             Order = staticOrder;
             TotalPrice = staticOrder.Total;
             DeliveryFee = FetchDeliveryFee();
-            TotalBill = (double)staticOrder.DeliveryFee + TotalPrice;
+            if (staticOrder.DeliveryFee == null)
+                TotalBill = totalPrice + FetchDeliveryFee();
+            else
+                TotalBill = (double)staticOrder.DeliveryFee + totalPrice;
             CancellingOrderIsVisible = true;
-            HandleOrderStatusLabel(Order.OrderStatus);
+            FetchSelectedAddressById(staticOrder.DeliveryAddressId.ToString());
+            HandleUI();
         }
 
         private void FetchSelectedAddressById(string deliveryAddressId)
@@ -173,34 +175,50 @@ namespace Rawaa.ViewModels
             }
         }
 
+        private async void Cancelrder()
+        {
+            var request = new RequestProvider<Order>();
+            var order = new Order()
+            {
+                Id = _order.Id,
+                OrderStatus = 5,
+                CustomerId = Convert.ToInt32(AppSettings.UserId),
+                DeliveryFee = FetchDeliveryFee()
+            };
+
+
+            var url = $"en/api/client/Order/OrderStatus";
+            var res = await request.PutOneAsync(order,url);
+            if (res != null)
+            {
+                _order = res;
+                MyHelper.HandleStatuseName(ref _order);
+                RefreshAlgorithms(res);
+                OnPropertyChanged("Order");
+            }
+          
+        }
+
         private void RefreshAlgorithms(Order order)
         {
+            if (order.DeliveryFee == null)
+                order.DeliveryFee = FetchDeliveryFee();
             TotalPrice = order.Total;
             DeliveryFee = FetchDeliveryFee();
             TotalBill = (double)order.DeliveryFee + TotalPrice;
             CancellingOrderIsVisible = true;
-            HandleOrderStatusLabel(Order.OrderStatus);
+            HandleUI();
         }
 
-        private void HandleOrderStatusLabel(byte status)
+        private void HandleUI()
         {
-            switch (status)
+            if(_order.OrderStatus > 1)
             {
-                case 1:
-                    OrderStatus = LanguageResources.ODOrderPrepared;
-                    break;
-                case 2:
-                    OrderStatus = LanguageResources.ODOrderPrepared;
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    OrderStatus = LanguageResources.ODRequestCanceled;
-                    break;
-                case 5:
-                    break;
+                ButtonsVisible = false;
             }
+
         }
+
 
     }
 }

@@ -5,6 +5,7 @@ namespace Rawaa_Api.Models
     {
         public int Id { get; set; }
         public string? Email { get; set; } = null!;
+        public string? Phone { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string? FullName { get; set; } 
         public DateTime? CreateOn { get; set; }

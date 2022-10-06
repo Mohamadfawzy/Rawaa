@@ -20,9 +20,18 @@ namespace Rawaa_Api.Services.Client
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             var entity = context.Carts.Where(e => e.CustomerId == model.CustomerId && e.ProductId == model.ProductId);
-
+            byte s= 1;
             if (entity.Any())
             {
+                var qu = entity.FirstOrDefault().Quantity + 1;
+                if(model.Quantity <= 1)
+                {
+                    model.Quantity = Convert.ToByte( qu);
+                }
+                else
+                {
+
+                }
                 res = context.Update(model).Entity;
                 context.Entry(model).Property(e => e.CreateOn).IsModified = false;
             }
@@ -43,6 +52,16 @@ namespace Rawaa_Api.Services.Client
                 e.ProductId == mode.ProductId)
                 .FirstOrDefault();
         }
+
+        public string CountProductInCart(int userId)
+        {
+           var rs =  context.Carts.Where(e =>
+                e.CustomerId == userId)
+                .Sum(e=>e.Quantity).ToString();
+
+            return rs;
+        }
+
         public List<CartResponseClient> List(int userId, string lang)
         {
             var entity = context.Carts.Where(e => e.CustomerId == userId).ToList();
@@ -54,7 +73,7 @@ namespace Rawaa_Api.Services.Client
                             join t in context.ProductTitleTranslations on p.Id equals t.ProductId
                             join l in context.LanguageNames on t.LanguageId equals l.Id
                             where l.Name == lang
-
+                            orderby c.CreateOn descending
                             select new CartResponseClient
                             {
                                 CustomerId = c.CustomerId,

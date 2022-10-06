@@ -484,6 +484,60 @@ namespace Rawaa.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string OrderCanceled {
+            get {
+                return ResourceManager.GetString("OrderCanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        public static string OrderCompleted {
+            get {
+                return ResourceManager.GetString("OrderCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        public static string OrderPending {
+            get {
+                return ResourceManager.GetString("OrderPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OrderProcessing Processing.
+        /// </summary>
+        public static string OrderProcessing {
+            get {
+                return ResourceManager.GetString("OrderProcessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected.
+        /// </summary>
+        public static string OrderRejected {
+            get {
+                return ResourceManager.GetString("OrderRejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to my previous orders.
+        /// </summary>
+        public static string OrdersTitle {
+            get {
+                return ResourceManager.GetString("OrdersTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Acount.
         /// </summary>
         public static string Shell_Title_Acount {

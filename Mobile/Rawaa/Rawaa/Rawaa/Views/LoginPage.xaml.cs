@@ -61,5 +61,11 @@ namespace Rawaa.Views
             var u = new User();
             Console.WriteLine("mooooooooooooooooooooooooooooooooooo"+ u.Id);
         }
+
+
+        private void GoToRegisterPage_Tapped(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("RegisterPage", false);
+        }
     }
 }

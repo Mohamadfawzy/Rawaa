@@ -36,7 +36,7 @@ namespace Rawaa_Api.Services
 
         public UserRequest Login(UserRequest user)
         {
-            var res = context.Customers.Where(e => e.Email == user.Email && e.Password == user.Password).FirstOrDefault();
+            var res = context.Customers.Where(e => e.Email == user.Email && e.Password == user.Password || e.Phone == user.Phone && e.Password == user.Password).FirstOrDefault();
             var result = CastClass.Deserialize(res,user);
             return result;
         }

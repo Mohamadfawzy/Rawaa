@@ -65,6 +65,38 @@ namespace Rawaa_Api.Services.Client
             return products;
         }
 
+        public object Max(string lang)
+        {
+            var products = new List<ProductRequestClinet>();
+
+            var res = context.OrderDetails.GroupBy(x => x.ProductId)
+                .Select(g => new { ProductId = g.Key, count = g.Count() });
+
+            products = (from p in context.Products
+                        join t in context.ProductTitleTranslations on p.Id equals t.ProductId
+                        join l in context.LanguageNames on t.LanguageId equals l.Id
+
+                        where l.Name == lang 
+
+                        select new ProductRequestClinet
+
+                        {
+                            Id = p.Id,
+                            Image = p.Image,
+                            Title = t.Title,
+                            SmallSizePrice = p.SmallSizePrice,
+                            MediumSizePrice = p.MediumSizePrice,
+                            BigSizePrice = p.BigSizePrice,
+                            DiscountValue = p.DiscountValue,
+                            Calories = p.Calories,
+                            HasTaste = p.HasTaste,
+                            CategoryId = p.CategoryId,
+                        }).ToList();
+
+            return res;
+        }
+
+
         public List<ProductRequestClinet> Search(string searchString, string lang)
         {
             var products = (from t in context.ProductTitleTranslations
@@ -91,5 +123,6 @@ namespace Rawaa_Api.Services.Client
             return products;
 
         }
+
     }
 }

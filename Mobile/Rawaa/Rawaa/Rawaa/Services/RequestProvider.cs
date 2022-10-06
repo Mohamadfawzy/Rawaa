@@ -52,6 +52,7 @@ namespace Rawaa.Services
             else
             {
                 Console.WriteLine(response);
+                await AppSettings.Alert(response.RequestMessage.ToString());
             }
             return default(T);
         }
@@ -125,6 +126,30 @@ namespace Rawaa.Services
             return false;
         }
 
+        // update
+        // post single 
+        public async Task<T> PutOneAsync<Take>(Take item, string uri, string token = "")
+        {
+            var valueReturned = default(T);// as ResponseResult<TResult>;
+
+            var json = JsonConvert.SerializeObject(item);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(uri, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                //valueReturned.Status = true;
+                var resJson = response.Content.ReadAsStringAsync().Result;
+                valueReturned = await Task.Run(() => JsonConvert.DeserializeObject<T>(resJson));
+
+                return valueReturned; // default(TResult);
+            }
+            else
+            {
+                Console.WriteLine(response);
+            }
+            return default(T);
+        }
 
 
 

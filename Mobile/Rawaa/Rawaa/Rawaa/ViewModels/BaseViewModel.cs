@@ -51,9 +51,9 @@ namespace Rawaa.ViewModels
         }
 
         // Cart count
-        int countBasket =0;
+        string countBasket = "0";
         [JsonIgnore]
-        public int CountBasket
+        public string CountBasket
         {
             get { return countBasket; }
             set { SetProperty(ref countBasket, value); }
@@ -86,7 +86,7 @@ namespace Rawaa.ViewModels
         {
             Shell.Current.GoToAsync("SearchPage", false);
         }
-        
+
         public async void ExceuteAddProductToBasket(Product product)
         {
             var r = await RequestServices.PostProductToCart(product);
@@ -97,24 +97,15 @@ namespace Rawaa.ViewModels
         {
             Task.Run(() =>
             {
-                var item = 2;//new BasketCount();
-                //item = AllServices.GetCountBasket();
-                if (item != null)
-                {
-                    if (item > 0)
-                    {
-                        CountBasket = AppSettings.countOfCart;
-                        CountBasketVisible = true;
-                    }
-                    else
-                    {
-                        CountBasketVisible = false;
-                    }
-                }
-                else
-                {
-                    CountBasketVisible = false;
-                }
+                IsBusy = true;
+                var url = $"ar/api/client/cart/quantity/";
+
+
+                CountBasket = RequestServices.GetCountOfProductInCart(url);
+                CountBasketVisible = true;
+
+
+                IsBusy = false;
             });
         }
 

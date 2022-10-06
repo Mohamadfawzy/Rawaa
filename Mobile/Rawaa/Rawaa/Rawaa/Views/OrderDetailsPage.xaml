@@ -59,9 +59,11 @@
                         <!-- row 1  Order Prepared -->
                         <StackLayout HeightRequest="130"
                                      x:Name="stackOrderStatus"
-                                     BackgroundColor="{Binding BindingContext.StatusOrderBackgournColor, Source={x:Reference Name=page}}">
+                                     BindingContext="{Binding Order}"
+                                     BackgroundColor="{Binding StatuseBackgrounColore}">
                             <!-- -->
-                            <Label Text="{Binding OrderStatus}"
+                            <Label Text="{Binding StatusName}"
+                                   TextColor="{Binding StatuseTextColore}"
                                    FontSize="18"
                                    FontFamily="CairoBold"
                                    HorizontalOptions="Center"
@@ -227,8 +229,10 @@
                         
                         <!-- row 6  Button  Conform && cancel order -->
                         <StackLayout Grid.Row="1"
+                                     IsVisible="{Binding ButtonsVisible}"
                                      VerticalOptions="End">
-                            <!-- -->
+                            
+                            <!-- Cancelling Order -->
                             <Button Text="{x:Static lang:LanguageResources.ODCancellingOrder}"
                                     IsVisible="{Binding CancellingOrderIsVisible}"
                                     x:Name="btnCancellingOrder"
@@ -240,9 +244,10 @@
                                     TextColor="{StaticResource blueDark}"
                                     FontFamily="CairoBold"
                                     HorizontalOptions="FillAndExpand"
-                                    Command="{Binding BindingContext.ConformOrderCommand, Source={x:Reference Name=page}}">
+                                    Command="{Binding CancelOrderCommand}">
                             </Button>
-                            
+
+                            <!-- Conform Order Button -->
                             <Button Text="{x:Static lang:LanguageResources.ODExecutionRequest}"
                                     Margin="20"
                                     CornerRadius="15"
