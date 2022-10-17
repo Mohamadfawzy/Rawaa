@@ -9,6 +9,7 @@
              x:Class="Rawaa.Views.SearchPage"
              xmlns:image="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Shell.NavBarIsVisible="False"
+             x:Name="page"
              FlowDirection="{Binding  CurrentFlowDirection}">
 
     <ContentPage.BindingContext>
@@ -48,68 +49,129 @@
     <ContentPage.Content>
         <RefreshView IsRefreshing="{Binding IsBusy}"
                      RefreshColor="{StaticResource yellowDark}">
-            <StackLayout>
-                <!-- Frame searchBar -Contain 2 elements -->
-                <frame:PancakeView CornerRadius="7"
-                                   HorizontalOptions="FillAndExpand"
-                                   BackgroundColor="White"
-                                   Margin="8,2,8,8"
-                                   Padding="0"
-                                   Border="{frame:BorderMarkup Color=Gray, Thickness=1}">
-                    <!-- Containar -have MagnifyIcon,SearchEntry,ClearIcon -->
-                    <StackLayout HorizontalOptions="FillAndExpand"
-                                 VerticalOptions="Center"
-                                 Orientation="Horizontal"
-                                 Spacing="0">
-                        <!-- Magnify Icon-->
-                        <Label Text="{x:Static icon:IconFont.Magnify}"
-                               FontFamily="IconFont"
-                               Padding="10,0"
-                               FontSize="25"
-                               Margin="0,4,0,0"
-                               VerticalOptions="Center"
-                               TextColor="Red" />
-                        <!-- Entry for search -->
-                        <Entry Placeholder="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
-                               x:Name="entrySearch"
-                               FontFamily="CairoRequler"
-                               FontSize="14"
-                               VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="FillAndExpand"
-                               Text="{Binding EntrySearch}">
-                            <Entry.Effects>
-                                <xct:RemoveBorderEffect />
-                            </Entry.Effects>
-                        </Entry>
-                        <!-- Frame Clear icon -->
-                        <Frame Style="{StaticResource FrameCircleTouch}"
-                               xct:TouchEffect.Command="{Binding EraseEntrySearshCommand}">
-                            <Label Text="{x:Static icon:IconFont.Close}"
-                                   IsVisible="true"
+            <StackLayout Padding="0,0">
+                <StackLayout Orientation="Horizontal"
+                             Padding="20,0"
+                             HeightRequest="50"
+                             BackgroundColor="{StaticResource blueRegular}"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="Start">
+                    <!-- logo -->
+                    <Image Source="LogoPNG"
+                           x:Name="logo"
+                           HeightRequest="30"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           xct:IconTintColorEffect.TintColor="{StaticResource white}" />
+                    <!-- Frame searchBar -Contain 2 elements -->
+                    <frame:PancakeView CornerRadius="7"
+                                       HorizontalOptions="FillAndExpand"
+                                       BackgroundColor="White"
+                                       Margin="8,2,8,8"
+                                       Padding="0"
+                                       Border="{frame:BorderMarkup Color=Gray, Thickness=1}">
+                        <!-- Containar -have MagnifyIcon,SearchEntry,ClearIcon -->
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="Center"
+                                     Orientation="Horizontal"
+                                     Spacing="0">
+                            <!-- Magnify Icon-->
+                            <Label Text="{x:Static icon:IconFont.Magnify}"
                                    FontFamily="IconFont"
-                                   FontSize="20"
-                                   Padding="10"
-                                   VerticalOptions="Fill"
-                                   HorizontalOptions="End"
-                                   TextColor="Orange"
-                                   BackgroundColor="Transparent">
-                            </Label>
-                            <!-- Trigger if  entrySearch not empty => IsVisible = false -->
-                            <Frame.Triggers>
-                                <DataTrigger TargetType="Frame"
-                                             Binding="{Binding Source={x:Reference entrySearch},Path=Text.Length}"
-                                             Value="0">
-                                    <Setter Property="IsVisible"
-                                            Value="False" />
-                                </DataTrigger>
-                            </Frame.Triggers>
-                        </Frame>
-                    </StackLayout>
+                                   Padding="10,0"
+                                   FontSize="25"
+                                   Margin="0,4,0,0"
+                                   VerticalOptions="Center"
+                                   TextColor="Red" />
+                            <!-- Entry for search -->
+                            <Entry Placeholder="{x:Static lang:LanguageResources.MainPage_SearchPlaceHolder}"
+                                   PlaceholderColor="{StaticResource lightGray}"
+                                   TextColor="{StaticResource blueDark}"
+                                   x:Name="entrySearch"
+                                   FontFamily="CairoRequler"
+                                   FontSize="14"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   Text="{Binding EntrySearch}">
+                                <Entry.Effects>
+                                    <xct:RemoveBorderEffect />
+                                </Entry.Effects>
+                            </Entry>
+                            <!-- Frame Clear icon -->
+                            <Frame Style="{StaticResource FrameCircleTouch}"
+                                   xct:TouchEffect.Command="{Binding EraseEntrySearshCommand}">
+                                <Label Text="{x:Static icon:IconFont.Close}"
+                                       IsVisible="true"
+                                       FontFamily="IconFont"
+                                       FontSize="20"
+                                       Padding="10"
+                                       VerticalOptions="Fill"
+                                       HorizontalOptions="End"
+                                       TextColor="Orange"
+                                       BackgroundColor="Transparent">
+                                </Label>
+                                <!-- Trigger if  entrySearch not empty => IsVisible = false -->
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame"
+                                                 Binding="{Binding Source={x:Reference entrySearch},Path=Text.Length}"
+                                                 Value="0">
+                                        <Setter Property="IsVisible"
+                                                Value="False" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                            </Frame>
+                        </StackLayout>
 
-                </frame:PancakeView>
+                    </frame:PancakeView>
+
+                    <!-- Cart -->
+                    <AbsoluteLayout HeightRequest="36"
+                                    WidthRequest="36"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    FlowDirection="LeftToRight">
+                        <Label x:Name="cartIcon"
+                               Text="{x:Static icon:IconFont.CartOutline}"
+                               TextColor="{StaticResource white}"
+                               FontFamily="IconFont"
+                               FontSize="30"
+                               Padding="0"
+                               Margin="0"
+                               HeightRequest="30"
+                               RotationY="0"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start"
+                               AbsoluteLayout.LayoutBounds="0,1"
+                               AbsoluteLayout.LayoutFlags="PositionProportional" />
+                        <frame:PancakeView IsVisible="{Binding CountBasketVisible}"
+                                           CornerRadius="15"
+                                           HeightRequest="20"
+                                           WidthRequest="20"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Start"
+                                           BackgroundColor="{StaticResource yellowDark}"
+                                           Padding="0"
+                                           Margin="0"
+                                           AbsoluteLayout.LayoutBounds="1,0"
+                                           AbsoluteLayout.LayoutFlags="PositionProportional">
+                            <Label Text="{Binding CountBasket}"
+                                   FontSize="10"
+                                   Padding="0"
+                                   Margin="0"
+                                   TextColor="{StaticResource white}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </frame:PancakeView>
+                        <AbsoluteLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToBasketPageCommand}" />
+                        </AbsoluteLayout.GestureRecognizers>
+                    </AbsoluteLayout>
+                </StackLayout>
 
                 <!-- Collection of  -->
                 <CollectionView ItemsSource="{Binding ListOfProducts}"
+                                x:Name="cvProducts"
+                                Margin="20,0"
                                 SelectionMode="Single"
                                 SelectionChanged="CollectionView_SelectionChanged">
                     
@@ -121,6 +183,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid VerticalOptions="Fill"
+                                  BackgroundColor="{StaticResource white}"
                                   RowSpacing="1">
                                 <frame:PancakeView Margin="8,5"
                                                    HeightRequest="150"
@@ -172,6 +235,8 @@
                                                     HorizontalOptions="Center"
                                                     BackgroundColor="{StaticResource yellowDark}"
                                                     TextColor="{StaticResource blueDark}"
+                                                    Command="{Binding BindingContext.AddProductToBasket, Source={x:Reference Name=cvProducts}}"
+                                                    CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
                                                     FontFamily="CairoBold" />
                                         </StackLayout>
 

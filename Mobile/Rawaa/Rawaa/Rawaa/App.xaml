@@ -50,6 +50,14 @@
                 <Setter Property="FontFamily"
                         Value="CairoRequler" />
             </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor"
+                        Value="{StaticResource blueDark}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource lightGray}" />
+                <Setter Property="FontFamily"
+                        Value="CairoRequler" />
+            </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">

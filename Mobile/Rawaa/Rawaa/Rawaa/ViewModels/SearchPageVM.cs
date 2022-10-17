@@ -30,6 +30,7 @@ namespace Rawaa.ViewModels
         }
 
         public ICommand RemainingItemsThresholdReachedCommand => new Command(Incrementally);
+        public ICommand EraseEntrySearshCommand => new Command(EraseEntrySearsh);
 
         // ctor
         public SearchPageVM()
@@ -46,7 +47,10 @@ namespace Rawaa.ViewModels
             IsBusy = false;
 
         }
-
+        private void EraseEntrySearsh()
+        {
+            EntrySearch = "";
+        }
 
 
         private async Task Fetch(string text)

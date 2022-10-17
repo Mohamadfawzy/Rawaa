@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcountCrateAcount" xml:space="preserve">
+    <value>انشاء حساب</value>
+  </data>
+  <data name="Acountlangauge" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="AcountLogin" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="AcountLogout" xml:space="preserve">
+    <value>تسجيل خروج</value>
+  </data>
+  <data name="AcountMyOrder" xml:space="preserve">
+    <value>طلباتي</value>
+  </data>
   <data name="CartContinueRoRequest" xml:space="preserve">
     <value>تابع تنفيذ الطلب</value>
   </data>
@@ -188,6 +203,9 @@
   </data>
   <data name="GlobalDelete" xml:space="preserve">
     <value>حذف</value>
+  </data>
+  <data name="LanguagePageTitle" xml:space="preserve">
+    <value>تغيير اللغة</value>
   </data>
   <data name="LanguagePage_Ok" xml:space="preserve">
     <value>تأكيد</value>

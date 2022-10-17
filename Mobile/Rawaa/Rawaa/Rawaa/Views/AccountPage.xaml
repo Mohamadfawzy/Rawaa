@@ -24,19 +24,19 @@
     <ContentPage.Content>
         <StackLayout Margin="20">
 
-            <Button Text="طلباتي"
+            <Button Text="{x:Static lang:LanguageResources.AcountMyOrder}"
                     x:Name="btOrders"
                     Clicked="GoToOrdersPage" />
-            <Button Text="انشاء حساب"
+            <Button Text="{x:Static lang:LanguageResources.AcountCrateAcount}"
                     x:Name="btRegister"
                     Clicked="GoToRegisterPage" />
-            <Button Text="{x:Static lang:LanguageResources.loginPage_title}"
+            <Button Text="{x:Static lang:LanguageResources.AcountLogin}"
                     x:Name="btLogin"
                     Clicked="GoToLoginPage" />
-            <Button Text="اللغة"
+            <Button Text="{x:Static lang:LanguageResources.Acountlangauge}"
                     x:Name="btLang"
                     Clicked="GoToLanguage_Tapped" />
-            <Button Text="تسجيل خروج"
+            <Button Text="{x:Static lang:LanguageResources.AcountLogout}"
                     x:Name="btLogout"
                     Clicked="Button_Clicked" />
 

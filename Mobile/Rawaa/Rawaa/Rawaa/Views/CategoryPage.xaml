@@ -133,21 +133,23 @@
                                 SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CVMenus}}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout  Orientation="Vertical"
-                                          Span="3" />
+                                          Span="3" 
+                                          HorizontalItemSpacing="5"
+                                          VerticalItemSpacing="5"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Padding="7,10"
-                                         BackgroundColor="WhiteSmoke"
+                                         BackgroundColor="{StaticResource white}"
                                          VerticalOptions="CenterAndExpand">
                                 <frame:PancakeView CornerRadius="10"
+                                                   BackgroundColor="WhiteSmoke"
                                                    Padding="0"
                                                    HeightRequest="150"
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center"
                                                    IsClippedToBounds="True"
-                                                   BackgroundColor="WhiteSmoke"
-                                                   Border="{frame:BorderMarkup Color=NavajoWhite, Thickness=2}">
+                                                   Border="{frame:BorderMarkup Color=NavajoWhite, Thickness=3}">
                                     <StackLayout>
                                         <image:CachedImage Source="{Binding ImageUrl}"
                                                            Aspect="AspectFill" 

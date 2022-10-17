@@ -13,11 +13,16 @@ namespace Rawaa
 {
     public static class AppSettings
     {
-        //http://www.rawaa.somee.com/
-        public const string ApiUrl = "http://192.168.1.101:5117";
+        //https://192.168.1.101:7279
+        //http://192.168.1.101:5279
+        //https://www.rawaa.somee.com
+        public const string ApiUrl = "http://192.168.1.101:9002";
         public const string ImageUrl = ApiUrl + "/api/file/";
         public static int countOfCart = 0;
-        public static string currentLang = LocalizationResourceManager.storedLanguageName;
+        public static string currentLang
+        {
+            get => LocalizationResourceManager.storedLanguageName;
+        }
 
         // vm
         public static double staticTotalPrice = 0.0;

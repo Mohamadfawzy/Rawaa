@@ -61,6 +61,51 @@ namespace Rawaa.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Acount.
+        /// </summary>
+        public static string AcountCrateAcount {
+            get {
+                return ResourceManager.GetString("AcountCrateAcount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Langauge.
+        /// </summary>
+        public static string Acountlangauge {
+            get {
+                return ResourceManager.GetString("Acountlangauge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string AcountLogin {
+            get {
+                return ResourceManager.GetString("AcountLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string AcountLogout {
+            get {
+                return ResourceManager.GetString("AcountLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Orders.
+        /// </summary>
+        public static string AcountMyOrder {
+            get {
+                return ResourceManager.GetString("AcountMyOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue to Request.
         /// </summary>
         public static string CartContinueRoRequest {
@@ -291,6 +336,15 @@ namespace Rawaa.Resources.Languages {
         public static string LanguagePage_TheSameLange {
             get {
                 return ResourceManager.GetString("LanguagePage_TheSameLange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Langaug.
+        /// </summary>
+        public static string LanguagePageTitle {
+            get {
+                return ResourceManager.GetString("LanguagePageTitle", resourceCulture);
             }
         }
         

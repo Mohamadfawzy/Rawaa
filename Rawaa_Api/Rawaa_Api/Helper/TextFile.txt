@@ -1,0 +1,14 @@
+﻿=================================================================================
+var products = new List<ProductRequestClinet>();
+            var time = DateTime.Now.Date.AddDays(-3);
+            var res = context.OrderDetails.GroupBy(x => x.ProductId)
+                .Select(g => new { productId = g.Key, count = g.Count(c => c.CreateOn >= time) })
+                .Where(c => c.count >= 2)
+                .ToList();
+=================================================================================
+=>How To Access Website Hosted In IIS From Any PC On LAN
+    netsh advfirewall firewall add rule name="Hosting Local Website On LAN" dir=in action=allow protocol=TCP localport=9002
+
+=================================================================================
+=================================================================================
+=================================================================================

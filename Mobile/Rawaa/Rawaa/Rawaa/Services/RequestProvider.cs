@@ -15,8 +15,8 @@ namespace Rawaa.Services
 {
     public class RequestProvider<T>
     {
-
-        private const string BaseUrl = AppSettings.ApiUrl;// "http://www.rawaa.somee.com";
+       
+        private const string BaseUrl = AppSettings.ApiUrl;
         HttpClientHandler httpClientHandler = new HttpClientHandler();
         HttpClient client;
 
@@ -24,6 +24,7 @@ namespace Rawaa.Services
         public RequestProvider()
         {
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+            //client = new HttpClient(httpClientHandler)
 
             client = new HttpClient(httpClientHandler)
             {

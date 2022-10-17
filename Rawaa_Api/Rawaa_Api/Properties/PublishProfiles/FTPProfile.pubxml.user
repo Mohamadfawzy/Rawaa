@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA4Y7F70Dzv0S3/MzFK9SvvwAAAAACAAAAAAAQZgAAAAEAACAAAAABT1kwF8/1aYtQcjrGYBR8i9dFnOu3v764jYmbGB2aigAAAAAOgAAAAAIAACAAAAAnwxakpNxr0epY9UqvQhXnWgdNYnoM1hLygXFnHgcEVSAAAAB+umZjUwvLOnLErGW7nxKQ0CuipDNySd9uCQ/j6GEHIkAAAAD3m5j/MRX2sINzzDI+jKhVwDI9DHzJRqwdRcGOiEzfe++A1rxiyZye2HvxxRn9ur7rUCPmdxfrRbVof2zPI4wp</EncryptedPassword>
+    <_PublishTargetUrl>ftp://155.254.244.37/www.rawaa.somee.com</_PublishTargetUrl>
+    <History>True|2022-10-07T20:50:04.2505633Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>10/03/2022 18:24:47</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>10/03/2022 18:24:47</publishTime>
+    </File>
+    <File Include="Microsoft.Data.SqlClient.dll">
+      <publishTime>09/21/2021 01:59:34</publishTime>
+    </File>
+    <File Include="Microsoft.Data.SqlClient.SNI.dll">
+      <publishTime>10/20/2020 20:13:38</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>07/12/2022 23:50:18</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>07/12/2022 23:50:44</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>07/12/2022 23:50:58</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
+      <publishTime>07/12/2022 23:51:08</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Caching.Memory.dll">
+      <publishTime>01/14/2022 21:54:16</publishTime>
+    </File>
+    <File Include="Microsoft.Identity.Client.dll">
+      <publishTime>10/19/2020 23:51:12</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>10/13/2020 02:21:34</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Logging.dll">
+      <publishTime>10/13/2020 02:23:12</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.dll">
+      <publishTime>10/13/2020 02:25:30</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <publishTime>10/13/2020 02:31:32</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>10/13/2020 02:27:48</publishTime>
+    </File>
+    <File Include="Microsoft.OpenApi.dll">
+      <publishTime>08/29/2020 22:14:12</publishTime>
+    </File>
+    <File Include="Microsoft.Win32.SystemEvents.dll">
+      <publishTime>11/15/2019 10:54:18</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>03/17/2021 22:03:36</publishTime>
+    </File>
+    <File Include="Rawaa_Api.deps.json">
+      <publishTime>10/07/2022 22:47:25</publishTime>
+    </File>
+    <File Include="Rawaa_Api.dll">
+      <publishTime>10/07/2022 22:47:24</publishTime>
+    </File>
+    <File Include="Rawaa_Api.exe">
+      <publishTime>10/07/2022 22:47:24</publishTime>
+    </File>
+    <File Include="Rawaa_Api.pdb">
+      <publishTime>10/07/2022 22:47:24</publishTime>
+    </File>
+    <File Include="Rawaa_Api.runtimeconfig.json">
+      <publishTime>10/07/2022 22:47:24</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>10/16/2021 14:54:10</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>10/16/2021 14:54:36</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>10/16/2021 14:54:30</publishTime>
+    </File>
+    <File Include="System.Configuration.ConfigurationManager.dll">
+      <publishTime>11/15/2019 10:37:04</publishTime>
+    </File>
+    <File Include="System.Drawing.Common.dll">
+      <publishTime>11/15/2019 10:54:20</publishTime>
+    </File>
+    <File Include="System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>10/13/2020 02:20:12</publishTime>
+    </File>
+    <File Include="System.Runtime.Caching.dll">
+      <publishTime>11/15/2019 10:53:44</publishTime>
+    </File>
+    <File Include="System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>11/15/2019 10:53:46</publishTime>
+    </File>
+    <File Include="System.Security.Permissions.dll">
+      <publishTime>11/15/2019 10:56:44</publishTime>
+    </File>
+    <File Include="System.Windows.Extensions.dll">
+      <publishTime>11/15/2019 10:54:30</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>10/07/2022 22:47:25</publishTime>
+    </File>
+    <File Include="wwwroot/Images/1.jpg">
+      <publishTime>09/02/2022 04:13:53</publishTime>
+    </File>
+    <File Include="wwwroot/uploads/1.jpg">
+      <publishTime>08/31/2022 01:07:52</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

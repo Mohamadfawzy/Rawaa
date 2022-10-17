@@ -12,12 +12,12 @@ namespace Rawaa.ViewModels
 {
     public  class CategoryPageVM : BaseViewModel
     {
-        Category selectedCategory = new Category();
         
         
         public RequestProvider<Category> requestProvider = new RequestProvider<Category>();
         public List<Category> FoodMenu { get; set; }
 
+        Category selectedCategory = new Category();
         public Category SelectedCategory
         {
             get {return selectedCategory;}

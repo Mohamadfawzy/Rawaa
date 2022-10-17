@@ -46,12 +46,16 @@ namespace Rawaa.Views
         }
         private async void MealsCV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             try
             {
+                var collectionView = (CollectionView)sender;
                 var item =e.CurrentSelection.FirstOrDefault() as Product;
-                //ProductsPageVM.StaticSelectedProduct = item;
+                if (collectionView.SelectedItem == null)
+                    return;
                 ProductDetailsPageVM.Initializer(item);
                 await Shell.Current.GoToAsync($"ProductDetailsPage");
+                collectionView.SelectedItem = null;
 
             }
             catch (Exception ex )

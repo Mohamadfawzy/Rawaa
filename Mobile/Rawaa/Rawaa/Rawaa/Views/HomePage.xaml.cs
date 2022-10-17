@@ -29,7 +29,6 @@ namespace Rawaa.Views
             Carousel.TranslationY = 0;
             Carousel.Opacity = 1;
             (BindingContext as HomePageVM).SliderIsLoop = true;
-            (BindingContext as HomePageVM).RefreshCountBasket();
             (BindingContext as HomePageVM).OnAppearing();
         }
         protected override void OnDisappearing()
@@ -55,7 +54,7 @@ namespace Rawaa.Views
             IconTintColorEffect.SetTintColor(logo, Color.Red);
             Task.Run(async () =>
             {
-                await Task.Delay(2000);
+                await Task.Delay(500);
                 IconTintColorEffect.SetTintColor(logo, Color.White);
             });
         }

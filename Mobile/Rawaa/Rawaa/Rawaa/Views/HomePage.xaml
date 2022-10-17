@@ -160,7 +160,8 @@ FontFamily="IconFont"
                                           Position="{Binding SliderPosition, Mode=TwoWay}"
                                           HorizontalOptions="Start"
                                           VerticalOptions="Center"
-                                          HeightRequest="170">
+                                          HeightRequest="170"
+                                          >
                                 <CarouselView.ItemsLayout>
                                     <LinearItemsLayout Orientation="Horizontal"
                                                        ItemSpacing="0"
@@ -228,10 +229,7 @@ FontFamily="IconFont"
                                         SelectionMode="None"
                                         HeightRequest="200"
                                         Margin="0,20,0,0"
-                                        ItemsSource="{Binding FoodMenu}"
-                                        SelectedItem="{Binding SelectedCategory,Mode=TwoWay }"
-                                        SelectionChangedCommand="{Binding SelectedCategoryCommand}"
-                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CVMenus}}">
+                                        ItemsSource="{Binding FoodMenu}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout  Orientation="Horizontal"
                                                   Span="2" />
@@ -261,6 +259,7 @@ FontFamily="IconFont"
 
                     <!-- MostPopularMeals -->
                     <StackLayout Margin="0,0,0,0"
+                                 IsVisible="false"
                                  VerticalOptions="Start"
                                  IsClippedToBounds="True">
                         <!-- Title -->
@@ -380,6 +379,7 @@ FontFamily="IconFont"
 
                     <!-- Offers  -->
                     <StackLayout Margin="0,20,0,0"
+                                 IsVisible="false"
                                  VerticalOptions="Start">
 
                         <!-- Title -->

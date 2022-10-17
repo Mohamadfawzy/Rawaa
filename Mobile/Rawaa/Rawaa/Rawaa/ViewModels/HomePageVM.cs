@@ -33,16 +33,23 @@ namespace Rawaa.ViewModels
             set { SetProperty(ref selectedProduct, value); }
         }
 
+
+
+        Category selectedCategory = new Category();
+        public Category SelectedCategory
+        {
+            get { return selectedCategory; }
+            set { SetProperty(ref selectedCategory, value); }
+        }
         public ICommand langCommand => new Command<string>(changLang);
+        //public ICommand SelectedItemCommand => new Command<Cart>(SelectedItemExcuted);
         public ICommand CurrentItemChangedCommand => new Command<AdsM>(CurrentItemChangedExcute);
         public ICommand SelectedProductCommand => new Command<Product>(SelectedProductExecute);
 
         public HomePageVM()
         {
             FoodMenu = new List<Category>();
-            RefreshCountBasket();
             Task.Run(()=>FetchAds());
-            Task.Run(() => FetchCategory());
             Task.Run(() => FetchMostPopularMeals());
             Task.Run(() => FetchOffers());
         }
@@ -50,8 +57,26 @@ namespace Rawaa.ViewModels
         public void OnAppearing()
         {
             RefreshCountBasket();
+            Task.Run(() => FetchCategory());
         }
+        public ICommand SelectedCategoryCommand => new Command<Category>(SelectedCategoryExecute);
+        public static Category StaticSelectedCategory;
+        private async void SelectedCategoryExecute(Category item)
+        {
+            try
+            {
+                if (SelectedCategory == null) return;
+                StaticSelectedCategory = selectedCategory;
+                await Shell.Current.GoToAsync($"ProductsPage");
+                SelectedCategory = null;
+            }
+            catch (Exception ex)
+            {
 
+                await AppSettings.Alert(ex.Message);
+            }
+
+        }
         // excuted
         private async void SelectedProductExecute(Product item)
         {
@@ -117,6 +142,7 @@ namespace Rawaa.ViewModels
             var list = requestProvider.GetListAsync($"{AppSettings.currentLang}/api/client/Category/all");
             FoodMenu = list.Result.ToList();
             OnPropertyChanged("FoodMenu");
+
         }  
 
         // most meals 
